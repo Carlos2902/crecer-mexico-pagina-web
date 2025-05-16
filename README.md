@@ -1,60 +1,41 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
+# Crecer México
 
-# Django
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-media
+Plataforma web para la organización Crecer México, enfocada en programas educativos, becas escolares y donaciones para apoyar a estudiantes.
 
-# Entorno virtual
-venv/
-env/
-ENV/
+## Estructura del proyecto
 
-# Entorno de desarrollo
-.env
-.vscode/
-.idea/
-*.swp
-*.swo
+El proyecto está organizado en varias aplicaciones Django:
 
-# Archivos del sistema
-.DS_Store
-Thumbs.db
+- **core**: Funcionalidades comunes y página de inicio
+- **about**: Sección "¿Quiénes somos?"
+- **projects**: Cursos, becas y programas
+- **impact**: Estadísticas, testimonios e impacto
+- **contact**: Formulario e información de contacto
+- **donations**: Sistema de gestión de donaciones
 
-# Archivos generados por el proyecto
-static/admin/
-static/collected/
-staticfiles/
+## Configuración del entorno de desarrollo
 
-# Archivos de caché
-.cache/
-.pytest_cache/
-.coverage
-htmlcov/
+1. Clona el repositorio:
+```bash
+git clone https://github.com/TU_USUARIO/crecer-mexico.git
+cd crecer-mexico
+```
 
-# Archivos de migraciones específicos
-# Descomenta esto si no quieres controlar versiones de migraciones específicas
-# */migrations/*.py
-# !*/migrations/__init__.py
+2. Crea y activa un entorno virtual:
+```bash
+python -m venv venv
+
+source venv/bin/activate  || En Windows: venv\Scripts\activate
+```
+3. Instala las dependencias:
+```bash
+pip install -r requirements.txt
+```
+4. Ejecuta las migraciones:
+```bash
+python manage.py migrate
+```
+5. Inicia el servidor de desarrollo:
+```bash
+python manage.py runserver
+```
