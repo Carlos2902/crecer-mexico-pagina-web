@@ -31,6 +31,7 @@ media
 venv/
 env/
 ENV/
+env
 
 # Entorno de desarrollo
 .env
@@ -38,6 +39,7 @@ ENV/
 .idea/
 *.swp
 *.swo
+.vs
 
 # Archivos del sistema
 .DS_Store
