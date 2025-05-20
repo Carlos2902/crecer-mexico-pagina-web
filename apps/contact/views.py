@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from django.views.generic import View
+from django.shortcuts import render, redirect
 
-# Create your views here.
+class ContactView(View):
+    def get(self, request, *args, **kwargs):
+        context = {
+            # puedes agregar datos dinámicos aquí si es necesario
+        }
+        return render(request, 'contact.html', context)

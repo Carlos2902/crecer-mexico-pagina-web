@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from django.views.generic import View
+from django.shortcuts import render, redirect
 
-# Create your views here.
+class TestimonialsImpactView(View):
+    def get(self, request, *args, **kwargs):
+        context = {
+            # puedes agregar datos dinámicos aquí si es necesario
+        }
+        return render(request, 'impact.html', context)
