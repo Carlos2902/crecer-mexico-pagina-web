@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Inicio | Crecer México{% endblock %}
+
+{% block content %}
+{% load static %} {# Asegúrate de tener {% load static %} si usas static para alguna imagen/CSS/JS del carrusel #}
+
+{% for section in sections %}
+    {% if section.section == 'hero' and hero %}
+    <section id="hero" class="hero-section">
+        {# Reemplaza "to be defined" con las clases CSS de tu framework o personalizadas para el contenedor principal del hero #}
+        <div class="container mx-auto px-4 py-16 sm:py-24 lg:py-32"> {# Ejemplo de clases de Tailwind CSS para un contenedor #}
+            <div class="hero-content text-center"> {# O ajusta la alineación según necesites #}
+                <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">{{ hero.title }}</h1>
+                {% if hero.subtitle %}
+                <p class="hero-subtitle mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">{{ hero.subtitle }}</p>
+                {% endif %}
+
+                {% if hero.card1_title or hero.card2_title or hero.card3_title %} {# Solo muestra la sección de tarjetas si al menos una tiene título #}
+                <div class="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                    {# Tarjeta 1 #}
+                    {% if hero.card1_title %}
+                    <div class="card bg-white shadow-lg rounded-lg p-6"> {# Adapta las clases de la tarjeta a tu diseño #}
+                        {% if hero.card1_icon %}
+                        <div class="card-icon text-3xl mb-3">
+                            {# Asume que cardX_icon es el nombre de una clase de icono (ej. Font Awesome) #}
+                            {# Si es una URL de imagen, usa <img src="{{ hero.card1_icon }}" alt=""> #}
+                            <i class="{{ hero.card1_icon }}"></i>
+                        </div>
+                        {% endif %}
+                        <h3 class="card-title text-xl font-semibold mb-2">{{ hero.card1_title }}</h3>
+                        <p class="card-description text-gray-600">{{ hero.card1_description }}</p>
+                    </div>
+                    {% endif %}
+
+                    {# Tarjeta 2 #}
+                    {% if hero.card2_title %}
+                    <div class="card bg-white shadow-lg rounded-lg p-6">
+                        {% if hero.card2_icon %}
+                        <div class="card-icon text-3xl mb-3">
+                            <i class="{{ hero.card2_icon }}"></i>
+                        </div>
+                        {% endif %}
+                        <h3 class="card-title text-xl font-semibold mb-2">{{ hero.card2_title }}</h3>
+                        <p class="card-description text-gray-600">{{ hero.card2_description }}</p>
+                    </div>
+                    {% endif %}
+
+                    {# Tarjeta 3 #}
+                    {% if hero.card3_title %}
+                    <div class="card bg-white shadow-lg rounded-lg p-6">
+                        {% if hero.card3_icon %}
+                        <div class="card-icon text-3xl mb-3">
+                            <i class="{{ hero.card3_icon }}"></i>
+                        </div>
+                        {% endif %}
+                        <h3 class="card-title text-xl font-semibold mb-2">{{ hero.card3_title }}</h3>
+                        <p class="card-description text-gray-600">{{ hero.card3_description }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+                <div class="hero-buttons mt-8 flex justify-center gap-x-4"> {# Clases de ejemplo para centrar y espaciar botones #}
+                    <a href="{{ hero.primary_button_url }}" class="btn btn-primary inline-block rounded-md bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
+                        {{ hero.primary_button_text }}
+                    </a>
+                    <a href="{{ hero.secondary_button_url }}" class="btn btn-outline inline-block rounded-md bg-white px-6 py-3 text-base font-medium text-indigo-600 shadow-sm ring-1 ring-inset ring-indigo-600 hover:bg-indigo-50">
+                        {{ hero.secondary_button_text }}
+                    </a>
+                </div>
+
+                {# Asegúrate de que `hero.carousel_images` existe y tiene el `related_name` correcto #}
+                {# y que las imágenes activas son las que quieres mostrar. #}
+                {% with active_images=hero.carousel_images.all|dictsort:"order" %}
+                    {% if active_images %}
+                    <div id="heroImageCarousel" class="carousel slide mt-12" data-bs-ride="carousel"> {# Ejemplo para Bootstrap 5, adapta a tu librería de carrusel #}
+                        <div class="carousel-inner">
+                            {% for image_item in active_images %}
+                                {% if image_item.is_active %}
+                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                    <img src="{{ image_item.image.url }}" class="d-block w-100" alt="Imagen del carrusel {{ forloop.counter }}">
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        {% if active_images|length > 1 %}
+                        <button class="carousel-control-prev" type="button" data-bs-target="#heroImageCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#heroImageCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                {% endwith %}
+                </div>
+        </div>
+    </section>
+    {% endif %}
+
+    {% if section.section == 'programs' and programs %}
+    <!-- Sección de Programas -->
+    <section id="programas" class="programs-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>{{ programs_section.title|default:"Nuestros Programas" }}</h2>
+                {% if programs_section.subtitle %}
+                <p class="section-subtitle">{{ programs_section.subtitle }}</p>
+                {% endif %}
+            </div>
+            
+            <div class="programs-grid">
+                {% for program in programs %}
+                <div class="program-card">
+                    <div class="program-image">
+                        <img src="{{ program.image.url }}" alt="{{ program.title }}">
+                    </div>
+                    <div class="program-content">
+                        <h3>{{ program.title }}</h3>
+                        <p>{{ program.description }}</p>
+                        <a href="{{ program.url }}" class="program-link">Conocer más</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    {% if section.section == 'testimonial' and testimonial %}
+    <!-- Sección de Cita Textual -->
+    <section id="testimonio" class="testimonial-section">
+        <div class="container">
+            <div class="testimonial-content">
+                <div class="quote-mark">"</div>
+                <blockquote>
+                    {{ testimonial.quote }}
+                </blockquote>
+                <div class="testimonial-author">
+                    {% if testimonial.image %}
+                    <div class="author-image">
+                        <img src="{{ testimonial.image.url }}" alt="{{ testimonial.name }}">
+                    </div>
+                    {% endif %}
+                    <div class="author-info">
+                        <h4>{{ testimonial.name }}</h4>
+                        <p>{{ testimonial.position }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    {% if section.section == 'video' and featured_video %}
+    <!-- Sección de Video Destacado -->
+    <section id="video-destacado" class="featured-video-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>{{ video_section.title|default:"Video Destacado" }}</h2>
+                {% if video_section.subtitle %}
+                <p class="section-subtitle">{{ video_section.subtitle }}</p>
+                {% endif %}
+            </div>
+            
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <iframe 
+                        src="{{ featured_video.youtube_url }}" 
+                        title="{{ featured_video.title }}" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="video-info">
+                    <h3>{{ featured_video.title }}</h3>
+                    {% if featured_video.description %}
+                    <p>{{ featured_video.description }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+{% endfor %}
+
+{% endblock %}

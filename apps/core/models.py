@@ -182,8 +182,8 @@ class HeroCarouselImage(models.Model):
     )
 
     class Meta:
-        verbose_name        = _("Imagen del Hero")
-        verbose_name_plural = _("Imágenes del Hero")
+        verbose_name        = _("Imagen del Carrusel del Hero")
+        verbose_name_plural = _("Imágenes del Carrusel del Hero")
         ordering            = ["order"]
 
     def __str__(self):

@@ -1,64 +1,141 @@
-# Register your models here.
 from django.contrib import admin
-from .models import Hero, HeroCarouselImage, SocialNetwork, SiteConfiguration, MenuItem,  Program, Testimonial, FeaturedVideo, HomepageSection
+from django.utils.html import format_html
+from .models import (
+    SiteConfiguration,
+    SocialNetwork,
+    MenuItem,
+    Hero,
+    Program,
+    Testimonial,
+    FeaturedVideo,
+    HomepageSection,
+    HeroCarouselImage,
+)
 
-class HeroCarouselImageInline(admin.TabularInline):
-    model      = HeroCarouselImage
-    extra      = 3      # número de campos vacíos por defecto
-    max_num    = 10     # opcional: límite superior
-    fields     = ("order", "is_active", "image")
 
-@admin.register(Hero)
-class HeroAdmin(admin.ModelAdmin):
-    inlines = [HeroCarouselImageInline]
-    list_display = ("title", "is_active")
-
-
-@admin.register(SocialNetwork)
 class SocialNetworkAdmin(admin.ModelAdmin):
-    list_display = ('name', 'url', 'order', 'is_active','created_at', 'updated_at')
+    list_display = ('name', 'url', 'is_active', 'order')
     list_filter = ('is_active', 'name')
     search_fields = ('name', 'url')
+    list_editable = ('order', 'is_active')
     ordering = ('order',)
 
-@admin.register(SiteConfiguration)
-class SiteConfigurationAdmin(admin.ModelAdmin):
-    list_display = ('site_name', 'email', 'phone', 'created_at', 'updated_at')
-    readonly_fields = ('created_at', 'updated_at')
 
-    def has_add_permission(self, request):
-        # Evitar que se creen más de una configuración en el admin
-        if SiteConfiguration.objects.exists():
-            return False
-        return True
+class MenuItemInline(admin.TabularInline):
+    model = MenuItem
+    extra = 1
+    fk_name = 'parent'
+    fields = ('title', 'url', 'location', 'order', 'is_active')
 
-@admin.register(MenuItem)
+
 class MenuItemAdmin(admin.ModelAdmin):
-    list_display = ('title', 'location', 'order', 'is_active', 'parent', 'created_at', 'updated_at')
+    list_display = ('title', 'url', 'location', 'get_parent', 'order', 'is_active')
     list_filter = ('location', 'is_active')
     search_fields = ('title', 'url')
-    ordering = ('location', 'order')
+    list_editable = ('order', 'is_active')
+    inlines = [MenuItemInline]
+    
+    def get_parent(self, obj):
+        if obj.parent:
+            return obj.parent.title
+        return "-"
+    get_parent.short_description = "Padre"
+    
+    def get_queryset(self, request):
+        # Solo mostrar elementos de nivel superior en la lista principal
+        qs = super().get_queryset(request)
+        return qs.filter(parent__isnull=True)
 
-@admin.register(Program)
+
+class SiteConfigurationAdmin(admin.ModelAdmin):
+    fieldsets = (
+        ('Información básica', {
+            'fields': ('site_name', 'logo', 'logo_alt', 'favicon')
+        }),
+        ('Información de contacto', {
+            'fields': ('email', 'phone', 'address')
+        }),
+        ('Textos del footer', {
+            'fields': ('footer_text', 'copyright_text')
+        }),
+        ('SEO y Analytics', {
+            'fields': ('meta_description', 'meta_keywords', 'google_analytics_id'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def has_add_permission(self, request):
+        # Verificar si ya existe una configuración
+        return not SiteConfiguration.objects.exists()
+
+class HeroCarouselImageInline(admin.TabularInline):
+    model = HeroCarouselImage
+    extra = 1 # Número de imágenes adicionales a mostrar
+    fields = ('image', 'get_image_preview', 'order', 'is_active')
+    readonly_fields = ('get_image_preview',)
+    
+    def get_image_preview(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" width="50" height="auto" />', obj.image.url)
+        return "Sin imagen"
+    get_image_preview.short_description = "Previsualización"
+    
+
+
+class HeroAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_active')
+    list_editable = ('is_active',)
+    inlines = [HeroCarouselImageInline]
+
+
 class ProgramAdmin(admin.ModelAdmin):
-    list_display = ("title", "is_active", "order", "created_at")
-    list_filter = ("is_active",)
-    search_fields = ("title", "description")
+    list_display = ('title', 'get_image', 'order', 'is_active')
+    list_filter = ('is_active',)
+    list_editable = ('order', 'is_active')
+    
+    def get_image(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" width="50" height="auto" />', obj.image.url)
+        return "Sin imagen"
+    get_image.short_description = "Imagen"
 
-@admin.register(Testimonial)
+
 class TestimonialAdmin(admin.ModelAdmin):
-    list_display = ("name", "position", "is_active", "order")
-    list_filter = ("is_featured", "is_active")
-    search_fields = ("name", "position")
+    list_display = ('name', 'position', 'get_image', 'is_featured', 'order', 'is_active')
+    list_filter = ('is_featured', 'is_active')
+    list_editable = ('is_featured', 'order', 'is_active')
+    search_fields = ('name', 'position', 'quote')
+    
+    def get_image(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" width="50" height="auto" />', obj.image.url)
+        return "Sin imagen"
+    get_image.short_description = "Imagen"
 
-@admin.register(FeaturedVideo)
+
 class FeaturedVideoAdmin(admin.ModelAdmin):
-    list_display = ("title", "is_active")
-    list_filter = ("is_active",)
-    search_fields = ("title", "description", "youtube_id")
+    list_display = ('title', 'get_thumbnail', 'youtube_id', 'is_active')
+    list_filter = ('is_active',)
+    list_editable = ('is_active',)
+    search_fields = ('title', 'description', 'youtube_id')
+    
+    def get_thumbnail(self, obj):
+        return format_html('<img src="{}" width="120" height="auto" />', obj.youtube_thumbnail)
+    get_thumbnail.short_description = "Miniatura"
 
-@admin.register(HomepageSection)
+
 class HomepageSectionAdmin(admin.ModelAdmin):
-    list_display = ("section", "title", "order", "is_active")
-    list_filter = ("is_active",)
+    list_display = ('get_section_display', 'title', 'order', 'is_active')
+    list_filter = ('is_active',)
+    list_editable = ('order', 'is_active')
 
+
+# Registrar los modelos en el admin
+admin.site.register(SiteConfiguration, SiteConfigurationAdmin)
+admin.site.register(SocialNetwork, SocialNetworkAdmin)
+admin.site.register(MenuItem, MenuItemAdmin)
+admin.site.register(Hero, HeroAdmin)
+admin.site.register(Program, ProgramAdmin)
+admin.site.register(Testimonial, TestimonialAdmin)
+admin.site.register(FeaturedVideo, FeaturedVideoAdmin)
+admin.site.register(HomepageSection, HomepageSectionAdmin)
