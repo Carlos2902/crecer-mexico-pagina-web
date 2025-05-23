@@ -56,7 +56,7 @@ class SiteConfigurationAdmin(admin.ModelAdmin):
             'fields': ('email', 'phone', 'address')
         }),
         ('Textos del footer', {
-            'fields': ('footer_text', 'copyright_text')
+            'fields': ('footer_text_col1', 'footer_text_col2','copyright_text')
         }),
         ('SEO y Analytics', {
             'fields': ('meta_description', 'meta_keywords', 'google_analytics_id'),
