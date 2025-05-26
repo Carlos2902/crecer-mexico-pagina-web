@@ -59,7 +59,9 @@ class SiteConfiguration(TimeStampedModel):
     address = models.TextField(blank=True, verbose_name=_("Dirección"))
     
     # Textos del footer
-    footer_text = models.TextField(blank=True, verbose_name=_("Texto del pie de página"))
+    footer_text_col1 = models.TextField(blank=True, verbose_name=_("Texto pie de página (Columna 2)"))
+    footer_text_col2 = models.TextField(blank=True, verbose_name=_("Texto pie de página (Columna 2)"))
+
     copyright_text = models.CharField(max_length=255, blank=True, verbose_name=_("Texto de copyright"))
     
     # Metadatos SEO
@@ -149,8 +151,6 @@ class Hero(TimeStampedModel):
     secondary_button_text = models.CharField(max_length=50, default="Conocer más", verbose_name=_("Texto botón secundario"))
     secondary_button_url = models.CharField(max_length=255, default="/nosotros", verbose_name=_("URL botón secundario"))
     
-    #carrusel de imagenes
-    
     is_active = models.BooleanField(default=True, verbose_name=_("Activo"))
     
     class Meta:
@@ -182,8 +182,8 @@ class HeroCarouselImage(models.Model):
     )
 
     class Meta:
-        verbose_name        = _("Imagen del Hero")
-        verbose_name_plural = _("Imágenes del Hero")
+        verbose_name        = _("Imagen del Carrusel del Hero")
+        verbose_name_plural = _("Imágenes del Carrusel del Hero")
         ordering            = ["order"]
 
     def __str__(self):
@@ -225,8 +225,9 @@ class Testimonial(TimeStampedModel):
     """
     name = models.CharField(max_length=100, verbose_name=_("Nombre"))
     position = models.CharField(max_length=100, verbose_name=_("Cargo"))
+    image1 = models.ImageField(upload_to='home/testimonials/', blank=True, null=True, verbose_name=_("Imagen"))
     quote = models.TextField(verbose_name=_("Cita"))
-    image = models.ImageField(upload_to='home/testimonials/', blank=True, null=True, verbose_name=_("Imagen"))
+    image = models.ImageField(upload_to='home/testimonials/', blank=True, null=True, verbose_name=_("Imagen de perfil"))
     is_featured = models.BooleanField(default=False, verbose_name=_("Destacado"))
     order = models.PositiveIntegerField(default=0, verbose_name=_("Orden"))
     is_active = models.BooleanField(default=True, verbose_name=_("Activo"))
@@ -244,7 +245,7 @@ class FeaturedVideo(TimeStampedModel):
     """
     Modelo para videos destacados en la página de inicio
     """
-    title = models.CharField(max_length=200, verbose_name=_("Título"))
+    title = models.CharField(max_length=200, verbose_name=_("Fecha de publicación"))
     description = models.TextField(blank=True, verbose_name=_("Descripción"))
     youtube_id = models.CharField(max_length=20, verbose_name=_("ID de YouTube"))
     thumbnail = models.ImageField(upload_to='home/videos/', blank=True, null=True, verbose_name=_("Miniatura"))
@@ -292,3 +293,8 @@ class HomepageSection(TimeStampedModel):
     
     def __str__(self):
         return self.get_section_display()
+    
+    
+    
+    # aclarar si este modelo de elementos de menu es para el header
+    #agregar un modelo para el footer? solo está el de redes sociales  
