@@ -59,7 +59,7 @@ class SiteConfiguration(TimeStampedModel):
     address = models.TextField(blank=True, verbose_name=_("Dirección"))
     
     # Textos del footer
-    footer_text_col1 = models.TextField(blank=True, verbose_name=_("Texto pie de página (Columna 2)"))
+    footer_text_col1 = models.TextField(blank=True, verbose_name=_("Texto pie de página (Columna 1)"))
     footer_text_col2 = models.TextField(blank=True, verbose_name=_("Texto pie de página (Columna 2)"))
 
     copyright_text = models.CharField(max_length=255, blank=True, verbose_name=_("Texto de copyright"))

@@ -1,0 +1,300 @@
+:root {
+    /* Paleta de Colores */
+    --color-primary-green: #69c624;
+    --color-primary-dark-blue: #2b2a5b;
+    --color-primary-white: #ffffff;
+    --color-primary-black: #000000;
+    
+    --color-secondary-gray: #737373;
+    --color-secondary-light-blue: #465a88;
+    
+    /* Sombras */
+    --shadow-color-10: #191919;
+    --shadow-color-15: #262626;
+    --shadow-color-20: #333333;
+    --shadow-color-30: #4c4c4d;
+    --shadow-color-35: #58595a;
+    --shadow-color-40: #858587;
+    --shadow-color-60: #98989a;
+    --shadow-color-70: #b3b3b3;
+    
+    /* Tipografía */
+    --font-family-sans: "Open Sans", sans-serif;
+    --font-weight-regular: 400;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    /* Otros globales */
+    --container-max-width: 1100px;
+    --spacing-unit: 8px;
+    }
+    
+    body {
+    margin: 0;
+    font-family: var(--font-family-sans);
+    color: var(--shadow-color-20);
+    background-color: #f0f0f0; /* Color de fondo base */
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-image: linear-gradient(
+    to bottom,
+    rgba(105, 198, 36, 0.15) 0%,
+    transparent 30%
+    ), linear-gradient(to bottom, var(--color-primary-white), var(--color-primary-white));
+    background-repeat: no-repeat;
+    }
+    
+    main {
+    flex-grow: 1;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+    color: var(--color-primary-dark-blue);
+    }
+    
+    body::before,
+    body::after {
+    content: "";
+    position: absolute;
+    background-color: var(--color-primary-green);
+    border-radius: 50%;
+    z-index: -1;
+    }
+    
+    body::before {
+    width: 12px;
+    height: 12px;
+    top: 20%;
+    left: 5%;
+    opacity: 0.8;
+    }
+    
+    body::after {
+    width: 10px;
+    height: 10px;
+    top: 12%;
+    right: 5%;
+    opacity: 0.8;
+    }
+    
+    
+
+
+    /* static/css/main.css */
+
+/* ... (tus variables :root y estilos base del body que ya definimos) ... */
+
+/* Estilos del Header */
+.site-header {
+    background-color: var(--color-primary-white); /* O el color que desees para el fondo del header */
+    padding: calc(var(--spacing-unit) * 1.5) 0; /* 12px arriba/abajo si spacing-unit es 8px */
+    border-bottom: 1px solid #eee; /* Un borde sutil opcional */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra sutil para el header */
+    position: sticky; /* Para que el header se quede fijo arriba (opcional) */
+    top: 0;
+    z-index: 100; /* Para que esté sobre otros elementos */
+  }
+  
+  .container { /* Clase genérica para contenedores, puedes definirla una vez */
+    width: 90%;
+    max-width: var(--container-max-width); /* ej. 1100px */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo-img {
+    height: 50px; /* Ajusta según el tamaño de tu logo */
+    width: auto;
+    display: block;
+  }
+  
+  .site-title-text {
+    font-size: 1.5em;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary-dark-blue);
+    text-decoration: none;
+  }
+  
+  /* Botón Hamburguesa */
+  .hamburger-button {
+    display: flex; /* Cambiaremos a 'none' en desktop */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 200; /* Sobre el overlay cuando está cerrado */
+  }
+  
+  .hamburger-button:focus {
+    outline: none;
+  }
+  
+  .hamburger-bar {
+    width: 30px;
+    height: 3px;
+    background-color: var(--color-primary-green); /* Color de las barras */
+    border-radius: 10px;
+    transition: all 0.3s linear;
+  }
+  
+  /* Estilos para la transformación del botón hamburguesa a 'X' (con JS) */
+  .hamburger-button.open .hamburger-bar:nth-child(1) {
+    transform: translateY(9px) rotate(45deg); /* Ajusta los valores de translación si es necesario */
+  }
+  .hamburger-button.open .hamburger-bar:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger-button.open .hamburger-bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg); /* Ajusta los valores de translación */
+  }
+  
+  
+  /* Overlay del Menú Móvil */
+  .mobile-menu-overlay {
+    position: fixed;
+    top: 9%;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    /* background-color: rgba(43, 42, 91, 0.95); */ /* var(--color-primary-dark-blue) con opacidad */
+    background-color: rgba(105, 198, 36, 0.9); /* Usando tu figma-green con opacidad */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 150; /* Debajo del botón hamburguesa cuando está abierto, pero sobre el contenido */
+    
+    /* Transición para mostrar/ocultar */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+  }
+  
+  .mobile-menu-overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .mobile-menu-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .mobile-menu-nav li a {
+    color: var(--color-primary-white);
+    font-size: 1.3rem; /* Tamaño grande para móvil */
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+    padding: calc(var(--spacing-unit) * 1.5) 0; /* 12px arriba/abajo */
+    display: block;
+    transition: color 0.3s ease;
+  }
+  
+  .mobile-menu-nav li a:hover {
+    color: var(--color-primary-green); /* O un blanco más brillante/diferente */
+  }
+  
+
+
+  /* Estilos del footer */
+  /* static/css/main.css (continuación - ajusta o reemplaza estilos de footer anteriores) */
+
+.site-footer-new {
+  background-color: var(--color-primary-dark-blue); /* Nuevo color de fondo: #2b2a5b */
+  color: var(--color-primary-white);
+  padding: calc(var(--spacing-unit) * 3) 0; /* 24px arriba/abajo */
+  font-size: 0.9em;
+}
+
+/* .container ya debería estar definido para centrar y limitar ancho */
+/* .footer-content-wrapper { */
+  /* Puedes añadir estilos específicos si necesitas un wrapper extra dentro del container */
+/* } */
+
+/* Sección 1: Grid de dos columnas para texto */
+.footer-text-grid {
+  display: flex; /* Usamos flex para dos columnas */
+  justify-content: space-between; /* Espacio entre las columnas */
+  gap: calc(var(--spacing-unit) * 2); /* Espacio entre columnas si flex-basis lo permite */
+  margin-bottom: calc(var(--spacing-unit) * 3);
+}
+
+.footer-text-column {
+  flex-basis: calc(50% - var(--spacing-unit)); /* Cada columna ocupa casi el 50%, restando la mitad del gap */
+  /* Si el contenido es muy largo y quieres que se envuelva, necesitarás 'flex-wrap: wrap;' en el padre
+     o ajustar flex-basis. Para móvil, si es demasiado apretado, considera apilarlas o reducir el texto.
+     Por ahora, forzamos dos columnas. */
+}
+.footer-text-column p {
+    margin-top: 0;
+}
+
+/* Contenido apilado a la izquierda (Logo, Dirección, Copyright, Redes) */
+.footer-stacked-left {
+  /* Estos elementos se apilarán verticalmente por defecto */
+  /* Todos estarán alineados a la izquierda por el flujo normal del bloque */
+}
+
+.footer-logo-alt-section {
+  margin-bottom: calc(var(--spacing-unit) * 1.5);
+}
+
+.footer-logo-alt-img {
+  max-height: 35px; /* Ajusta según necesites */
+  width: auto;
+}
+
+.footer-address-section {
+  margin-bottom: calc(var(--spacing-unit) * 1);
+  font-size: 0.9em;
+}
+.footer-address-section p {
+  margin: 0;
+}
+
+.footer-copyright-section {
+  margin-bottom: calc(var(--spacing-unit) * 2);
+  font-size: 0.8em;
+  opacity: 0.8;
+}
+.footer-copyright-section p {
+  margin: 0;
+}
+
+.footer-social-new-section {
+  /* No se necesita text-align: left aquí, los elementos de bloque lo hacen por defecto */
+}
+
+.social-icons-list-new {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* Alinea iconos en una fila */
+  gap: calc(var(--spacing-unit) * 2); /* Espacio entre iconos (16px) */
+}
+
+.social-icons-list-new li a {
+  color: var(--color-primary-white);
+  text-decoration: none;
+  font-size: 1.5em; /* Tamaño de los iconos de Font Awesome */
+  transition: color 0.3s ease;
+}
+
+.social-icons-list-new li a:hover {
+  color: var(--color-primary-green);
+}

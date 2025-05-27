@@ -1,24 +1,113 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <title>{% block title %}Mi sitio{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Crecer México{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
-  <header>
-    <!-- tu header -->
-  </header>
+    <header class="site-header">
+        <div class="container header-container">
+            <div class="logo-container">
+                <a href="/"> 
+                    {% if site_config.logo %}
+                        <img src="{{ site_config.logo.url }}" alt="{{ site_config.site_name }} Logo" class="logo-img">
+                    {% else %}
+                        <span class="site-title-text">{{ site_config.site_name }}</span>
+                    {% endif %}
+                </a>
+            </div>
 
-  <main>
-    {% block content %}
+            <button id="hamburger-button" class="hamburger-button" aria-label="Abrir menú" aria-expanded="false">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+        </div>
+        </header>
 
-    <body class="bg-gradient-to-b from-figma-green/10 via-white to-white min-h-screen relative">
-    </body>
-    {% endblock %}
-  </main>
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay">
+        <nav class="mobile-menu-nav">
+            <ul>
+                {% for item in header_menu %} 
+                    <li>
+                        <a href="{{ item.url }}">{{ item.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
 
-  <footer>
-    <!-- tu footer -->
-  </footer>
+    <main class="flex-grow"> {#para empujar el footer al final de la página}
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="site-footer-new">
+        <div class="container footer-content-wrapper"> {# Un wrapper para el contenido del footer #}
+
+            <!-- {% if site_config.footer_text_col1 or site_config.footer_text_col2 %}
+            <div class="footer-text-grid">
+                <div class="footer-text-column">
+                    {{ site_config.footer_text_col1|linebreaksbr }}
+                </div>
+                <div class="footer-text-column">
+                    {{ site_config.footer_text_col2|linebreaksbr }}
+                </div>
+            </div>
+            {% endif %} -->
+
+            <div class="footer-stacked-left">
+                <div class="footer-logo-alt-section">
+                    {% if site_config.logo_alt %}
+                        <img src="{{ site_config.logo_alt.url }}" alt="{{ site_config.site_name }} Logo Footer" class="footer-logo-alt-img">
+                    {% elif site_config.logo %}
+                        <img src="{{ site_config.logo.url }}" alt="{{ site_config.site_name }} Logo" class="footer-logo-alt-img">
+                    {% endif %}
+                </div>
+
+                {% if site_config.address %}
+                <div class="footer-address-section">
+                    <p>{{ site_config.address|linebreaksbr }}</p>
+                </div>
+                {% endif %}
+
+                {% if site_config.copyright_text %}
+                <div class="footer-copyright-section">
+                    <p>{{ site_config.copyright_text }}</p>
+                </div>
+                {% endif %}
+                
+                {% if social_networks %}
+                <div class="footer-social-new-section">
+                    <ul class="social-icons-list-new">
+                        {% for social in social_networks %}
+                            <li>
+                                <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ social.get_name_display }}">
+                                    {% if social.icon %}
+                                        <i class="{{ social.icon }}"></i>
+                                    {% else %}
+                                        {{ social.get_name_display }}
+                                    {% endif %}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block scripts %}{% endblock %}
 </body>
 </html>
