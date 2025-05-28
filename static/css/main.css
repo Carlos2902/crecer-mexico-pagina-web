@@ -210,91 +210,255 @@
   }
   
 
+  /* static/css/main.css (continuación) */
 
-  /* Estilos del footer */
-  /* static/css/main.css (continuación - ajusta o reemplaza estilos de footer anteriores) */
-
-.site-footer-new {
-  background-color: var(--color-primary-dark-blue); /* Nuevo color de fondo: #2b2a5b */
-  color: var(--color-primary-white);
-  padding: calc(var(--spacing-unit) * 3) 0; /* 24px arriba/abajo */
-  font-size: 0.9em;
+/* --- Estilos Base para Desktop Nav (oculto en móvil) --- */
+.desktop-nav {
+  display: none; /* Oculto por defecto (móvil primero) */
 }
 
-/* .container ya debería estar definido para centrar y limitar ancho */
-/* .footer-content-wrapper { */
-  /* Puedes añadir estilos específicos si necesitas un wrapper extra dentro del container */
-/* } */
-
-/* Sección 1: Grid de dos columnas para texto */
-.footer-text-grid {
-  display: flex; /* Usamos flex para dos columnas */
-  justify-content: space-between; /* Espacio entre las columnas */
-  gap: calc(var(--spacing-unit) * 2); /* Espacio entre columnas si flex-basis lo permite */
-  margin-bottom: calc(var(--spacing-unit) * 3);
-}
-
-.footer-text-column {
-  flex-basis: calc(50% - var(--spacing-unit)); /* Cada columna ocupa casi el 50%, restando la mitad del gap */
-  /* Si el contenido es muy largo y quieres que se envuelva, necesitarás 'flex-wrap: wrap;' en el padre
-     o ajustar flex-basis. Para móvil, si es demasiado apretado, considera apilarlas o reducir el texto.
-     Por ahora, forzamos dos columnas. */
-}
-.footer-text-column p {
-    margin-top: 0;
-}
-
-/* Contenido apilado a la izquierda (Logo, Dirección, Copyright, Redes) */
-.footer-stacked-left {
-  /* Estos elementos se apilarán verticalmente por defecto */
-  /* Todos estarán alineados a la izquierda por el flujo normal del bloque */
-}
-
-.footer-logo-alt-section {
-  margin-bottom: calc(var(--spacing-unit) * 1.5);
-}
-
-.footer-logo-alt-img {
-  max-height: 35px; /* Ajusta según necesites */
-  width: auto;
-}
-
-.footer-address-section {
-  margin-bottom: calc(var(--spacing-unit) * 1);
-  font-size: 0.9em;
-}
-.footer-address-section p {
-  margin: 0;
-}
-
-.footer-copyright-section {
-  margin-bottom: calc(var(--spacing-unit) * 2);
-  font-size: 0.8em;
-  opacity: 0.8;
-}
-.footer-copyright-section p {
-  margin: 0;
-}
-
-.footer-social-new-section {
-  /* No se necesita text-align: left aquí, los elementos de bloque lo hacen por defecto */
-}
-
-.social-icons-list-new {
+.desktop-nav ul {
   list-style: none;
-  padding: 0;
   margin: 0;
-  display: flex; /* Alinea iconos en una fila */
-  gap: calc(var(--spacing-unit) * 2); /* Espacio entre iconos (16px) */
+  padding: 0;
+  display: flex; /* Para alinear los <li> horizontalmente */
+  align-items: center;
 }
 
-.social-icons-list-new li a {
-  color: var(--color-primary-white);
+.desktop-nav li {
+  margin-left: calc(var(--spacing-unit) * 2.5); /* 20px si spacing-unit es 8px - ajusta según tu diseño */
+}
+
+.desktop-nav li:first-child {
+  margin-left: 0;
+}
+
+.desktop-nav a {
   text-decoration: none;
-  font-size: 1.5em; /* Tamaño de los iconos de Font Awesome */
+  color: var(--color-primary-dark-blue); /* O el color que prefieras para los enlaces del header */
+  font-weight: var(--font-weight-semibold);
+  font-size: 1em; /* Ajusta según necesites */
+  padding: calc(var(--spacing-unit) / 2) var(--spacing-unit); /* 4px 8px - Pequeño padding para área de click */
   transition: color 0.3s ease;
 }
 
-.social-icons-list-new li a:hover {
-  color: var(--color-primary-green);
+.desktop-nav a:hover {
+  color: var(--color-primary-green); /* Color al pasar el ratón */
 }
+
+
+/* --- Media Query para Pantallas Medianas (md) en adelante --- */
+@media (min-width: 768px) {
+  .hamburger-button {
+    display: none; /* Oculta el botón hamburguesa */
+  }
+
+  .desktop-nav {
+    display: flex; /* Muestra la navegación de escritorio */
+  }
+
+  /* Si el overlay del menú móvil estaba abierto, nos aseguramos que no interfiera */
+  /* Esto es una precaución, ya que el botón para abrirlo estará oculto */
+  .mobile-menu-overlay {
+    display: none !important; /* Asegura que esté oculto, aunque el JS lo haya dejado abierto */
+  }
+}
+
+/* --- Media Query para Pantallas Grandes (lg) en adelante --- */
+@media (min-width: 1024px) {
+  .desktop-nav a {
+    font-size: 1.05em; /* Ligeramente más grande para pantallas lg */
+    padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5); /* 8px 12px */
+  }
+
+  .desktop-nav li {
+    margin-left: calc(var(--spacing-unit) * 3); /* 24px */
+  }
+
+  .logo-img {
+    height: 45px; /* Ligeramente más grande el logo */
+  }
+}
+
+/* --- Media Query para Pantallas Extra Grandes (xl) en adelante --- */
+@media (min-width: 1280px) {
+  .desktop-nav a {
+    font-size: 1.1em; /* Un poco más grande aún */
+    padding: var(--spacing-unit) calc(var(--spacing-unit) * 2); /* 8px 16px */
+  }
+   .desktop-nav li {
+    margin-left: calc(var(--spacing-unit) * 3.5); /* 28px */
+  }
+
+  .logo-img {
+    height: 50px; /* Logo un poco más grande */
+  }
+}
+
+
+ /* static/css/main.css (continuación) */
+/* static/css/main.css (continuación) */
+
+.site-footer-new {
+  background-color: var(--color-primary-dark-blue); /* NUEVO COLOR DE FONDO */
+  color: var(--color-primary-white);
+  padding: calc(var(--spacing-unit) * 3) 0;
+  font-size: 0.9em;
+}
+
+/* --- ESTILOS MÓVIL (BASE) --- */
+
+/* Escenario 1 (CON columnas de texto) - Móvil: bloques se apilan */
+.footer-main-row-with-cols .footer-block {
+  margin-bottom: calc(var(--spacing-unit) * 2);
+}
+.footer-main-row-with-cols .footer-block:last-child {
+  margin-bottom: 0;
+}
+
+/* Estilo para el grid de texto col1 y col2 - MÓVIL (COMO LO TENÍAS Y QUERÍAS CONSERVAR) */
+.footer-text-grid {
+  display: flex; 
+  /* Si en móvil quieres que las 2 columnas de texto se apilen una sobre otra: */
+  flex-direction: column; 
+  gap: calc(var(--spacing-unit) * 1.5); 
+}
+.footer-text-column {
+  /* Si están apiladas en móvil, no necesitan flex-basis aquí */
+  /* Si fueran 2 columnas lado a lado en móvil: flex-basis: calc(50% - var(--spacing-unit)); */
+}
+.footer-text-column p { margin-top: 0; }
+
+/* Logo, Dirección en Escenario 1 (Móvil) */
+.footer-identity-block { text-align: center; } /* Centrar logo y dirección en móvil si están en este bloque */
+.footer-logo-alt-img { max-height: 40px; width: auto; display: inline-block; margin-bottom: var(--spacing-unit); }
+.footer-address-section p { margin: 0; white-space: normal; }
+
+/* Redes Sociales en Escenario 1 (Móvil) */
+.footer-social-block { text-align: center; } /* Centrar el bloque social en móvil */
+.footer-social-block h4 {
+    font-size: 1.1em;
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-unit);
+}
+.social-icons-list-new { /* Común para ambos escenarios */
+  list-style: none; padding: 0; margin: 0;
+  display: flex;
+  flex-wrap: wrap; /* Para que los iconos se ajusten si son muchos */
+  justify-content: center; /* Centrar los iconos en móvil */
+  gap: calc(var(--spacing-unit) * 2);
+}
+.social-icons-list-new li a {
+  color: var(--color-primary-white); text-decoration: none;
+  font-size: 1.6em; /* Un poco más grandes para mejor toque */
+  transition: color 0.3s ease;
+}
+.social-icons-list-new li a:hover { color: var(--color-primary-green); }
+
+
+/* Escenario 2 (SIN columnas de texto - footer-single-row-layout) - Móvil: bloques se apilan y centran */
+.footer-single-row-layout .footer-item-sr {
+  margin-bottom: calc(var(--spacing-unit) * 2);
+  text-align: center;
+}
+.footer-single-row-layout .footer-item-sr:last-child {
+  margin-bottom: 0;
+}
+.footer-single-row-layout .footer-logo-sr img {
+    display: inline-block; /* Para permitir centrado con text-align */
+    max-height: 40px; /* Igual que el otro logo */
+}
+.footer-single-row-layout .footer-address-sr-centered p {
+    margin: 0;
+    white-space: normal; /* Permite que la dirección fluya */
+}
+
+
+/* Copyright (común a ambos escenarios) - Móvil */
+.footer-copyright-section-standalone {
+  text-align: center;
+  padding-top: calc(var(--spacing-unit) * 2.5);
+  margin-top: calc(var(--spacing-unit) * 2.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.8em;
+  opacity: 0.8;
+}
+.footer-copyright-section-standalone p { margin: 0; }
+
+
+/* --- Media Queries para PANTALLAS MEDIANAS (md) en adelante --- */
+@media (min-width: 768px) {
+  /* Escenario 1 (CON COLUMNAS DE TEXTO) - Desktop */
+  .footer-main-row-with-cols {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: calc(var(--spacing-unit) * 3);
+  }
+
+  .footer-main-row-with-cols .footer-block { margin-bottom: 0; }
+
+  .footer-identity-block { /* Contiene logo & dirección */
+    flex: 1; /* Ajusta o usa flex-basis si prefieres anchos más fijos */
+    min-width: 180px; /* Evita que se encoja demasiado */
+    text-align: left;
+  }
+  .footer-identity-block .footer-logo-alt-img { margin: 0; display: block; } /* Reinicia centrado móvil */
+  .footer-identity-block .footer-address-section p { text-align: left; }
+
+
+  .footer-text-content-block { /* Contiene el grid de textos */
+    flex: 2; /* Más espacio para el contenido de texto */
+    min-width: 250px; /* Evita que se encoja demasiado */
+  }
+  .footer-text-grid { /* El grid interno de textos */
+    flex-direction: row; /* Columnas de texto una al lado de la otra */
+    justify-content: space-between;
+    gap: calc(var(--spacing-unit) * 2.5);
+  }
+  .footer-text-column {
+     flex-basis: calc(50% - var(--spacing-unit) * 1.25); /* Cada columna de texto */
+     text-align: left;
+  }
+
+  .footer-social-block { /* Contiene título "Síguenos" e iconos */
+    flex: 1;
+    min-width: 150px;
+    text-align: right;
+  }
+  .footer-social-block h4 { text-align: right; }
+  .social-icons-list-new {
+    justify-content: flex-end; /* Alinea iconos a la derecha */
+    flex-direction: column; /* Iconos apilados verticalmente en desktop */
+    align-items: flex-end;  /* Alinea los items apilados a la derecha */
+    gap: calc(var(--spacing-unit) * 0.75);
+  }
+
+  /* Escenario 2 (SIN COLUMNAS DE TEXTO) - Desktop: Todo en una fila */
+  .footer-single-row-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Centra verticalmente los items en la fila */
+  }
+  .footer-single-row-layout .footer-item-sr {
+    margin-bottom: 0; /* Quita margen para la fila */
+  }
+  .footer-logo-sr {
+    text-align: left; /* Logo a la izquierda */
+  }
+  .footer-address-sr-centered {
+    flex-grow: 1; /* Ocupa el espacio central */
+    text-align: center; /* Dirección centrada */
+  }
+  .footer-social-sr .social-icons-list-new {
+     justify-content: flex-end; /* Iconos a la derecha */
+     flex-direction: row; /* Iconos en fila para este layout */
+  }
+
+  .footer-copyright-section-standalone {
+    /* Puedes dejarlo centrado o alinearlo a la izquierda/derecha si prefieres para desktop */
+    /* text-align: left; */
+  }
+}
+
