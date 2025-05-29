@@ -1,464 +1,327 @@
 :root {
-    /* Paleta de Colores */
-    --color-primary-green: #69c624;
-    --color-primary-dark-blue: #2b2a5b;
-    --color-primary-white: #ffffff;
-    --color-primary-black: #000000;
-    
-    --color-secondary-gray: #737373;
-    --color-secondary-light-blue: #465a88;
-    
-    /* Sombras */
-    --shadow-color-10: #191919;
-    --shadow-color-15: #262626;
-    --shadow-color-20: #333333;
-    --shadow-color-30: #4c4c4d;
-    --shadow-color-35: #58595a;
-    --shadow-color-40: #858587;
-    --shadow-color-60: #98989a;
-    --shadow-color-70: #b3b3b3;
-    
-    /* Tipografía */
-    --font-family-sans: "Open Sans", sans-serif;
-    --font-weight-regular: 400;
-    --font-weight-semibold: 600;
-    --font-weight-bold: 700;
-    
-    /* Otros globales */
-    --container-max-width: 1100px;
-    --spacing-unit: 8px;
-    }
-    
-    body {
-    margin: 0;
-    font-family: var(--font-family-sans);
-    color: var(--shadow-color-20);
-    background-color: #f0f0f0; /* Color de fondo base */
-    line-height: 1.6;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    background-image: linear-gradient(
-    to bottom,
-    rgba(105, 198, 36, 0.15) 0%,
-    transparent 30%
-    ), linear-gradient(to bottom, var(--color-primary-white), var(--color-primary-white));
-    background-repeat: no-repeat;
-    }
-    
-    main {
-    flex-grow: 1;
-    }
-    
-    h1, h2, h3, h4, h5, h6 {
-    color: var(--color-primary-dark-blue);
-    }
-    
-    body::before,
-    body::after {
-    content: "";
-    position: absolute;
-    background-color: var(--color-primary-green);
-    border-radius: 50%;
-    z-index: -1;
-    }
-    
-    body::before {
-    width: 12px;
-    height: 12px;
-    top: 20%;
-    left: 5%;
-    opacity: 0.8;
-    }
-    
-    body::after {
-    width: 10px;
-    height: 10px;
-    top: 12%;
-    right: 5%;
-    opacity: 0.8;
-    }
-    
-    
+  /* Colores */
+  --color-primary-green: #69c624;
+  --color-primary-dark-blue: #2b2a5b;
+  --color-primary-white: #ffffff;
+  --color-primary-black: #000000;
+  --color-secondary-gray: #737373;
+  --color-secondary-light-blue: #465a88;
 
+  /* Sombras */
+  --shadow-color-20: #333333;
 
-    /* static/css/main.css */
+  /* Tipografía */
+  --font-family-sans: "Open Sans", sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
 
-/* ... (tus variables :root y estilos base del body que ya definimos) ... */
-
-/* Estilos del Header */
-.site-header {
-    background-color: var(--color-primary-white); /* O el color que desees para el fondo del header */
-    padding: calc(var(--spacing-unit) * 1.5) 0; /* 12px arriba/abajo si spacing-unit es 8px */
-    border-bottom: 1px solid #eee; /* Un borde sutil opcional */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra sutil para el header */
-    position: sticky; /* Para que el header se quede fijo arriba (opcional) */
-    top: 0;
-    z-index: 100; /* Para que esté sobre otros elementos */
-  }
-  
-  .container { /* Clase genérica para contenedores, puedes definirla una vez */
-    width: 90%;
-    max-width: var(--container-max-width); /* ej. 1100px */
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .logo-img {
-    height: 50px; /* Ajusta según el tamaño de tu logo */
-    width: auto;
-    display: block;
-  }
-  
-  .site-title-text {
-    font-size: 1.5em;
-    font-weight: var(--font-weight-bold);
-    color: var(--color-primary-dark-blue);
-    text-decoration: none;
-  }
-  
-  /* Botón Hamburguesa */
-  .hamburger-button {
-    display: flex; /* Cambiaremos a 'none' en desktop */
-    flex-direction: column;
-    justify-content: space-around;
-    width: 30px;
-    height: 24px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 200; /* Sobre el overlay cuando está cerrado */
-  }
-  
-  .hamburger-button:focus {
-    outline: none;
-  }
-  
-  .hamburger-bar {
-    width: 30px;
-    height: 3px;
-    background-color: var(--color-primary-green); /* Color de las barras */
-    border-radius: 10px;
-    transition: all 0.3s linear;
-  }
-  
-  /* Estilos para la transformación del botón hamburguesa a 'X' (con JS) */
-  .hamburger-button.open .hamburger-bar:nth-child(1) {
-    transform: translateY(9px) rotate(45deg); /* Ajusta los valores de translación si es necesario */
-  }
-  .hamburger-button.open .hamburger-bar:nth-child(2) {
-    opacity: 0;
-  }
-  .hamburger-button.open .hamburger-bar:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg); /* Ajusta los valores de translación */
-  }
-  
-  
-  /* Overlay del Menú Móvil */
-  .mobile-menu-overlay {
-    position: fixed;
-    top: 9%;
-    left: 0;
-    width: 100%;
-    height: 50%;
-    /* background-color: rgba(43, 42, 91, 0.95); */ /* var(--color-primary-dark-blue) con opacidad */
-    background-color: rgba(105, 198, 36, 0.9); /* Usando tu figma-green con opacidad */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    z-index: 150; /* Debajo del botón hamburguesa cuando está abierto, pero sobre el contenido */
-    
-    /* Transición para mostrar/ocultar */
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.35s ease, visibility 0.35s ease;
-  }
-  
-  .mobile-menu-overlay.open {
-    opacity: 1;
-    visibility: visible;
-  }
-  
-  .mobile-menu-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .mobile-menu-nav li a {
-    color: var(--color-primary-white);
-    font-size: 1.3rem; /* Tamaño grande para móvil */
-    font-weight: var(--font-weight-semibold);
-    text-decoration: none;
-    padding: calc(var(--spacing-unit) * 1.5) 0; /* 12px arriba/abajo */
-    display: block;
-    transition: color 0.3s ease;
-  }
-  
-  .mobile-menu-nav li a:hover {
-    color: var(--color-primary-green); /* O un blanco más brillante/diferente */
-  }
-  
-
-  /* static/css/main.css (continuación) */
-
-/* --- Estilos Base para Desktop Nav (oculto en móvil) --- */
-.desktop-nav {
-  display: none; /* Oculto por defecto (móvil primero) */
+  /* Layout */
+  --container-max-width: 1100px;
+  --spacing-unit: 8px;
 }
 
-.desktop-nav ul {
-  list-style: none;
+body {
   margin: 0;
-  padding: 0;
-  display: flex; /* Para alinear los <li> horizontalmente */
+  font-family: var(--font-family-sans);
+  color: var(--shadow-color-20);
+  background-color: #f0f0f0;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-image:
+    linear-gradient(to bottom, rgba(105,198,36,0.15) 0%, transparent 30%),
+    linear-gradient(to bottom, var(--color-primary-white), var(--color-primary-white));
+  background-repeat: no-repeat;
+}
+
+main {
+  flex-grow: 1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-primary-dark-blue);
+}
+
+body::before,
+body::after {
+  content: "";
+  position: absolute;
+  background-color: var(--color-primary-green);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+body::before {
+  width: 12px;
+  height: 12px;
+  top: 20%;
+  left: 5%;
+  opacity: 0.8;
+}
+
+body::after {
+  width: 10px;
+  height: 10px;
+  top: 12%;
+  right: 5%;
+  opacity: 0.8;
+}
+
+/* Contenedor genérico */
+.container {
+  width: 90%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+}
+
+/* Header */
+.site-header {
+  background-color: var(--color-primary-white);
+  padding: calc(var(--spacing-unit) * 1.5) 0;
+  border-bottom: 1px solid #eee;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
-.desktop-nav li {
-  margin-left: calc(var(--spacing-unit) * 2.5); /* 20px si spacing-unit es 8px - ajusta según tu diseño */
+.logo-img {
+  height: 50px;
+  width: auto;
+  display: block;
 }
 
-.desktop-nav li:first-child {
-  margin-left: 0;
-}
-
-.desktop-nav a {
+.site-title-text {
+  font-size: 1.5em;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary-dark-blue);
   text-decoration: none;
-  color: var(--color-primary-dark-blue); /* O el color que prefieras para los enlaces del header */
+}
+
+/* Desktop Nav */
+.desktop-nav {
+  display: none;
+}
+.desktop-nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.desktop-nav li + li {
+  margin-left: calc(var(--spacing-unit) * 2.5);
+}
+.desktop-nav a {
+  color: var(--color-primary-dark-blue);
   font-weight: var(--font-weight-semibold);
-  font-size: 1em; /* Ajusta según necesites */
-  padding: calc(var(--spacing-unit) / 2) var(--spacing-unit); /* 4px 8px - Pequeño padding para área de click */
-  transition: color 0.3s ease;
+  font-size: 1em;
+  padding: calc(var(--spacing-unit)/2) var(--spacing-unit);
+  text-decoration: none;
+  transition: color 0.3s;
 }
-
 .desktop-nav a:hover {
-  color: var(--color-primary-green); /* Color al pasar el ratón */
+  color: var(--color-primary-green);
 }
 
+/* Hamburger (mobile) */
+.hamburger-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 200;
+}
+.hamburger-button:focus {
+  outline: none;
+}
+.hamburger-bar {
+  width: 30px;
+  height: 3px;
+  background-color: var(--color-primary-green);
+  border-radius: 10px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.hamburger-button.open .hamburger-bar:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.hamburger-button.open .hamburger-bar:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-button.open .hamburger-bar:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
 
-/* --- Media Query para Pantallas Medianas (md) en adelante --- */
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 9%;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-color: rgba(105,198,36,0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 150;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+.mobile-menu-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+.mobile-menu-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.mobile-menu-nav a {
+  display: block;
+  padding: calc(var(--spacing-unit) * 1.5) 0;
+  font-size: 1.3rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary-white);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.mobile-menu-nav a:hover {
+  color: var(--color-primary-green);
+}
+
+/* Breakpoints */
 @media (min-width: 768px) {
-  .hamburger-button {
-    display: none; /* Oculta el botón hamburguesa */
-  }
-
-  .desktop-nav {
-    display: flex; /* Muestra la navegación de escritorio */
-  }
-
-  /* Si el overlay del menú móvil estaba abierto, nos aseguramos que no interfiera */
-  /* Esto es una precaución, ya que el botón para abrirlo estará oculto */
-  .mobile-menu-overlay {
-    display: none !important; /* Asegura que esté oculto, aunque el JS lo haya dejado abierto */
-  }
+  .hamburger-button { display: none; }
+  .desktop-nav { display: flex; }
+  .mobile-menu-overlay { display: none !important; }
 }
 
-/* --- Media Query para Pantallas Grandes (lg) en adelante --- */
 @media (min-width: 1024px) {
   .desktop-nav a {
-    font-size: 1.05em; /* Ligeramente más grande para pantallas lg */
-    padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5); /* 8px 12px */
+    font-size: 1.05em;
+    padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5);
   }
-
-  .desktop-nav li {
-    margin-left: calc(var(--spacing-unit) * 3); /* 24px */
+  .desktop-nav li + li {
+    margin-left: calc(var(--spacing-unit) * 3);
   }
-
   .logo-img {
-    height: 45px; /* Ligeramente más grande el logo */
+    height: 45px;
   }
 }
 
-/* --- Media Query para Pantallas Extra Grandes (xl) en adelante --- */
 @media (min-width: 1280px) {
   .desktop-nav a {
-    font-size: 1.1em; /* Un poco más grande aún */
-    padding: var(--spacing-unit) calc(var(--spacing-unit) * 2); /* 8px 16px */
+    font-size: 1.1em;
+    padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
   }
-   .desktop-nav li {
-    margin-left: calc(var(--spacing-unit) * 3.5); /* 28px */
+  .desktop-nav li + li {
+    margin-left: calc(var(--spacing-unit) * 3.5);
   }
-
   .logo-img {
-    height: 50px; /* Logo un poco más grande */
+    height: 50px;
   }
 }
 
-
- /* static/css/main.css (continuación) */
-/* static/css/main.css (continuación) */
-
+/* Footer */
 .site-footer-new {
-  background-color: var(--color-primary-dark-blue); /* NUEVO COLOR DE FONDO */
+  background-color: var(--color-primary-dark-blue);
   color: var(--color-primary-white);
   padding: calc(var(--spacing-unit) * 3) 0;
   font-size: 0.9em;
 }
 
-/* --- ESTILOS MÓVIL (BASE) --- */
+.footer-upper-content {
+  /* Se ajusta en breakpoints */
+}
 
-/* Escenario 1 (CON columnas de texto) - Móvil: bloques se apilan */
-.footer-main-row-with-cols .footer-block {
+.footer-text-content-block,
+.footer-identity-block {
   margin-bottom: calc(var(--spacing-unit) * 2);
 }
-.footer-main-row-with-cols .footer-block:last-child {
-  margin-bottom: 0;
-}
 
-/* Estilo para el grid de texto col1 y col2 - MÓVIL (COMO LO TENÍAS Y QUERÍAS CONSERVAR) */
 .footer-text-grid {
-  display: flex; 
-  /* Si en móvil quieres que las 2 columnas de texto se apilen una sobre otra: */
-  flex-direction: column; 
-  gap: calc(var(--spacing-unit) * 1.5); 
-}
-.footer-text-column {
-  /* Si están apiladas en móvil, no necesitan flex-basis aquí */
-  /* Si fueran 2 columnas lado a lado en móvil: flex-basis: calc(50% - var(--spacing-unit)); */
-}
-.footer-text-column p { margin-top: 0; }
-
-/* Logo, Dirección en Escenario 1 (Móvil) */
-.footer-identity-block { text-align: center; } /* Centrar logo y dirección en móvil si están en este bloque */
-.footer-logo-alt-img { max-height: 40px; width: auto; display: inline-block; margin-bottom: var(--spacing-unit); }
-.footer-address-section p { margin: 0; white-space: normal; }
-
-/* Redes Sociales en Escenario 1 (Móvil) */
-.footer-social-block { text-align: center; } /* Centrar el bloque social en móvil */
-.footer-social-block h4 {
-    font-size: 1.1em;
-    font-weight: var(--font-weight-semibold);
-    margin-bottom: var(--spacing-unit);
-}
-.social-icons-list-new { /* Común para ambos escenarios */
-  list-style: none; padding: 0; margin: 0;
   display: flex;
-  flex-wrap: wrap; /* Para que los iconos se ajusten si son muchos */
-  justify-content: center; /* Centrar los iconos en móvil */
+  justify-content: space-between;
   gap: calc(var(--spacing-unit) * 2);
 }
-.social-icons-list-new li a {
-  color: var(--color-primary-white); text-decoration: none;
-  font-size: 1.6em; /* Un poco más grandes para mejor toque */
-  transition: color 0.3s ease;
-}
-.social-icons-list-new li a:hover { color: var(--color-primary-green); }
 
-
-/* Escenario 2 (SIN columnas de texto - footer-single-row-layout) - Móvil: bloques se apilan y centran */
-.footer-single-row-layout .footer-item-sr {
-  margin-bottom: calc(var(--spacing-unit) * 2);
-  text-align: center;
-}
-.footer-single-row-layout .footer-item-sr:last-child {
-  margin-bottom: 0;
-}
-.footer-single-row-layout .footer-logo-sr img {
-    display: inline-block; /* Para permitir centrado con text-align */
-    max-height: 40px; /* Igual que el otro logo */
-}
-.footer-single-row-layout .footer-address-sr-centered p {
-    margin: 0;
-    white-space: normal; /* Permite que la dirección fluya */
+.footer-text-column {
+  flex: 1;
 }
 
-
-/* Copyright (común a ambos escenarios) - Móvil */
-.footer-copyright-section-standalone {
-  text-align: center;
-  padding-top: calc(var(--spacing-unit) * 2.5);
-  margin-top: calc(var(--spacing-unit) * 2.5);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: 0.8em;
-  opacity: 0.8;
+.footer-text-column p,
+.footer-address-section p,
+.copyright-text-container p {
+  margin: 0;
 }
-.footer-copyright-section-standalone p { margin: 0; }
 
+.footer-logo-alt-img {
+  max-height: 35px;
+  display: block;
+  margin-bottom: 10px;
+}
 
-/* --- Media Queries para PANTALLAS MEDIANAS (md) en adelante --- */
+.footer-bottom-bar {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-unit) * 2);
+  padding-top: calc(var(--spacing-unit) * 2);
+  margin-top: calc(var(--spacing-unit) * 2);
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.social-icons-list-new {
+  display: flex;
+  gap: calc(var(--spacing-unit) * 2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.social-icons-list-new a {
+  font-size: 1.6em;
+  color: var(--color-primary-white);
+  transition: color 0.3s;
+}
+
+.social-icons-list-new a:hover {
+  color: var(--color-primary-green);
+}
+
 @media (min-width: 768px) {
-  /* Escenario 1 (CON COLUMNAS DE TEXTO) - Desktop */
-  .footer-main-row-with-cols {
+  .footer-scenario-with-cols {
     display: flex;
-    flex-wrap: nowrap;
     justify-content: space-between;
     align-items: flex-start;
     gap: calc(var(--spacing-unit) * 3);
   }
-
-  .footer-main-row-with-cols .footer-block { margin-bottom: 0; }
-
-  .footer-identity-block { /* Contiene logo & dirección */
-    flex: 1; /* Ajusta o usa flex-basis si prefieres anchos más fijos */
-    min-width: 180px; /* Evita que se encoja demasiado */
-    text-align: left;
+  .footer-identity-block {
+    order: 1;
   }
-  .footer-identity-block .footer-logo-alt-img { margin: 0; display: block; } /* Reinicia centrado móvil */
-  .footer-identity-block .footer-address-section p { text-align: left; }
-
-
-  .footer-text-content-block { /* Contiene el grid de textos */
-    flex: 2; /* Más espacio para el contenido de texto */
-    min-width: 250px; /* Evita que se encoja demasiado */
-  }
-  .footer-text-grid { /* El grid interno de textos */
-    flex-direction: row; /* Columnas de texto una al lado de la otra */
-    justify-content: space-between;
-    gap: calc(var(--spacing-unit) * 2.5);
-  }
-  .footer-text-column {
-     flex-basis: calc(50% - var(--spacing-unit) * 1.25); /* Cada columna de texto */
-     text-align: left;
-  }
-
-  .footer-social-block { /* Contiene título "Síguenos" e iconos */
-    flex: 1;
-    min-width: 150px;
+  .footer-text-content-block {
+    order: 2;
+    display: flex;
+    justify-content: flex-end;
     text-align: right;
   }
-  .footer-social-block h4 { text-align: right; }
-  .social-icons-list-new {
-    justify-content: flex-end; /* Alinea iconos a la derecha */
-    flex-direction: column; /* Iconos apilados verticalmente en desktop */
-    align-items: flex-end;  /* Alinea los items apilados a la derecha */
-    gap: calc(var(--spacing-unit) * 0.75);
-  }
-
-  /* Escenario 2 (SIN COLUMNAS DE TEXTO) - Desktop: Todo en una fila */
-  .footer-single-row-layout {
-    display: flex;
+  .footer-bottom-bar {
+    flex-direction: row;
     justify-content: space-between;
-    align-items: center; /* Centra verticalmente los items en la fila */
-  }
-  .footer-single-row-layout .footer-item-sr {
-    margin-bottom: 0; /* Quita margen para la fila */
-  }
-  .footer-logo-sr {
-    text-align: left; /* Logo a la izquierda */
-  }
-  .footer-address-sr-centered {
-    flex-grow: 1; /* Ocupa el espacio central */
-    text-align: center; /* Dirección centrada */
-  }
-  .footer-social-sr .social-icons-list-new {
-     justify-content: flex-end; /* Iconos a la derecha */
-     flex-direction: row; /* Iconos en fila para este layout */
-  }
-
-  .footer-copyright-section-standalone {
-    /* Puedes dejarlo centrado o alinearlo a la izquierda/derecha si prefieres para desktop */
-    /* text-align: left; */
   }
 }
-
