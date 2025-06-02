@@ -18,16 +18,6 @@
                 {% endif %}
             </div>
 
-            <!-- BOTONES MÓVIL (se ocultan en desktop) -->
-            <div class="hero-buttons">
-                <a href="{{ hero.primary_button_url }}" class="btn btn-primary">
-                    {{ hero.primary_button_text }}
-                </a>
-                <a href="{{ hero.secondary_button_url }}" class="btn btn-outline">
-                    {{ hero.secondary_button_text }}
-                </a>
-            </div>
-
             <!-- GRID MÓVIL (se oculta en desktop) -->
             {% if hero.card1_title or hero.card2_title or hero.card3_title %}
             <div class="grid">
@@ -71,6 +61,16 @@
                 {% endif %}
             </div>
             {% endif %}
+
+            <!-- BOTONES MÓVIL (ahora van después de las cards) -->
+            <div class="hero-buttons">
+                <a href="{{ hero.primary_button_url }}" class="btn btn-primary">
+                    {{ hero.primary_button_text }}
+                </a>
+                <a href="{{ hero.secondary_button_url }}" class="btn btn-outline">
+                    {{ hero.secondary_button_text }}
+                </a>
+            </div>
 
             <!-- LAYOUT DESKTOP/TABLET (se muestra solo en pantallas grandes) -->
             <div class="hero-main-content">
@@ -174,8 +174,6 @@
     {% endif %}
 
 
-
-
     {% if section.section == 'programs' and programs %}
     <!-- Sección de Programas -->
     <section id="programas" class="programs-section">
@@ -189,22 +187,42 @@
             
             <div class="programs-grid">
                 {% for program in programs %}
-                <div class="program-card">
+                <div class="program-card {% if forloop.first %}active{% endif %}">
                     <div class="program-image">
                         <img src="{{ program.image.url }}" alt="{{ program.title }}">
                     </div>
                     <div class="program-content">
                         <h3>{{ program.title }}</h3>
+                        {% if program.description %}
                         <p>{{ program.description }}</p>
+                        {% endif %}
                         <a href="{{ program.url }}" class="program-link">Conocer más</a>
                     </div>
                 </div>
                 {% endfor %}
+                
+                <!-- Controles de navegación -->
+                <button class="carousel-nav prev" aria-label="Anterior">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                </button>
+                <button class="carousel-nav next" aria-label="Siguiente">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                    </svg>
+                </button>
+                
+                <!-- Indicadores -->
+                <div class="carousel-indicators">
+                    {% for program in programs %}
+                    <button class="carousel-indicator {% if forloop.first %}active{% endif %}" data-slide="{{ forloop.counter0 }}"></button>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </section>
     {% endif %}
-
 
 
     {% if section.section == 'testimonial' and testimonial %}
@@ -268,4 +286,5 @@
     {% endif %}
 {% endfor %}
 <script src="{% static 'js/inicio.js' %}"></script>
+
 {% endblock %}

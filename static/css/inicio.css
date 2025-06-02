@@ -95,7 +95,7 @@
     text-align: center;
 }
 
-/* Botones en móvil - Como en el screenshot */
+/* Botones en móvil - Como en el screenshot - AHORA VAN DESPUÉS DE LAS CARDS */
 .hero-buttons {
     display: flex;
     flex-direction: row;
@@ -139,6 +139,27 @@
 .btn-outline:hover {
     background: var(--color-primary-dark-blue);
     color: var(--color-primary-white);
+}
+
+/* OCULTAR CONTENIDO DE DESKTOP/TABLET EN MÓVILES */
+.hero-main-content {
+    display: none;
+}
+
+.hero-content-left {
+    display: none;
+}
+
+.hero-cards-column {
+    display: none;
+}
+
+.hero-subtitle-left {
+    display: none;
+}
+
+.hero-buttons-left {
+    display: none;
 }
 
  /* Carrusel continuo automático - Optimizado para móvil */
@@ -197,13 +218,6 @@
     }
 }
 
-
-
-/* Remover pausa al hacer hover para que sea completamente infinito */
-/* .carousel:hover .carousel-track {
-    animation-play-state: paused;
-}  */
-
 /* Efecto de desvanecimiento en los bordes - Móvil */
 .carousel::before,
 .carousel::after {
@@ -231,11 +245,9 @@
  * Replica exactamente el layout del screenshot de referencia
  */
 
+
 /* TABLET Y DESKTOP - Pantallas medianas y grandes (768px+) */
 @media (min-width: 768px) {
-    .hero-section {
-        padding: 3rem 2rem;
-    }
 
     .hero-section .container {
         max-width: 1200px;
@@ -253,9 +265,26 @@
 
     /* BLOQUE CONTENIDO IZQUIERDO */
     .hero-content-left {
+        display: block;
         text-align: left;
     }
 
+    .hero-cards-column {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        width: 100%;
+        position: relative;
+        top: 0;
+    }
+
+    .hero-subtitle-left {
+        display: block;
+    }
+
+    .hero-buttons-left {
+        display: flex;
+    }
     /* Título principal alineado a la izquierda */
     .hero-content-left h1 {
         font-size: 2.5rem;
@@ -306,8 +335,11 @@
     .hero-cards-column {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: 1.2rem;
         width: 100%;
+        /* Alinear la primera carta exactamente con el título */
+        position: relative;
+        top: 0;
     }
 
     /* CARD BASE - Todas las cards */
@@ -315,31 +347,60 @@
         background: var(--color-primary-white);
         border-radius: 1.5rem;
         padding: 1.5rem;
-        box-shadow: 0 4px 20px rgba(51, 51, 51, 0.1);
+        box-shadow: 0 8px 25px rgba(51, 51, 51, 0.12);
         border: 1px solid #e5e5e5;
         display: flex;
         align-items: center;
         gap: 1rem;
         position: relative;
-        width: 100%;
+        transition: all 0.3s ease;
+        /* Efecto de flotación constante */
+        transform: translateY(-3px);
+        animation: float 3s ease-in-out infinite;
     }
 
-    /* CARD 1: Becas escolares - ALTURA COMPACTA */
+    /* Animación de flotación constante */
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(-3px);
+        }
+        50% {
+            transform: translateY(-8px);
+        }
+    }
+
+    /* Efecto hover de flotación acentuado */
+    .hero-card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 15px 40px rgba(51, 51, 51, 0.2);
+        animation: none; /* Pausar animación en hover */
+    }
+
+    /* ALINEACIÓN Y ANCHOS ESPECÍFICOS SEGÚN FIGMA */
+    /* CARD 1: Becas escolares - Más angosta, alineada a la derecha */
     .hero-card-1 {
         min-height: 80px;
         max-height: 100px;
+        width: 75%; /* Más angosta */
+        align-self: flex-end;
+        margin-right: 0;
     }
 
-    /* CARD 2: Orientación social - ALTURA MAYOR */
+    /* CARD 2: Orientación social - Más ancha, centrada */
     .hero-card-2 {
-        min-height: 140px;
-        max-height: 160px;
+        min-height: 120px;
+        max-height: 140px;
+        width: 95%; /* Más ancha */
+        align-self: center;
     }
 
-    /* CARD 3: Apoyo instituciones - ALTURA COMPACTA */
+    /* CARD 3: Apoyo instituciones - Intermedia, alineada a la derecha */
     .hero-card-3 {
-        min-height: 80px;
+        min-height: 60px;
         max-height: 100px;
+        width: 50%; /* Ancho intermedio */
+        align-self: flex-end;
+        margin-right: 0;
     }
 
     /* ICONOS DE LAS CARDS - Lado izquierdo */
@@ -406,9 +467,6 @@
 
 /* DESKTOP GRANDE - Pantallas grandes (1024px+) */
 @media (min-width: 1024px) {
-    .hero-section {
-        padding: 4rem 2rem;
-    }
 
     .hero-section .container {
         max-width: 1400px;
@@ -441,29 +499,58 @@
         min-width: 140px;
     }
 
-    /* Cards con más espacio */
+    /* Cards con más espacio y BORDES VERDES para desktop */
     .hero-cards-column {
         gap: 1.5rem;
+        /* Mantener alineación con título en desktop */
+        position: relative;
+        top: 0; /* Ajustar para alinear con el título */
+
     }
 
     .hero-card {
         padding: 2rem;
+        margin-top:1rem;
+        border: 2px solid var(--color-primary-green); /* Borde verde en desktop */
+        /* Flotación más pronunciada en desktop */
+        transform: translateY(-5px);
     }
 
-    /* Ajustar alturas para desktop */
+    /* Animación de flotación más pronunciada en desktop */
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(-5px);
+        }
+        50% {
+            transform: translateY(-12px);
+        }
+    }
+
+    /* Efecto hover más pronunciado en desktop */
+    .hero-card:hover {
+        transform: translateY(-18px);
+        box-shadow: 0 20px 50px rgba(51, 51, 51, 0.25);
+        border-color: var(--color-primary-green);
+        animation: none;
+    }
+
+    /* Anchos específicos para desktop según Figma */
     .hero-card-1 {
-        min-height: 90px;
-        max-height: 110px;
+        min-height: 60px;
+        max-height: 80px;
+        width: 70%; /* Más angosta en desktop */
     }
 
     .hero-card-2 {
-        min-height: 160px;
-        max-height: 180px;
+        min-height: 80px;
+        max-height: 100px;
+        width: 90%; /* Ancha en desktop */
     }
 
     .hero-card-3 {
-        min-height: 90px;
-        max-height: 110px;
+        min-height: 60px;
+        max-height: 80px;
+        width: 50%; /* Intermedia en desktop */
     }
 
     /* Iconos más grandes */
@@ -507,6 +594,38 @@
     .hero-subtitle-left {
         font-size: 1.2rem;
     }
+
+    /* Cards aún más amplias en pantallas extra grandes */
+    .hero-card {
+        padding: 2.5rem;
+        /* Flotación aún más pronunciada en pantallas extra grandes */
+        transform: translateY(-6px);
+    }
+
+    .hero-card:hover {
+        transform: translateY(-20px);
+        box-shadow: 0 25px 60px rgba(51, 51, 51, 0.3);
+    }
+
+    .hero-cards-column {
+        gap: 2rem;
+        /* Mantener alineación */
+        position: relative;
+        top: 0;
+    }
+
+    /* Anchos optimizados para pantallas extra grandes */
+    .hero-card-1 {
+        width: 65%; /* Más refinada */
+    }
+
+    .hero-card-2 {
+        width: 85%; /* Proporcionalmente ajustada */
+    }
+
+    .hero-card-3 {
+        width: 70%; /* Balance perfecto */
+    }
 }
 
 /* Mantener el carrusel original para todas las pantallas */
@@ -534,4 +653,423 @@
         height: 210px;
         margin-right: 25px;
     }
+}
+
+
+
+
+/* CSS Mobile-First para Sección de Programas */
+
+/* Estilos base para móviles */
+.programs-section {
+  padding: 40px 0;
+  background-color: var(--color-primary-white);
+  position: relative;
+  overflow: hidden;
+}
+
+.programs-section .container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+  position: relative;
+}
+
+/* Header de la sección */
+.section-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.section-header h2 {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-bold);
+  font-size: 1.75rem;
+  color: var(--color-primary-green);
+  margin-bottom: 12px;
+  line-height: 1.2;
+  padding: 0 16px;
+}
+
+.section-subtitle {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-regular);
+  font-size: 1rem;
+  color: var(--color-secondary-gray);
+  margin: 0 auto;
+  line-height: 1.5;
+  padding: 0 16px;
+}
+
+/* Contenedor del carousel */
+.programs-grid {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(51, 51, 51, 0.12);
+  margin: 0 8px;
+  height: 400px;
+}
+
+/* Card individual del programa */
+.program-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  background: linear-gradient(135deg, rgba(43, 42, 91, 0.85) 0%, rgba(70, 90, 136, 0.7) 100%);
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.program-card.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+/* Imagen de fondo */
+.program-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.program-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Overlay adicional para mejorar contraste */
+.program-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(43, 42, 91, 0.3) 0%, rgba(43, 42, 91, 0.8) 100%);
+  z-index: 2;
+}
+
+/* Contenido del programa */
+.program-content {
+  position: relative;
+  z-index: 3;
+  padding: 24px 20px;
+  width: 100%;
+  color: var(--color-primary-white);
+}
+
+.program-content h3 {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-bold);
+  font-size: 1.5rem;
+  line-height: 1.3;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.program-content p {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-regular);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  opacity: 0.95;
+}
+
+/* Botón de llamada a la acción */
+.program-link {
+  display: inline-block;
+  background-color: var(--color-secondary-light-blue);
+  color: var(--color-primary-white);
+  padding: 12px 24px;
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-semibold);
+  font-size: 0.95rem;
+  text-decoration: none;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 12px rgba(70, 90, 136, 0.3);
+  text-shadow: none;
+}
+
+.program-link:hover {
+  background-color: var(--color-primary-green);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(105, 198, 36, 0.4);
+}
+
+/* Controles de navegación del carousel */
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-nav:hover {
+  background-color: var(--color-primary-green);
+  color: var(--color-primary-white);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.carousel-nav.prev {
+  left: 12px;
+}
+
+.carousel-nav.next {
+  right: 12px;
+}
+
+.carousel-nav svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* Indicadores del carousel */
+.carousel-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.carousel-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.carousel-indicator.active {
+  background-color: var(--color-primary-green);
+  transform: scale(1.25);
+}
+
+.carousel-indicator:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* MEDIA QUERIES - TABLET */
+@media (min-width: 768px) {
+  .programs-section {
+    padding: 60px 0;
+  }
+
+  .programs-section .container {
+    max-width: 768px;
+    padding: 0 24px;
+  }
+
+  .section-header {
+    margin-bottom: 48px;
+  }
+
+  .section-header h2 {
+    font-size: 2.25rem;
+    margin-bottom: 16px;
+    padding: 0;
+  }
+
+  .section-subtitle {
+    font-size: 1.125rem;
+    max-width: 500px;
+    padding: 0;
+  }
+
+  .programs-grid {
+    border-radius: 20px;
+    box-shadow: 0 12px 32px rgba(51, 51, 51, 0.15);
+    margin: 0;
+    height: 450px;
+  }
+
+  .program-card {
+    align-items: center;
+  }
+
+  .program-content {
+    padding: 40px;
+    max-width: 70%;
+  }
+
+  .program-content h3 {
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+
+  .program-content p {
+    font-size: 1.125rem;
+    margin-bottom: 24px;
+  }
+
+  .program-link {
+    padding: 14px 28px;
+    font-size: 1rem;
+    border-radius: 30px;
+  }
+
+  .carousel-nav {
+    width: 50px;
+    height: 50px;
+  }
+
+  .carousel-nav.prev {
+    left: 20px;
+  }
+
+  .carousel-nav.next {
+    right: 20px;
+  }
+
+  .carousel-nav svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .carousel-indicators {
+    bottom: 24px;
+    gap: 10px;
+  }
+
+  .carousel-indicator {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* MEDIA QUERIES - DESKTOP */
+@media (min-width: 1024px) {
+  .programs-section {
+    padding: 80px 0;
+  }
+
+  .programs-section .container {
+    max-width: 1200px;
+    padding: 0 32px;
+  }
+
+  .section-header {
+    margin-bottom: 64px;
+  }
+
+  .section-header h2 {
+    font-size: 2.75rem;
+    margin-bottom: 20px;
+  }
+
+  .section-subtitle {
+    font-size: 1.25rem;
+    max-width: 600px;
+  }
+
+  .programs-grid {
+    box-shadow: 0 20px 40px rgba(51, 51, 51, 0.18);
+    height: 500px;
+  }
+
+  .program-card {
+
+  .program-content {
+    padding: 60px;
+    max-width: 55%;
+  }
+
+  .program-content h3 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  .program-content p {
+    font-size: 1.25rem;
+    margin-bottom: 32px;
+  }
+
+  .program-link {
+    padding: 16px 32px;
+    font-size: 1.125rem;
+    border-radius: 35px;
+  }
+
+  .carousel-nav {
+    width: 60px;
+    height: 60px;
+  }
+
+  .carousel-nav.prev {
+    left: 30px;
+  }
+
+  .carousel-nav.next {
+    right: 30px;
+  }
+
+  .carousel-nav svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .carousel-indicators {
+    bottom: 30px;
+    gap: 12px;
+  }
+
+  .carousel-indicator {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* MEDIA QUERIES - DESKTOP GRANDE */
+@media (min-width: 1440px) {
+  .programs-section .container {
+    max-width: 1400px;
+  }
+
+  .section-header h2 {
+    font-size: 3rem;
+  }
+
+  .program-content {
+    padding: 80px;
+    max-width: 50%;
+  }
+
+  .program-content h3 {
+    font-size: 3rem;
+  }
+
+  .program-content p {
+    font-size: 1.375rem;
+  }
+}
 }

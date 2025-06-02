@@ -196,7 +196,7 @@ class Program(TimeStampedModel):
     """
     image = models.ImageField(upload_to='home/programs/', verbose_name=_("Imagen"))
     title = models.CharField(max_length=100, verbose_name=_("Título"))
-    description = models.TextField(verbose_name=_("Descripción"))
+    description = models.TextField(verbose_name=_("Descripción"), blank=True, null=True)
     button_text = models.CharField(
         max_length=50,
         default="Conocer más",
