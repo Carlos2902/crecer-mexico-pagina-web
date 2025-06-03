@@ -192,10 +192,12 @@
                         <img src="{{ program.image.url }}" alt="{{ program.title }}">
                     </div>
                     <div class="program-content">
-                        <h3>{{ program.title }}</h3>
-                        {% if program.description %}
-                        <p>{{ program.description }}</p>
-                        {% endif %}
+                        <div class="program-text">
+                            <h3>{{ program.title }}</h3>
+                            {% if program.description %}
+                            <p>{{ program.description }}</p>
+                            {% endif %}
+                        </div>
                         <a href="{{ program.url }}" class="program-link">Conocer más</a>
                     </div>
                 </div>
@@ -224,7 +226,6 @@
     </section>
     {% endif %}
 
-
     {% if section.section == 'testimonial' and testimonial %}
     <!-- Sección de Cita Textual -->
     <section id="testimonio" class="testimonial-section">
@@ -233,7 +234,6 @@
                 <div>
                     <img src="{{testimonial.image1.url}}" alt="{{testimonial.name}}">
                 </div>
-                <div class="quote-mark">"</div>
                 <blockquote>
                     {{ testimonial.quote }}
                 </blockquote>
