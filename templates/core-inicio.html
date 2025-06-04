@@ -1,10 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block title %}Inicio | Crecer México{% endblock %}
-
 {% block content %}
-{% load static %} {# Asegúrate de tener {% load static %} si usas static para alguna imagen/CSS/JS del carrusel #}
+{% load static %}
 {% for section in sections %}
     {% if section.section == 'hero' and hero %}
     <link rel="stylesheet" href="{% static 'css/inicio.css' %}">
@@ -17,13 +15,12 @@
                 <p class="hero-subtitle">{{ hero.subtitle }}</p>
                 {% endif %}
             </div>
-
             <!-- GRID MÓVIL (se oculta en desktop) -->
             {% if hero.card1_title or hero.card2_title or hero.card3_title %}
             <div class="grid">
                 <!-- Tarjeta 1 -->
                 {% if hero.card1_title %}
-                <div class="card">
+                <div class="card parallax-card parallax-card-wave">
                     {% if hero.card1_icon %}
                     <div class="card-icon">
                         <i class="{{ hero.card1_icon }}"></i>
@@ -33,10 +30,9 @@
                     <p class="card-description">{{ hero.card1_description }}</p>
                 </div>
                 {% endif %}
-
                 <!-- Tarjeta 2 -->
                 {% if hero.card2_title %}
-                <div class="card">
+                <div class="card parallax-card parallax-card-wave">
                     {% if hero.card2_icon %}
                     <div class="card-icon">
                         <i class="{{ hero.card2_icon }}"></i>
@@ -46,10 +42,9 @@
                     <p class="card-description">{{ hero.card2_description }}</p>
                 </div>
                 {% endif %}
-
                 <!-- Tarjeta 3 -->
                 {% if hero.card3_title %}
-                <div class="card">
+                <div class="card parallax-card parallax-card-wave">
                     {% if hero.card3_icon %}
                     <div class="card-icon">
                         <i class="{{ hero.card3_icon }}"></i>
@@ -61,7 +56,6 @@
                 {% endif %}
             </div>
             {% endif %}
-
             <!-- BOTONES MÓVIL (ahora van después de las cards) -->
             <div class="hero-buttons">
                 <a href="{{ hero.primary_button_url }}" class="btn btn-primary">
@@ -71,7 +65,6 @@
                     {{ hero.secondary_button_text }}
                 </a>
             </div>
-
             <!-- LAYOUT DESKTOP/TABLET (se muestra solo en pantallas grandes) -->
             <div class="hero-main-content">
                 <!-- BLOQUE CONTENIDO IZQUIERDO -->
@@ -91,7 +84,6 @@
                         </a>
                     </div>
                 </div>
-
                 <!-- COLUMNA CARDS DERECHA -->
                 {% if hero.card1_title or hero.card2_title or hero.card3_title %}
                 <div class="hero-cards-column">
@@ -109,7 +101,6 @@
                         </div>
                     </div>
                     {% endif %}
-
                     <!-- CARD 2: Altura mayor -->
                     {% if hero.card2_title %}
                     <div class="hero-card hero-card-2">
@@ -124,7 +115,6 @@
                         </div>
                     </div>
                     {% endif %}
-
                     <!-- CARD 3: Altura compacta -->
                     {% if hero.card3_title %}
                     <div class="hero-card hero-card-3">
@@ -142,7 +132,6 @@
                 </div>
                 {% endif %}
             </div>
-
             <!-- CARRUSEL (se mantiene para todas las pantallas) -->
             {% with active_images=hero.carousel_images.all|dictsort:"order" %}
                 {% if active_images %}
@@ -172,14 +161,12 @@
         </div>
     </section>
     {% endif %}
-
-
     {% if section.section == 'programs' and programs %}
     <!-- Sección de Programas -->
     <section id="programas" class="programs-section">
         <div class="container">
             <div class="section-header">
-                <h2>{{ programs_section.title|default:"Nuestros Programas" }}</h2>
+                <h1>{{ programs_section.title|default:"Nuestros Programas" }}</h1>
                 {% if programs_section.subtitle %}
                 <p class="section-subtitle">{{ programs_section.subtitle }}</p>
                 {% endif %}
@@ -225,40 +212,47 @@
         </div>
     </section>
     {% endif %}
-
     {% if section.section == 'testimonial' and testimonial %}
-    <!-- Sección de Cita Textual -->
+    <!-- Sección de Testimonios -->
     <section id="testimonio" class="testimonial-section">
         <div class="container">
             <div class="testimonial-content">
-                <div>
+                <!-- Columna Izquierda: Imagen Principal -->
+                <div class="main-image">
                     <img src="{{testimonial.image1.url}}" alt="{{testimonial.name}}">
                 </div>
-                <blockquote>
-                    {{ testimonial.quote }}
-                </blockquote>
-                <div class="testimonial-author">
-                    {% if testimonial.image %}
-                    <div class="author-image">
-                        <img src="{{ testimonial.image.url }}" alt="{{ testimonial.name }}">
+    
+                <!-- Columna Derecha: Contenido del Testimonio -->
+                <div class="testimonial-text">
+                    <div class="quote-container">
+                        <div class="quote-mark">"</div>
+                        <blockquote id="quote-text">
+                            {{ testimonial.quote }}
+                        </blockquote>
                     </div>
-                    {% endif %}
-                    <div class="author-info">
-                        <h4>{{ testimonial.name }}</h4>
-                        <p>{{ testimonial.position }}</p>
+                    
+                    <div class="testimonial-author">
+                        {% if testimonial.image %}
+                        <div class="author-image">
+                            <img src="{{ testimonial.image.url }}" alt="{{ testimonial.name }}">
+                        </div>
+                        {% endif %}
+                        <div class="author-info">
+                            <h4>{{ testimonial.name }}</h4>
+                            <p>{{ testimonial.position }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     {% endif %}
-
     {% if section.section == 'video' and featured_video %}
     <!-- Sección de Video Destacado -->
     <section id="video-destacado" class="featured-video-section">
         <div class="container">
             <div class="section-header">
-                <h2>{{ video_section.title|default:"Video Destacado" }}</h2>
+                <h1>{{ video_section.title|default:"Video Destacado" }}</h1>
                 {% if video_section.subtitle %}
                 <p class="section-subtitle">{{ video_section.subtitle }}</p>
                 {% endif %}
@@ -286,5 +280,5 @@
     {% endif %}
 {% endfor %}
 <script src="{% static 'js/inicio.js' %}"></script>
-
+<script src="{% static 'js/testimonial.js' %}"></script>
 {% endblock %}

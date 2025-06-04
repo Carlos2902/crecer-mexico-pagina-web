@@ -295,6 +295,3 @@ class HomepageSection(TimeStampedModel):
         return self.get_section_display()
     
     
-    
-    # aclarar si este modelo de elementos de menu es para el header
-    #agregar un modelo para el footer? solo está el de redes sociales  
