@@ -247,6 +247,97 @@
         position: relative;
     }
 
+    .hero-card {
+        background: var(--color-primary-white);
+        border-radius: 1.5rem;
+        padding: 1rem;
+        margin-top: 1rem;
+        box-shadow: 0 8px 25px rgba(51, 51, 51, 0.12);
+        border: 2px solid var(--color-primary-green);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        position: relative;
+        transition: all 0.3s ease;
+        transform: translateY(-5px);
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(-5px);
+        }
+        50% {
+            transform: translateY(-12px);
+        }
+    }
+
+    .hero-card:hover {
+        transform: translateY(-18px);
+        box-shadow: 0 20px 50px rgba(51, 51, 51, 0.25);
+        border-color: var(--color-primary-green);
+        animation: none;
+    }
+
+    .hero-card-1 {
+        min-height: 60px;
+        max-height: 80px;
+        width: 50%;
+        align-self: flex-end;
+    }
+
+    .hero-card-2 {
+        min-height: 80px;
+        max-height: 100px;
+        width: 70%;
+        align-self: center;
+    }
+
+    .hero-card-3 {
+        min-height: 60px;
+        max-height: 80px;
+        width: 40%;
+        align-self: flex-end;
+    }
+
+    .hero-card-icon {
+        width: 60px;
+        height: 60px;
+        background: var(--color-primary-dark-blue);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: var(--color-primary-white);
+        flex-shrink: 0;
+    }
+    
+    .hero-card-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .hero-card-title {
+        font-size: 0.9rem;
+        font-weight: var(--font-weight-bold);
+        color: var(--color-primary-dark-blue);
+        margin-bottom: 0.75rem;
+        line-height: 1;
+    }
+
+    .hero-card-description {
+        font-size: 0.7rem;
+        line-height: 1.1;
+        color: var(--color-secondary-light-blue);
+        margin: 0;
+    }
+
+    .hero-card-2 .hero-card-description {
+        font-size: 0.85rem;
+    }
+  
     .hero-subtitle-left {
         display: block;
     }
@@ -333,38 +424,7 @@
         gap: 1.5rem;
         position: relative;
     }
-
-    .hero-card {
-        background: var(--color-primary-white);
-        border-radius: 1.5rem;
-        padding: 2rem;
-        margin-top: 1rem;
-        box-shadow: 0 8px 25px rgba(51, 51, 51, 0.12);
-        border: 2px solid var(--color-primary-green);
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        position: relative;
-        transition: all 0.3s ease;
-        transform: translateY(-5px);
-    }
-
-    @keyframes float {
-        0%, 100% {
-            transform: translateY(-5px);
-        }
-        50% {
-            transform: translateY(-12px);
-        }
-    }
-
-    .hero-card:hover {
-        transform: translateY(-18px);
-        box-shadow: 0 20px 50px rgba(51, 51, 51, 0.25);
-        border-color: var(--color-primary-green);
-        animation: none;
-    }
-
+   
     .hero-card-1 {
         min-height: 60px;
         max-height: 80px;
@@ -920,7 +980,7 @@
     padding: 3rem 1rem;
     position: relative;
     overflow: hidden;
-    min-height: 100vh;
+    min-height: 80vh;
     display: flex;
     align-items: center;
 }
@@ -1288,34 +1348,7 @@ blockquote {
     letter-spacing: 0.5px;
 }
 
-.video-wrapper::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
-    border: 3px solid #e2e8f0;
-    border-top: 3px solid #4299e1;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    z-index: 1;
-}
 
-@keyframes spin {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-.video-wrapper iframe[src] + ::before {
-    display: none;
-}
-
-.video-wrapper:focus-within {
-    outline: 2px solid #4299e1;
-    outline-offset: 2px;
-}
 
 @media (min-width: 768px) {
     .featured-video-section {

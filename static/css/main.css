@@ -324,4 +324,7 @@ body::after {
     flex-direction: row;
     justify-content: space-between;
   }
+  .site-footer-new {
+    font-size: 1.02em;
+  }
 }
