@@ -256,15 +256,16 @@ class ObjetivoDesarrolloSostenible(models.Model):
         return f"ODS {self.numero:02d} - {self.titulo}"
 
 
+
+
 class SeccionProgramasODS(models.Model):
     """
     Configuración para la sección de Programas alineados con ODS
     """
-    # PENDIENTE: crear un filtro de plantilla para que el título muestre el texto con *palabras* destacadas en verde
     titulo_completo_configurable = models.CharField(
         max_length=255,
         default="Nuestros *programas* están *alineados* con el objetivo de desarrollo sostenible de la agenda 20/30 de la *ONU*",
-        help_text="Escribe el título completo. Usa *palabra* para destacar en verde."
+        help_text="Escribe el título completo. Usa *palabra* para destacar el texto en verde."
     )
     activo = models.BooleanField(default=True)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
@@ -275,8 +276,5 @@ class SeccionProgramasODS(models.Model):
         verbose_name_plural = "Configuración Sección ODS"
 
     def __str__(self):
-        return f"Config ODS - {self.titulo_principal} {self.titulo_destacado}"
-
-    def titulo_completo(self):
-        """Retorna el título completo formateado"""
-        return f"{self.titulo_principal} {self.titulo_destacado} {self.titulo_complemento} {self.titulo_organizacion}"
+        # Corregido: Ya no existen los campos anteriores. Se retorna un nombre estático.
+        return "Configuración de la Sección ODS"

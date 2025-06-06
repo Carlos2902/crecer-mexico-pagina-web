@@ -187,44 +187,68 @@ class ObjetivoDesarrolloSostenibleAdmin(admin.ModelAdmin):
     icono_preview.short_description = 'Icono'
 
 
+
+# app/admin.py
+
+import re
+from django.contrib import admin
+from django.utils.html import format_html, escape
+from .models import SeccionProgramasODS
+
 @admin.register(SeccionProgramasODS)
 class SeccionProgramasODSAdmin(admin.ModelAdmin):
     list_display = ['titulo_completo_preview', 'activo', 'fecha_actualizacion']
-    list_filter = ['activo', 'fecha_creacion']
-    search_fields = ['titulo_principal', 'titulo_destacado', 'titulo_complemento']
+    list_filter = ['activo']
+    # Actualizado para buscar en el nuevo campo de título
+    search_fields = ['titulo_completo_configurable']
     
+    # fieldsets ajustados a la nueva estructura del modelo
     fieldsets = [
-        ('Título Principal', {
-            'fields': ['titulo_principal', 'titulo_destacado'],
-            'description': 'El título destacado aparecerá en color verde'
-        }),
-        ('Título Complementario', {
-            'fields': ['titulo_complemento', 'titulo_organizacion'],
-            'description': 'La organización (ONU) aparecerá en color verde'
-        }),
-        ('Descripción Adicional', {
-            'fields': ['descripcion_adicional'],
-            'classes': ['collapse']
-        }),
-        ('Estado', {
-            'fields': ['activo']
+        ('Contenido de la Sección', {
+            'fields': ['titulo_completo_configurable', 'activo'],
+            'description': (
+                "Para destacar una o varias palabras en color verde, "
+                "enciérralas entre asteriscos. Ejemplo: 'Estos son mis *programas* principales'."
+            )
         }),
     ]
 
     def titulo_completo_preview(self, obj):
-        return format_html(
-            '{} <span style="color: #28a745; font-weight: bold;">{}</span> {} <span style="color: #28a745; font-weight: bold;">{}</span>',
-            obj.titulo_principal,
-            obj.titulo_destacado,
-            obj.titulo_complemento,
-            obj.titulo_organizacion
+        """
+        Genera una vista previa del título, interpretando los asteriscos (*)
+        para destacar el texto en verde.
+        """
+        # 1. Escapamos el texto del usuario para evitar inyección de HTML
+        text = escape(obj.titulo_completo_configurable)
+
+        # 2. Usamos una expresión regular para encontrar texto entre asteriscos
+        # y reemplazarlo con el HTML deseado.
+        # r'\*(.*?)\*' busca un asterisco, captura cualquier texto (no-codicioso), y busca otro asterisco.
+        # r'<span style="...;">\1</span>' reemplaza todo el patrón con el span,
+        # donde \1 es el texto capturado.
+        formatted_text = re.sub(
+            r'\*(.*?)\*',
+            r'<span style="color: #28a745; font-weight: bold;">\1</span>',
+            text
         )
+
+        return format_html(formatted_text)
+        
     titulo_completo_preview.short_description = 'Vista previa del título'
 
     def has_add_permission(self, request):
-        # Solo permitir una configuración
+        """
+        Impide que se puedan crear nuevas instancias si ya existe una.
+        Esto convierte al modelo en una configuración 'singleton'.
+        """
         return not SeccionProgramasODS.objects.exists()
 
+    def has_delete_permission(self, request, obj=None):
+        """
+        Opcional: puedes desactivar el borrado para que la configuración
+        siempre exista una vez creada.
+        """
+        return False
 
 # Personalización del admin site
 admin.site.site_header = "Panel de Administración - Quiénes Somos"
