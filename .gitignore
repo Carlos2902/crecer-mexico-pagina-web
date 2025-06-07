@@ -21,11 +21,11 @@ wheels/
 *.egg
 
 # Django
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-media
+# *.log
+# local_settings.py
+# db.sqlite3
+# db.sqlite3-journal
+# media
 
 # Entorno virtual
 venv/
