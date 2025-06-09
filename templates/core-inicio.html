@@ -77,9 +77,9 @@
                     {% endif %}
                     
                     <div class="hero-buttons-left">
-                        <a href="{{ hero.primary_button_url }}" class="btn btn-primary">
-                            {{ hero.primary_button_text }}
-                        </a>
+                    <a href="{% url 'donations:donations' %}" class="btn btn-primary">
+                           {{ hero.primary_button_text }}
+                    </a>
                         <a href="{{ hero.secondary_button_url }}" class="btn btn-outline">
                             {{ hero.secondary_button_text }}
                         </a>

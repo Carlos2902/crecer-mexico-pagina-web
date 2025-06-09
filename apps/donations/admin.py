@@ -1,7 +1,11 @@
 from django.contrib import admin
-from .models import Donation
+from .models import Donation, SiteConfiguration
 
 @admin.register(Donation)
 class DonationAdmin(admin.ModelAdmin):
-    list_display = ('donor_name', 'amount', 'donation_date', 'status')
-    search_fields = ('donor_name', 'transaction_id')
+    list_display = ('name', 'email', 'amount', 'created_at')
+    search_fields = ('name', 'email')
+    list_filter = ('created_at',)
+
+
+admin.site.register(SiteConfiguration)

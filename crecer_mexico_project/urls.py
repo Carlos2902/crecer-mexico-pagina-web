@@ -26,6 +26,8 @@ urlpatterns = [
     path('contacto/', include('apps.contact.urls')),
     path('testimonios-impacto/', include ('apps.impact.urls')),
     path('proyectos/', include('apps.projects.urls')),
+    path('donaciones/', include('apps.donations.urls')),
+
 ]
 
 if settings.DEBUG:

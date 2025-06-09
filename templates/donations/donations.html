@@ -1,0 +1,140 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>Donaciones - Apoya Nuestra Causa</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Realiza una donación segura para apoyar nuestra causa">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Iconos de Lucide -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.js"></script>
+
+  <link href="{% static 'css/donations.css' %}" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="icon">
+        <img src="{{ donations_config.logo.url }}" alt="Logo Crecer México" style="width: 40%; height: 60%;">
+        <i data-lucide="heart" style="width: 32px; height: 32px; color: white;"></i>
+      </div>
+      <h1 class="main-title">Haz una Donación</h1>
+      <p class="subtitle">Tu apoyo hace la diferencia. Cada contribución nos ayuda a seguir adelante con nuestra misión.</p>
+    </div>
+
+    <!-- Formulario de Donación -->
+    <div class="donation-card">
+      <div class="donation-card">
+          <form action="{% url 'donations:donations' %}" method="POST">
+    
+    {% csrf_token %}
+        <!-- Nombre -->
+        <div class="form-group">
+          <label for="{{ form.name.id_for_label }}" class="form-label">
+            <i data-lucide="user" style="width: 20px; height: 20px;"></i>
+            {{ form.name.label }}
+          </label>
+          <div class="input-wrapper">
+            {% render_field form.name class="currency-input" placeholder="Tu nombre completo" %}
+          </div>
+        </div>
+
+        <!-- Correo -->
+        <div class="form-group">
+          <label for="{{ form.email.id_for_label }}" class="form-label">
+            <i data-lucide="mail" style="width: 20px; height: 20px;"></i>
+            {{ form.email.label }}
+          </label>
+          <div class="input-wrapper">
+            {% render_field form.email class="currency-input" placeholder="correo@ejemplo.com" %}
+          </div>
+        </div>
+
+        <!-- Teléfono -->
+        <div class="form-group">
+          <label for="{{ form.phone.id_for_label }}" class="form-label">
+            <i data-lucide="phone" style="width: 20px; height: 20px;"></i>
+            {{ form.phone.label }}
+          </label>
+          <div class="input-wrapper">
+            {% render_field form.phone class="currency-input" placeholder="55 1234 5678" %}
+          </div>
+        </div>
+
+        <!-- Cantidad -->
+        <div class="form-group">
+          <label for="{{ form.amount.id_for_label }}" class="form-label">
+            <i data-lucide="dollar-sign" style="width: 20px; height: 20px;"></i>
+            {{ form.amount.label }}
+          </label>
+          <div class="input-wrapper">
+            <span class="currency-symbol">$</span>
+            {% render_field form.amount class="currency-input" placeholder="100" min="10" step="1" %}
+            <span class="currency-code">MXN</span>
+          </div>
+        </div>
+
+        <!-- Montos sugeridos -->
+        <div class="suggested-amounts">
+          <p class="suggested-label">Montos sugeridos:</p>
+          <div class="amount-grid">
+            <button type="button" onclick="setAmount(50)" class="amount-btn">$50</button>
+            <button type="button" onclick="setAmount(100)" class="amount-btn">$100</button>
+            <button type="button" onclick="setAmount(250)" class="amount-btn">$250</button>
+          </div>
+        </div>
+
+        <!-- Botón de donación -->
+        <button type="submit" class="donate-btn">
+          <i data-lucide="heart-handshake" style="width: 20px; height: 20px;"></i>
+          <span>Realizar Donación</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Información adicional -->
+    <div class="security-info">
+      <i data-lucide="shield-check" class="security-icon" style="width: 24px; height: 24px;"></i>
+      <div>
+        <h3 class="security-title">Donación Segura</h3>
+        <p class="security-text">
+          Todas las transacciones están protegidas con encriptación de alta seguridad.
+          Tu información personal y financiera está completamente segura.
+        </p>
+      </div>
+    </div>
+
+    <!-- Navegación -->
+  <div class="text-center">
+      <a href="{% url 'core:home' %}" class="back-link">
+        <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i>
+        <span>Volver al inicio</span>
+      </a>
+    </div> 
+
+  </div>
+
+  <script>
+    // Función para establecer montos sugeridos
+    function setAmount(amount) {
+      document.getElementById("id_amount").value = amount;
+    }
+
+    // Inicializar iconos de Lucide
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>
