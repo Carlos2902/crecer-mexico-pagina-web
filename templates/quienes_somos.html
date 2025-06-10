@@ -1,0 +1,199 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiénes Somos</title>
+</head>
+<body>
+    <!-- Sección Principal de Quiénes Somos -->
+    <section id="quienes-somos-principal">
+        <div class="contenedor-principal">
+            {% if config %}
+                <h1>{{ config.titulo_principal }}</h1>
+                <h2>{{ config.subtitulo_principal }}</h2>
+                <p>{{ config.descripcion_principal }}</p>
+            {% else %}
+                <h1>Nuestro Propósito</h1>
+                <h2>Transformar Realidades</h2>
+                <p>A Través De La Educación.</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Sección de Misión con Collage -->
+    <section id="seccion-mision">
+        <div class="contenedor-mision">
+            <!-- Contenido de la Misión -->
+            <div class="contenido-mision">
+                {% if mision %}
+                    <h3>{{ mision.titulo }}</h3>
+                    <div class="descripcion-mision">
+                        {{ mision.descripcion|safe }}
+                    </div>
+                {% else %}
+                    <h3>Misión</h3>
+                    <div class="descripcion-mision">
+                        <p>Información de misión no disponible.</p>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <!-- Collage de Imágenes de Misión -->
+            <div class="collage-mision">
+                <div class="grid-imagenes">
+                    {% if imagenes_mision %}
+                        {% for imagen in imagenes_mision %}
+                            <div class="imagen-collage" data-orden="{{ imagen.orden }}">
+                                <img 
+                                    src="{{ imagen.imagen.url }}" 
+                                    alt="{{ imagen.alt_text }}"
+                                    title="{{ imagen.titulo }}"
+                                    loading="lazy"
+                                >
+                                <div class="overlay-titulo">
+                                    <span>{{ imagen.titulo }}</span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="sin-imagenes">
+                            <p>No hay imágenes disponibles para esta sección.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Visión -->
+    {% if vision %}
+        <section id="seccion-vision">
+            <div class="contenedor-vision">
+                <div class="contenido-vision">
+                    <h3>{{ vision.titulo }}</h3>
+                    <div class="descripcion-vision">
+                        {{ vision.descripcion|safe }}
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    <!-- Sección de Valores -->
+    {% if valores %}
+        <section id="seccion-valores">
+            <div class="contenedor-valores">
+                <h3>Nuestros Valores</h3>
+                <div class="grid-valores">
+                    {% for valor in valores %}
+                        <div class="tarjeta-valor" data-orden="{{ valor.orden }}">
+                            {% if valor.icono %}
+                                <div class="icono-valor">
+                                    <img src="{{ valor.icono.url }}" alt="Icono {{ valor.nombre }}">
+                                </div>
+                            {% endif %}
+                            <h4>{{ valor.nombre }}</h4>
+                            <p>{{ valor.descripcion }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    <!-- Collage Visión y Valores -->
+    {% if imagenes_vision_valores %}
+        <section id="collage-vision-valores">
+            <div class="contenedor-collage">
+                <div class="grid-imagenes-vision-valores">
+                    {% for imagen in imagenes_vision_valores %}
+                        <div class="imagen-collage" data-orden="{{ imagen.orden }}">
+                            <img 
+                                src="{{ imagen.imagen.url }}" 
+                                alt="{{ imagen.alt_text }}"
+                                title="{{ imagen.titulo }}"
+                                loading="lazy"
+                            >
+                            <div class="overlay-titulo">
+                                <span>{{ imagen.titulo }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    <!-- Sección de Equipo -->
+    {% if miembros_equipo %}
+        <section id="seccion-equipo">
+            <div class="contenedor-equipo">
+                <h3>Nuestro Equipo</h3>
+                <div class="grid-equipo">
+                    {% for miembro in miembros_equipo %}
+                        <div class="tarjeta-miembro" data-orden="{{ miembro.orden }}">
+                            {% if miembro.foto %}
+                                <div class="foto-miembro">
+                                    <img src="{{ miembro.foto.url }}" alt="Foto de {{ miembro.nombre }}">
+                                </div>
+                            {% endif %}
+                            <div class="info-miembro">
+                                <h4>{{ miembro.nombre }}</h4>
+                                <p class="cargo">{{ miembro.cargo }}</p>
+                                {% if miembro.biografia %}
+                                    <div class="biografia">
+                                        {{ miembro.biografia|safe }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    <!-- Sección de ODS -->
+    {% if config_ods and objetivos_ods %}
+        <section id="seccion-ods">
+            <div class="contenedor-ods">
+                <div class="titulo-ods">
+                    <h3 id="titulo-ods-configurable">
+                        {{ config_ods.titulo_completo_configurable }}
+                    </h3>
+                </div>
+                
+                <div class="grid-ods">
+                    {% for objetivo in objetivos_ods %}
+                        <div class="tarjeta-ods" data-numero="{{ objetivo.numero }}" data-orden="{{ objetivo.orden }}">
+                            <div class="numero-ods">
+                                ODS {{ objetivo.numero|stringformat:"02d" }}
+                            </div>
+                            <div class="contenido-ods">
+                                <h4>{{ objetivo.titulo }}</h4>
+                                <p>{{ objetivo.descripcion }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    <script>
+        // Script para procesar el título con asteriscos (palabras destacadas)
+        document.addEventListener('DOMContentLoaded', function() {
+            const tituloOds = document.getElementById('titulo-ods-configurable');
+            if (tituloOds) {
+                let contenido = tituloOds.innerHTML;
+                // Reemplazar *palabra* con <span class="destacado">palabra</span>
+                contenido = contenido.replace(/\*(.*?)\*/g, '<span class="destacado">$1</span>');
+                tituloOds.innerHTML = contenido;
+            }
+        });
+    </script>
+</body>
+</html>
