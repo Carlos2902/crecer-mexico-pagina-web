@@ -1,13 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiénes Somos</title>
-</head>
-<body>
+{% block title %}Quiénes Somos{% endblock %}
+
+{% block content %}
     <!-- Sección Principal de Quiénes Somos -->
     <section id="quienes-somos-principal">
         <div class="contenedor-principal">
@@ -53,9 +48,6 @@
                                     title="{{ imagen.titulo }}"
                                     loading="lazy"
                                 >
-                                <div class="overlay-titulo">
-                                    <span>{{ imagen.titulo }}</span>
-                                </div>
                             </div>
                         {% endfor %}
                     {% else %}
@@ -86,7 +78,7 @@
     {% if valores %}
         <section id="seccion-valores">
             <div class="contenedor-valores">
-                <h3>Nuestros Valores</h3>
+                <h3>Valores</h3>
                 <div class="grid-valores">
                     {% for valor in valores %}
                         <div class="tarjeta-valor" data-orden="{{ valor.orden }}">
@@ -117,9 +109,6 @@
                                 title="{{ imagen.titulo }}"
                                 loading="lazy"
                             >
-                            <div class="overlay-titulo">
-                                <span>{{ imagen.titulo }}</span>
-                            </div>
                         </div>
                     {% endfor %}
                 </div>
@@ -135,17 +124,17 @@
                 <div class="grid-equipo">
                     {% for miembro in miembros_equipo %}
                         <div class="tarjeta-miembro" data-orden="{{ miembro.orden }}">
-                            {% if miembro.foto %}
-                                <div class="foto-miembro">
-                                    <img src="{{ miembro.foto.url }}" alt="Foto de {{ miembro.nombre }}">
+                            {% if miembro.imagen %}
+                                <div class="imagen-miembro">
+                                    <img src="{{ miembro.imagen.url }}" alt="Foto de {{ miembro.nombre }}">
                                 </div>
                             {% endif %}
                             <div class="info-miembro">
                                 <h4>{{ miembro.nombre }}</h4>
-                                <p class="cargo">{{ miembro.cargo }}</p>
-                                {% if miembro.biografia %}
-                                    <div class="biografia">
-                                        {{ miembro.biografia|safe }}
+                                <p class="puesto">{{ miembro.puesto }}</p>
+                                {% if miembro.frase_destacada %}
+                                    <div class="frase">
+                                        {{ miembro.frase_destacada|safe }}
                                     </div>
                                 {% endif %}
                             </div>
@@ -195,5 +184,4 @@
             }
         });
     </script>
-</body>
-</html>
+{% endblock %}
