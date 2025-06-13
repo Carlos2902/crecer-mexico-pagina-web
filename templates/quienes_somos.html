@@ -16,11 +16,11 @@
                     {% if config %}
                         <h1>{{ config.titulo_principal }}</h1>
                         <h2>{{ config.subtitulo_principal }}</h2>
-                        <p>{{ config.descripcion_principal }}</p>
+                        <h3>{{ config.descripcion_principal }}</h3>
                     {% else %}
                         <h1>Nuestro Propósito</h1>
                         <h2>Transformar Realidades</h2>
-                        <p>A Través De La Educación.</p>
+                        <h3>A Través De La Educación.</h3>
                     {% endif %}
                 </div>
     
@@ -86,13 +86,7 @@
                 <div class="grid-valores">
                     {% for valor in valores %}
                         <div class="tarjeta-valor" data-orden="{{ valor.orden }}">
-                            {% if valor.icono %}
-                                <div class="icono-valor">
-                                    <img src="{{ valor.icono.url }}" alt="Icono {{ valor.nombre }}">
-                                </div>
-                            {% endif %}
                             <h4>{{ valor.nombre }}</h4>
-                            <p>{{ valor.descripcion }}</p>
                         </div>
                     {% endfor %}
                 </div>

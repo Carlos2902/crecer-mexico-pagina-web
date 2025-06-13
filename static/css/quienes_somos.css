@@ -3,41 +3,32 @@
    ============================ */
 
 /* Sección Principal */
-.contenedor-principal {
-    line-height: 1.5;
-}
 
+.seccion-mision{
+    padding: 2rem 1rem;
+    background: transparent;
+}
 .contenedor-principal h1 {
-    font-family: var(--font-family-sans);
     font-size: 2.5rem;
     font-weight: var(--font-weight-bold);
-    color: var(--color-primary-green);
-    margin-bottom: calc(var(--spacing-unit) * 2);
+    color: var(--color-primary-dark-blue);
     line-height: 1.2;
+    margin-bottom: 0;
+    text-align: left;
 }
 
 .contenedor-principal h2 {
-    font-family: var(--font-family-sans);
+    color: var(--color-primary-green);
+    text-align: left;
+    margin-bottom: 0;
+}
+
+.contenedor-principal h3 {
     font-size: 2rem;
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-primary-dark-blue);
-    margin-bottom: calc(var(--spacing-unit) * 3);
-    line-height: 1.3;
-}
-
-.contenedor-principal p {
-    font-family: var(--font-family-sans);
-    font-size: 1.125rem;
     font-weight: var(--font-weight-bold);
-    color: var(--color-primary-black);
-    line-height: 1.4;
-    margin: 0;
-}
-
-/* Sección de Misión */
-#seccion-mision {
-    padding: calc(var(--spacing-unit) * 8) calc(var(--spacing-unit) * 2);
-    overflow: hidden;
+    color: var(--color-primary-dark-blue);
+    text-align: left;
+    margin-bottom: 0;
 }
 
 .contenedor-mision {
@@ -45,17 +36,12 @@
     margin: 0 auto;
 }
 
-/* Contenido de la Misión */
-.contenido-mision {
-    margin-bottom: calc(var(--spacing-unit) * 6);
-}
-
 .contenido-mision h3 {
     font-family: var(--font-family-sans);
     font-size: 2rem;
     font-weight: var(--font-weight-bold);
     color: var(--color-primary-green);
-    margin-bottom: calc(var(--spacing-unit) * 3);
+    margin-bottom: calc(var(--spacing-unit) * 2);
 }
 
 .descripcion-mision {
@@ -181,17 +167,13 @@
     color: var(--color-secondary-gray);
     font-style: italic;
 }
-
 /* ============================
-   MEDIA QUERIES - OPTIMIZADOS
+   MEDIA QUERIES - OPTIMIZADOS CON MEJORAS
    ============================ */
 
 /* Tablets y pantallas medianas (768px+) */
 @media (min-width: 768px) {
     /* Contenedores alineados con hero */
-    #seccion-mision {
-        padding: calc(var(--spacing-unit) * 8) 2rem;
-    }
     
     .contenedor-mision {
         max-width: 900px;
@@ -200,23 +182,27 @@
     
     /* Tipografía escalada consistentemente */
     .contenedor-principal h1 {
-        font-size: 3rem;
-        margin-bottom: 2rem;
+        font-size: 2.5rem;
+        font-weight: var(--font-weight-bold);
+        color: var(--color-primary-dark-blue);
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+        text-align: left;
     }
     
     .contenedor-principal h2 {
-        font-size: 2.5rem;
-        margin-bottom: calc(var(--spacing-unit) * 4);
+        color: var(--color-primary-green);
     }
     
-    .contenedor-principal p {
-        font-size: 1.25rem;
-        line-height: 1.6;
+    .contenedor-principal h3 {
+        font-size: 2rem;
+        font-weight: var(--font-weight-bold);
+        color: var(--color-primary-dark-blue);
+        text-align: left;
     }
     
     .contenido-mision h3 {
         font-size: 2.5rem;
-        margin-bottom: calc(var(--spacing-unit) * 4);
     }
     
     .descripcion-mision {
@@ -234,43 +220,52 @@
         flex: 0 0 280px;
         height: 240px;
         margin-right: 20px;
+        /* Transición de entrada desde abajo */
+        transform: translateY(50px);
+        opacity: 0;
+        transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    /* Estado visible de las imágenes */
+    .imagen-collage.visible {
+        transform: translateY(0);
+        opacity: 1;
     }
 }
 
 /* Pantallas grandes (1024px+) */
 @media (min-width: 1024px) {
-/* Contenedor de la rejilla principal */
-.contenedor-mision {
-    max-width: 1400px;
-    padding: 0 3rem;
-    display: grid;
-    grid-template-columns: 1fr 450px; /* Columna de texto | Columna de imágenes */
-    gap: 5rem;
-    align-items: start;
-    margin: 3rem 0;
-}
+    /* Contenedor de la rejilla principal */
+    .contenedor-mision {
+        max-width: 1400px;
+        padding: 0 3rem;
+        display: grid;
+        grid-template-columns: 1fr 450px; /* Columna de texto | Columna de imágenes */
+        gap: 5rem;
+        align-items: start;
+        margin: 2rem 0; /* Alineado con la página de inicio para tablet */
+    }
 
-/* NUEVA REGLA: Contenedor para toda la columna izquierda */
-.columna-contenido {
-    grid-column: 1; /* Posiciona este contenedor en la primera columna */
-    grid-row: 1;    /* y en la primera fila */
-    display: flex; /* Opcional: para control avanzado de alineación interna */
-    flex-direction: column; /* Apila los hijos verticalmente */
-}
+    /* NUEVA REGLA: Contenedor para toda la columna izquierda */
+    .columna-contenido {
+        grid-column: 1; /* Posiciona este contenedor en la primera columna */
+        grid-row: 1;    /* y en la primera fila */
+        display: flex; /* Opcional: para control avanzado de alineación interna */
+        flex-direction: column; /* Apila los hijos verticalmente */
+    }
 
-/* REGLA MODIFICADA: Limpia el posicionamiento del grid */
-.contenedor-principal {
-    /* Eliminamos grid-column y grid-row */
-    margin-bottom: calc(var(--spacing-unit) * 8); /* Ajusta este valor para el espacio deseado */
-    text-align: left;
-}
+    /* REGLA MODIFICADA: Eliminar espacio excesivo entre contenedores */
+    .contenedor-principal {
+        margin-bottom: 0; /* Eliminamos el espacio excesivo */
+        text-align: left;
+    }
 
-/* REGLA MODIFICADA: Limpia el posicionamiento del grid y el margen superior */
-.contenido-mision {
-    /* Eliminamos grid-column, grid-row y margin-top */
-    margin-bottom: 0;
-    padding-right: 0;
-}
+    /* REGLA MODIFICADA: Limpia el posicionamiento del grid y el margen superior */
+    .contenido-mision {
+        /* Eliminamos grid-column, grid-row y margin-top */
+        margin-bottom: 0;
+        padding-right: 0;
+    }
 
     .collage-mision {
         grid-column: 2;
@@ -326,32 +321,47 @@
         height: 180px;
         position: relative;
         margin-right: 0;
+        /* Transición de entrada desde abajo */
+        transform: translateY(50px);
+        opacity: 0;
+        transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
     
-    /* Posicionamiento alternado para efecto visual */
+    /* Estado visible de las imágenes */
+    .imagen-collage.visible {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+    /* NUEVA ALINEACIÓN: Posicionamiento alternado para efecto visual mejorado */
     .imagen-collage:nth-child(1) {
-        margin-left: 0;
-        margin-right: 2rem;
+        margin-left: -1rem; /* Más a la izquierda */
+        margin-right: 3rem;
+        transition-delay: 0.1s; /* Aparece primero */
     }
     
     .imagen-collage:nth-child(2) {
-        margin-left: 2rem;
-        margin-right: 0;
+        margin-left: 1rem; /* Centro-derecha */
+        margin-right: 1rem;
+        transition-delay: 0.2s; /* Aparece segundo */
     }
     
     .imagen-collage:nth-child(3) {
-        margin-left: 1rem;
-        margin-right: 1rem;
+        margin-left: -0.5rem; /* Más a la izquierda que el centro */
+        margin-right: 2.5rem;
+        transition-delay: 0.3s; /* Aparece tercero */
     }
     
     .imagen-collage:nth-child(4) {
-        margin-left: 3rem;
+        margin-left: 2rem; /* Centro-derecha */
         margin-right: 0;
+        transition-delay: 0.4s; /* Aparece cuarto */
     }
     
     .imagen-collage:nth-child(5) {
-        margin-left: 0;
+        margin-left: -1rem; /* Más a la izquierda (como la primera) */
         margin-right: 3rem;
+        transition-delay: 0.5s; /* Aparece último */
     }
 }
 
@@ -402,6 +412,22 @@
     .imagen-collage {
         height: 200px;
     }
+    
+    /* Alineación mejorada para pantallas extra grandes */
+    .imagen-collage:nth-child(1) {
+        margin-left: -1.5rem; /* Más espacio a la izquierda */
+        margin-right: 4rem;
+    }
+    
+    .imagen-collage:nth-child(3) {
+        margin-left: -1rem;
+        margin-right: 3rem;
+    }
+    
+    .imagen-collage:nth-child(5) {
+        margin-left: -1.5rem; /* Consistente con la primera */
+        margin-right: 4rem;
+    }
 }
 
 /* Mejoras para accesibilidad */
@@ -412,6 +438,8 @@
     
     .imagen-collage {
         transition: none;
+        transform: none !important;
+        opacity: 1 !important;
     }
     
     .imagen-collage img {
@@ -423,5 +451,167 @@
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
     .imagen-collage {
         box-shadow: 0 4px 12px rgba(51, 51, 51, 0.15);
+    }
+}
+
+/* NUEVO: Clases auxiliares para la animación */
+.fade-in-up {
+    animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* === ESTILOS GENERALES === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* === SECCIÓN VISIÓN === */
+#seccion-vision {
+    padding: calc(var(--spacing-unit) * 6) calc(var(--spacing-unit) * 2);
+    background-color: var(--color-primary-white);
+}
+
+.contenedor-vision {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+}
+
+.contenido-vision h3 {
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary-green);
+    margin-bottom: calc(var(--spacing-unit) * 3);
+    text-align: center;
+}
+
+.descripcion-vision {
+    font-size: 1.1rem;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-primary-black);
+    text-align: center;
+    line-height: 1.7;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* === SECCIÓN VALORES === */
+#seccion-valores {
+    padding: calc(var(--spacing-unit) * 6) calc(var(--spacing-unit) * 2);
+    background-color: var(--color-primary-white);
+}
+
+.contenedor-valores {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+}
+
+.contenedor-valores h3 {
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary-green);
+    margin-bottom: calc(var(--spacing-unit) * 6);
+    text-align: left;
+}
+
+.grid-valores {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing-unit) * 4);
+    align-items: flex-start;
+}
+
+.tarjeta-valor {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 3px solid var(--color-primary-green);
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: calc(var(--spacing-unit) * 2);
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.tarjeta-valor h4 {
+    font-size: 1.1rem;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.3;
+}
+
+/* Alternancia de colores según el mock-up */
+.tarjeta-valor[data-orden="1"] h4,
+.tarjeta-valor[data-orden="3"] h4,
+.tarjeta-valor[data-orden="6"] h4 {
+    color: var(--color-secondary-light-blue);
+}
+
+.tarjeta-valor[data-orden="2"] h4,
+.tarjeta-valor[data-orden="4"] h4,
+.tarjeta-valor[data-orden="5"] h4 {
+    color: var(--color-primary-green);
+}
+
+.tarjeta-valor[data-orden="7"] h4 {
+    color: var(--color-secondary-gray);
+}
+
+/* === ANIMACIÓN INFINITA DE PULSACIÓN === */
+@keyframes pulso-infinito {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.tarjeta-valor {
+    animation: pulso-infinito 3s ease-in-out infinite;
+}
+
+/* Delay diferente para cada valor para crear efecto escalonado */
+.tarjeta-valor[data-orden="1"] {
+    animation-delay: 0s;
+}
+
+.tarjeta-valor[data-orden="2"] {
+    animation-delay: 0.6s;
+}
+
+.tarjeta-valor[data-orden="3"] {
+    animation-delay: 1.2s;
+}
+
+.tarjeta-valor[data-orden="4"] {
+    animation-delay: 1.8s;
+}
+
+.tarjeta-valor[data-orden="5"] {
+    animation-delay: 2.4s;
+}
+
+/* === EFECTOS DE HOVER (Para dispositivos que soporten hover) === */
+@media (hover: hover) {
+    .tarjeta-valor:hover {
+        transform: scale(1.05);
+        animation-play-state: paused;
     }
 }
