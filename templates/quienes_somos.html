@@ -1,39 +1,43 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Quiénes Somos{% endblock %}
-
 {% block content %}
-    <!-- Sección Principal de Quiénes Somos -->
-    <section id="quienes-somos-principal">
-        <div class="contenedor-principal">
-            {% if config %}
-                <h1>{{ config.titulo_principal }}</h1>
-                <h2>{{ config.subtitulo_principal }}</h2>
-                <p>{{ config.descripcion_principal }}</p>
-            {% else %}
-                <h1>Nuestro Propósito</h1>
-                <h2>Transformar Realidades</h2>
-                <p>A Través De La Educación.</p>
-            {% endif %}
-        </div>
-    </section>
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/quienes_somos.css' %}">
 
-    <!-- Sección de Misión con Collage -->
+
     <section id="seccion-mision">
         <div class="contenedor-mision">
-            <!-- Contenido de la Misión -->
-            <div class="contenido-mision">
-                {% if mision %}
-                    <h3>{{ mision.titulo }}</h3>
-                    <div class="descripcion-mision">
-                        {{ mision.descripcion|safe }}
-                    </div>
-                {% else %}
-                    <h3>Misión</h3>
-                    <div class="descripcion-mision">
-                        <p>Información de misión no disponible.</p>
-                    </div>
-                {% endif %}
+            
+            <div class="columna-contenido">
+                
+                <div class="contenedor-principal">
+                    {% if config %}
+                        <h1>{{ config.titulo_principal }}</h1>
+                        <h2>{{ config.subtitulo_principal }}</h2>
+                        <p>{{ config.descripcion_principal }}</p>
+                    {% else %}
+                        <h1>Nuestro Propósito</h1>
+                        <h2>Transformar Realidades</h2>
+                        <p>A Través De La Educación.</p>
+                    {% endif %}
+                </div>
+    
+                <div class="contenido-mision">
+                    {% if mision %}
+                        <h3>{{ mision.titulo }}</h3>
+                        <div class="descripcion-mision">
+                            {{ mision.descripcion|safe }}
+                        </div>
+                    {% else %}
+                        <h3>Misión</h3>
+                        <div class="descripcion-mision">
+                            <p>Información de misión no disponible.</p>
+                        </div>
+                    {% endif %}
+                </div>
+    
             </div>
             
             <!-- Collage de Imágenes de Misión -->
@@ -171,17 +175,6 @@
             </div>
         </section>
     {% endif %}
-
-    <script>
-        // Script para procesar el título con asteriscos (palabras destacadas)
-        document.addEventListener('DOMContentLoaded', function() {
-            const tituloOds = document.getElementById('titulo-ods-configurable');
-            if (tituloOds) {
-                let contenido = tituloOds.innerHTML;
-                // Reemplazar *palabra* con <span class="destacado">palabra</span>
-                contenido = contenido.replace(/\*(.*?)\*/g, '<span class="destacado">$1</span>');
-                tituloOds.innerHTML = contenido;
-            }
-        });
-    </script>
+    
+    <script src="{% static 'js/quienes_somos.js' %}"></script>
 {% endblock %}

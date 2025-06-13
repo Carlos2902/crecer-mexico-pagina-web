@@ -1,0 +1,427 @@
+/* ============================
+   ESTILOS PARA QUIÉNES SOMOS
+   ============================ */
+
+/* Sección Principal */
+.contenedor-principal {
+    line-height: 1.5;
+}
+
+.contenedor-principal h1 {
+    font-family: var(--font-family-sans);
+    font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary-green);
+    margin-bottom: calc(var(--spacing-unit) * 2);
+    line-height: 1.2;
+}
+
+.contenedor-principal h2 {
+    font-family: var(--font-family-sans);
+    font-size: 2rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary-dark-blue);
+    margin-bottom: calc(var(--spacing-unit) * 3);
+    line-height: 1.3;
+}
+
+.contenedor-principal p {
+    font-family: var(--font-family-sans);
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary-black);
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* Sección de Misión */
+#seccion-mision {
+    padding: calc(var(--spacing-unit) * 8) calc(var(--spacing-unit) * 2);
+    overflow: hidden;
+}
+
+.contenedor-mision {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+}
+
+/* Contenido de la Misión */
+.contenido-mision {
+    margin-bottom: calc(var(--spacing-unit) * 6);
+}
+
+.contenido-mision h3 {
+    font-family: var(--font-family-sans);
+    font-size: 2rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary-green);
+    margin-bottom: calc(var(--spacing-unit) * 3);
+}
+
+.descripcion-mision {
+    font-family: var(--font-family-sans);
+    font-size: 1rem;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-primary-black);
+    line-height: 1.6;
+}
+
+.descripcion-mision p {
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+/* Collage de Imágenes */
+.collage-mision {
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+    height: 180px;
+    margin-top: calc(var(--spacing-unit) * 2);
+}
+
+.grid-imagenes {
+    display: flex;
+    animation: scroll 20s linear infinite;
+    height: 100%;
+    will-change: transform;
+}
+
+/* Efectos de gradiente en los bordes */
+.collage-mision::before,
+.collage-mision::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.collage-mision::before {
+    left: 0;
+    background: linear-gradient(to right, #ffffff, transparent);
+}
+
+.collage-mision::after {
+    right: 0;
+    background: linear-gradient(to left, #ffffff, transparent);
+}
+
+/* Pausar animación en hover para mejor UX */
+.grid-imagenes:hover {
+    animation-play-state: paused;
+}
+
+.imagen-collage {
+    flex: 0 0 220px;
+    margin-right: 15px;
+    height: 150px;
+    border-radius: 1.2rem;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Colores alternados para los contenedores */
+.imagen-collage:nth-child(odd) {
+    background: var(--color-primary-white);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+}
+
+.imagen-collage:nth-child(even) {
+    background: var(--color-primary-green);
+    box-shadow: 0 6px 24px rgba(105, 198, 36, 0.3);
+}
+
+.imagen-collage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.imagen-collage:hover {
+    transform: translateY(-8px);
+}
+
+.imagen-collage:hover img {
+    transform: scale(1.05);
+}
+
+/* Animación de scroll infinito */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Soporte para dispositivos táctiles */
+.collage-mision {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.collage-mision::-webkit-scrollbar {
+    display: none;
+}
+
+/* Mensaje sin imágenes */
+.sin-imagenes {
+    text-align: center;
+    padding: calc(var(--spacing-unit) * 8);
+    color: var(--color-secondary-gray);
+    font-style: italic;
+}
+
+/* ============================
+   MEDIA QUERIES - OPTIMIZADOS
+   ============================ */
+
+/* Tablets y pantallas medianas (768px+) */
+@media (min-width: 768px) {
+    /* Contenedores alineados con hero */
+    #seccion-mision {
+        padding: calc(var(--spacing-unit) * 8) 2rem;
+    }
+    
+    .contenedor-mision {
+        max-width: 900px;
+        padding: 0 2rem;
+    }
+    
+    /* Tipografía escalada consistentemente */
+    .contenedor-principal h1 {
+        font-size: 3rem;
+        margin-bottom: 2rem;
+    }
+    
+    .contenedor-principal h2 {
+        font-size: 2.5rem;
+        margin-bottom: calc(var(--spacing-unit) * 4);
+    }
+    
+    .contenedor-principal p {
+        font-size: 1.25rem;
+        line-height: 1.6;
+    }
+    
+    .contenido-mision h3 {
+        font-size: 2.5rem;
+        margin-bottom: calc(var(--spacing-unit) * 4);
+    }
+    
+    .descripcion-mision {
+        font-size: 1.125rem;
+        line-height: 1.6;
+    }
+    
+    /* Collage ajustado */
+    .collage-mision {
+        height: 300px;
+        margin-top: calc(var(--spacing-unit) * 3);
+    }
+    
+    .imagen-collage {
+        flex: 0 0 280px;
+        height: 240px;
+        margin-right: 20px;
+    }
+}
+
+/* Pantallas grandes (1024px+) */
+@media (min-width: 1024px) {
+/* Contenedor de la rejilla principal */
+.contenedor-mision {
+    max-width: 1400px;
+    padding: 0 3rem;
+    display: grid;
+    grid-template-columns: 1fr 450px; /* Columna de texto | Columna de imágenes */
+    gap: 5rem;
+    align-items: start;
+    margin: 3rem 0;
+}
+
+/* NUEVA REGLA: Contenedor para toda la columna izquierda */
+.columna-contenido {
+    grid-column: 1; /* Posiciona este contenedor en la primera columna */
+    grid-row: 1;    /* y en la primera fila */
+    display: flex; /* Opcional: para control avanzado de alineación interna */
+    flex-direction: column; /* Apila los hijos verticalmente */
+}
+
+/* REGLA MODIFICADA: Limpia el posicionamiento del grid */
+.contenedor-principal {
+    /* Eliminamos grid-column y grid-row */
+    margin-bottom: calc(var(--spacing-unit) * 8); /* Ajusta este valor para el espacio deseado */
+    text-align: left;
+}
+
+/* REGLA MODIFICADA: Limpia el posicionamiento del grid y el margen superior */
+.contenido-mision {
+    /* Eliminamos grid-column, grid-row y margin-top */
+    margin-bottom: 0;
+    padding-right: 0;
+}
+
+    .collage-mision {
+        grid-column: 2;
+        grid-row: 1;
+        height: auto;
+        position: relative;
+        border-radius: 16px;
+        padding: 2rem;
+        margin-top: 0;
+    }
+    
+    /* Tipografía escalada */
+    .contenedor-principal h1 {
+        font-size: 3.5rem;
+        margin-bottom: 2rem;
+        line-height: 1.2;
+    }
+    
+    .contenedor-principal h2 {
+        font-size: 3rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    .contenedor-principal p {
+        font-size: 1.1rem;
+    }
+    
+    .contenido-mision h3 {
+        font-size: 3rem;
+        margin-bottom: 2rem;
+    }
+    
+    .descripcion-mision {
+        font-size: 1.25rem;
+    }
+
+    /* Collage apilado para pantallas grandes */
+    .collage-mision::before,
+    .collage-mision::after {
+        display: none;
+    }
+    
+    .grid-imagenes {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        animation: none;
+    }
+    
+    .imagen-collage {
+        flex: none;
+        width: 100%;
+        height: 180px;
+        position: relative;
+        margin-right: 0;
+    }
+    
+    /* Posicionamiento alternado para efecto visual */
+    .imagen-collage:nth-child(1) {
+        margin-left: 0;
+        margin-right: 2rem;
+    }
+    
+    .imagen-collage:nth-child(2) {
+        margin-left: 2rem;
+        margin-right: 0;
+    }
+    
+    .imagen-collage:nth-child(3) {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+    
+    .imagen-collage:nth-child(4) {
+        margin-left: 3rem;
+        margin-right: 0;
+    }
+    
+    .imagen-collage:nth-child(5) {
+        margin-left: 0;
+        margin-right: 3rem;
+    }
+}
+
+/* Pantallas extra grandes (1440px+) */
+@media (min-width: 1440px) {
+    /* Contenedores alineados con hero */
+    #seccion-mision {
+        padding: calc(var(--spacing-unit) * 12) 4rem;
+    }
+    
+    .contenedor-mision {
+        max-width: 1600px;
+        padding: 0 4rem;
+        grid-template-columns: 1fr 500px;
+        gap: 6rem;
+    }
+    
+    /* Tipografía escalada máxima */
+    .contenedor-principal h1 {
+        font-size: 4rem;
+    }
+    
+    .contenedor-principal h2 {
+        font-size: 3.5rem;
+    }
+    
+    .contenedor-principal p {
+        font-size: 1.2rem;
+    }
+    
+    .contenido-mision h3 {
+        font-size: 3.5rem;
+    }
+    
+    .descripcion-mision {
+        font-size: 1.25rem;
+    }
+    
+    /* Collage optimizado */
+    .collage-mision {
+        padding: 2.5rem;
+    }
+    
+    .grid-imagenes {
+        gap: 2rem;
+    }
+    
+    .imagen-collage {
+        height: 200px;
+    }
+}
+
+/* Mejoras para accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    .grid-imagenes {
+        animation: none;
+    }
+    
+    .imagen-collage {
+        transition: none;
+    }
+    
+    .imagen-collage img {
+        transition: none;
+    }
+}
+
+/* Soporte para pantallas de alta densidad */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+    .imagen-collage {
+        box-shadow: 0 4px 12px rgba(51, 51, 51, 0.15);
+    }
+}
