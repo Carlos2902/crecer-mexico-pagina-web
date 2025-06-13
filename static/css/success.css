@@ -1,0 +1,484 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-green: #69C624;
+  --primary-white: #ffffff;
+  --primary-whitebg: #ffffff;
+  --primary-navy: #2b2a5b;
+  --secondary-gray: #737373;
+  --secondary-blue: #465a93;
+  --white: #ffffff;
+  --black: #000000;
+  
+  --green-light: #6ac624;
+  --green-light2: #6ac62418;
+  --green-dark: #5bb01e;
+  --navy-light: #3a3970;
+  --gray-light: #f8f9fa;
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  
+  /* Colores adicionales para success */
+  --success-green: #10b981;
+  --success-light: #d1fae5;
+  --facebook: #1877f2;
+  --twitter: #1da1f2;
+  --whatsapp: #25d366;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(180deg, var(--green-light2) 2%, var(--primary-white) 95%);
+  min-height: 100vh;
+  color: var(--black);
+  line-height: 1.6;
+  max-width: 800px;    
+  margin: 0 auto;       
+  padding: 20px;        
+  box-sizing: border-box;
+  transform: scale(0.85);
+  transform-origin: top left;
+}
+
+.container {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+}
+
+/* Header de Éxito */
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.success-icon-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 2rem;
+}
+
+
+.success-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--white);
+}
+
+/* Animación del checkmark personalizada */
+.success-animation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+
+.success-animation.animate {
+  opacity: 1;
+}
+
+.checkmark {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 3;
+  stroke: var(--white);
+  stroke-miterlimit: 10;
+  box-shadow: inset 0 0 0 var(--success-green);
+}
+
+.checkmark-stem {
+  width: 3px;
+  height: 9px;
+  background-color: var(--white);
+  position: absolute;
+  left: 20px;
+  top: 24px;
+  transform: rotate(45deg);
+  transform-origin: left bottom;
+  animation: checkmark-stem 0.3s ease-in-out 0.9s both;
+}
+
+.checkmark-kick {
+  width: 3px;
+  height: 3px;
+  background-color: var(--white);
+  position: absolute;
+  left: 16px;
+  top: 27px;
+  transform: rotate(-45deg);
+  transform-origin: left bottom;
+  animation: checkmark-kick 0.2s ease-in-out 1.1s both;
+}
+
+.main-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--primary-navy);
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: var(--secondary-gray);
+  max-width: 500px;
+  margin: 0 auto;
+  font-weight: 400;
+}
+
+/* Tarjeta de Confirmación */
+.confirmation-card {
+  background: var(--white);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  animation: slideInUp 0.6s ease-out 0.4s both;
+}
+
+.confirmation-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.heart-icon {
+  width: 32px;
+  height: 32px;
+  color: #ef4444;
+  margin-bottom: 1rem;
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+.confirmation-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+  margin-bottom: 0.5rem;
+}
+
+.confirmation-text {
+  color: var(--secondary-gray);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Mensaje de Impacto */
+.impact-message {
+  background: var(--success-light);
+  padding: 1.5rem;
+  border-radius: 16px;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.impact-icon {
+  color: var(--success-green);
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.impact-text h3 {
+  color: var(--primary-navy);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.impact-list {
+  list-style: none;
+  color: var(--secondary-gray);
+}
+
+.impact-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.impact-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--success-green);
+  font-weight: bold;
+}
+
+/* Información de Seguimiento */
+.follow-up-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.6s ease-out 0.6s both;
+}
+
+
+.info-item {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  transition: transform 0.2s ease;
+}
+.info-item-follow {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.info-item:hover {
+  transform: translateY(-2px);
+}
+
+.info-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--primary-green);
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.info-title {
+  font-weight: 600;
+  color: var(--primary-navy);
+  margin-bottom: 0.25rem;
+}
+
+.info-text {
+  color: var(--secondary-gray);
+  font-size: 0.9rem;
+}
+
+/* Sección CTA */
+.cta-section {
+  background: var(--primary-navy);
+  color: var(--white);
+  padding: 2rem;
+  border-radius: 20px;
+  text-align: center;
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.6s ease-out 0.8s both;
+}
+
+.cta-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.cta-text {
+  opacity: 0.9;
+  margin-bottom: 1.5rem;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: var(--white);
+}
+
+.social-btn.facebook {
+  background: var(--facebook);
+}
+
+.social-btn.twitter {
+  background: var(--twitter);
+}
+
+.social-btn.whatsapp {
+  background: var(--whatsapp);
+}
+
+.social-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+/* Navegación */
+.navigation-section {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.6s ease-out 1s both;
+}
+
+.home-btn, .donate-again-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  border-radius: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.home-btn {
+  background: var(--gray-light);
+  color: var(--secondary-gray);
+  border: 2px solid transparent;
+}
+
+.home-btn:hover {
+  background: var(--white);
+  border-color: var(--primary-green);
+  color: var(--primary-green);
+  transform: translateY(-2px);
+}
+
+.donate-again-btn {
+  background: linear-gradient(135deg, var(--primary-green), var(--green-light));
+  color: var(--white);
+  box-shadow: 0 8px 32px rgba(105, 198, 36, 0.3);
+}
+
+.donate-again-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 48px rgba(105, 198, 36, 0.4);
+  background: linear-gradient(135deg, var(--green-dark), var(--primary-green));
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes checkmark-stem {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 9px;
+  }
+}
+
+@keyframes checkmark-kick {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 3px;
+  }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .main-title {
+    font-size: 2.5rem;
+  }
+  
+  .confirmation-card {
+    padding: 2rem;
+  }
+  
+  .social-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .social-btn {
+    width: 100%;
+    max-width: 200px;
+    justify-content: center;
+  }
+  
+  .navigation-section {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .home-btn, .donate-again-btn {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+  }
+  
+  .impact-message {
+    flex-direction: column;
+    text-align: center;
+  }
+}
