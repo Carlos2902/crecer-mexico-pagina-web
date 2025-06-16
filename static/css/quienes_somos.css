@@ -12,14 +12,13 @@
     font-size: 2.5rem;
     font-weight: var(--font-weight-bold);
     color: var(--color-primary-dark-blue);
-    line-height: 1.2;
     margin-bottom: 0;
-    text-align: left;
+    text-align: center;
 }
 
 .contenedor-principal h2 {
     color: var(--color-primary-green);
-    text-align: left;
+    text-align: center;
     margin-bottom: 0;
 }
 
@@ -27,8 +26,8 @@
     font-size: 2rem;
     font-weight: var(--font-weight-bold);
     color: var(--color-primary-dark-blue);
-    text-align: left;
-    margin-bottom: 0;
+    text-align: center;
+    margin-bottom: 50px;
 }
 
 .contenedor-mision {
@@ -42,6 +41,7 @@
     font-weight: var(--font-weight-bold);
     color: var(--color-primary-green);
     margin-bottom: calc(var(--spacing-unit) * 2);
+    text-align: center;
 }
 
 .descripcion-mision {
@@ -54,6 +54,7 @@
 
 .descripcion-mision p {
     margin-bottom: calc(var(--spacing-unit) * 2);
+    text-align: center;
 }
 
 /* Collage de Imágenes */
@@ -279,21 +280,27 @@
     
     /* Tipografía escalada */
     .contenedor-principal h1 {
+        text-align: left;
         font-size: 3.5rem;
         margin-bottom: 2rem;
         line-height: 1.2;
     }
     
     .contenedor-principal h2 {
+        text-align: left;
         font-size: 3rem;
         margin-bottom: 2.5rem;
     }
     
     .contenedor-principal p {
+        text-align: left;
+
         font-size: 1.1rem;
     }
     
     .contenido-mision h3 {
+        text-align: left;
+
         font-size: 3rem;
         margin-bottom: 2rem;
     }
@@ -480,7 +487,6 @@
 /* === SECCIÓN VISIÓN === */
 #seccion-vision {
     padding: calc(var(--spacing-unit) * 6) calc(var(--spacing-unit) * 2);
-    background-color: var(--color-primary-white);
 }
 
 .contenedor-vision {
@@ -506,10 +512,10 @@
     margin: 0 auto;
 }
 
-/* === SECCIÓN VALORES === */
+/* === SECCIÓN VALORES === *//* === SECCIÓN VALORES === */
 #seccion-valores {
     padding: calc(var(--spacing-unit) * 6) calc(var(--spacing-unit) * 2);
-    background-color: var(--color-primary-white);
+
 }
 
 .contenedor-valores {
@@ -522,55 +528,90 @@
     font-weight: var(--font-weight-bold);
     color: var(--color-primary-green);
     margin-bottom: calc(var(--spacing-unit) * 6);
-    text-align: left;
+    text-align: center;
 }
 
 .grid-valores {
     display: flex;
     flex-direction: column;
-    gap: calc(var(--spacing-unit) * 4);
-    align-items: flex-start;
+    /* Centramos las píldoras para un mejor look en móvil */
+    align-items: center; 
+    gap: calc(var(--spacing-unit) * 3);
 }
 
+/* ESTILOS DE LA PÍLDORA DE VALOR */
 .tarjeta-valor {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    border: 3px solid var(--color-primary-green);
-    background-color: transparent;
+    /* Eliminamos ancho y alto fijos para que se adapte al contenido */
+    /* width: 200px; */
+    /* height: 200px; */
+    
+    /* Creamos la forma de píldora con un border-radius alto */
+    border-radius: 50px; 
+    
+    /* Usamos padding para dar espacio interno. Más ancho que alto. */
+    padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
+    
+    /* Ya no usamos borde, sino un color de fondo */
+    background-color: #f0f0f0; /* Color por defecto */
+    
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    padding: calc(var(--spacing-unit) * 2);
-    position: relative;
     transition: transform 0.3s ease;
+    
+    /* La animación de pulso se mantiene */
+    animation: pulso-infinito 3s ease-in-out infinite;
 }
 
 .tarjeta-valor h4 {
     font-size: 1.1rem;
     font-weight: var(--font-weight-semibold);
     line-height: 1.3;
+    /* Asegura que el texto no se parta en varias líneas */
+    white-space: nowrap; 
 }
 
-/* Alternancia de colores según el mock-up */
+/* === ASIGNACIÓN DE COLORES SEGÚN EL MOCKUP === */
+/* NOTA: Asegúrate de que tu HTML tiene los 'data-orden' correctos. */
+
+/* Valores con fondo azul claro y texto azul oscuro */
+.tarjeta-valor[data-orden="1"], /* Respeto a la persona y su dignidad */
+.tarjeta-valor[data-orden="4"], /* Vocación por la calidad */
+.tarjeta-valor[data-orden="5"]  /* Trabajo colaborativo */
+{
+    background-color: #eef2ff; /* Un azul muy claro */
+}
+
 .tarjeta-valor[data-orden="1"] h4,
-.tarjeta-valor[data-orden="3"] h4,
-.tarjeta-valor[data-orden="6"] h4 {
-    color: var(--color-secondary-light-blue);
+.tarjeta-valor[data-orden="4"] h4,
+.tarjeta-valor[data-orden="5"] h4 {
+    color: var(--color-secondary-light-blue); /* Tu variable para azul */
+}
+
+/* Valores con fondo verde claro y texto verde oscuro */
+.tarjeta-valor[data-orden="2"], /* Compromiso social */
+.tarjeta-valor[data-orden="6"]  /* Integridad y responsabilidad */
+{
+    background-color: #e6f7ee; /* Un verde muy claro */
 }
 
 .tarjeta-valor[data-orden="2"] h4,
-.tarjeta-valor[data-orden="4"] h4,
-.tarjeta-valor[data-orden="5"] h4 {
-    color: var(--color-primary-green);
+.tarjeta-valor[data-orden="6"] h4 {
+    color: var(--color-primary-green); /* Tu variable para verde */
 }
 
-.tarjeta-valor[data-orden="7"] h4 {
-    color: var(--color-secondary-gray);
+/* Valor "Empatía" con fondo gris claro y texto gris oscuro */
+.tarjeta-valor[data-orden="3"] /* Empatía */
+{
+    background-color: #f0f2f5; /* Un gris muy claro */
 }
 
-/* === ANIMACIÓN INFINITA DE PULSACIÓN === */
+.tarjeta-valor[data-orden="3"] h4 {
+    color: var(--color-secondary-gray); /* Tu variable para gris */
+}
+
+
+/* === ANIMACIÓN INFINITA DE PULSACIÓN (sin cambios) === */
 @keyframes pulso-infinito {
     0% {
         transform: scale(1);
@@ -583,35 +624,64 @@
     }
 }
 
-.tarjeta-valor {
-    animation: pulso-infinito 3s ease-in-out infinite;
-}
+/* Delay diferente para cada valor (ajustado para 6 valores principales) */
+.tarjeta-valor[data-orden="1"] { animation-delay: 0s; }
+.tarjeta-valor[data-orden="2"] { animation-delay: 0.5s; }
+.tarjeta-valor[data-orden="3"] { animation-delay: 1s; }
+.tarjeta-valor[data-orden="4"] { animation-delay: 1.5s; }
+.tarjeta-valor[data-orden="5"] { animation-delay: 2s; }
+.tarjeta-valor[data-orden="6"] { animation-delay: 2.5s; }
 
-/* Delay diferente para cada valor para crear efecto escalonado */
-.tarjeta-valor[data-orden="1"] {
-    animation-delay: 0s;
-}
 
-.tarjeta-valor[data-orden="2"] {
-    animation-delay: 0.6s;
-}
-
-.tarjeta-valor[data-orden="3"] {
-    animation-delay: 1.2s;
-}
-
-.tarjeta-valor[data-orden="4"] {
-    animation-delay: 1.8s;
-}
-
-.tarjeta-valor[data-orden="5"] {
-    animation-delay: 2.4s;
-}
-
-/* === EFECTOS DE HOVER (Para dispositivos que soporten hover) === */
+/* === EFECTOS DE HOVER (sin cambios) === */
 @media (hover: hover) {
     .tarjeta-valor:hover {
-        transform: scale(1.05);
+        transform: scale(1.1); /* Aumenté un poco el efecto para que se note más */
         animation-play-state: paused;
     }
+}
+
+/* === SECCIÓN COLLAGE VISIÓN Y VALORES (Mobile First) === */
+
+#collage-vision-valores {
+    padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 2);
+}
+
+.collage-vv-contenedor {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    /* No hay borde, según la corrección */
+}
+
+/* --- ESTRATEGIA DE GRID PARA MÓVIL --- */
+.collage-vv-grid {
+    display: grid;
+    /* 1. Creamos una cuadrícula de 2 columnas de igual ancho */
+    grid-template-columns: repeat(2, 1fr);
+    
+    /* 2. Damos un espacio consistente entre todos los elementos */
+    gap: calc(var(--spacing-unit) * 1.5);
+}
+
+
+/* === INICIO DE LA MODIFICACIÓN === */
+/* Ajuste para reducir el tamaño de las imágenes 1 y 4 */
+
+.collage-vv-item[data-orden="1"],
+.collage-vv-item[data-orden="2"] {
+    /* Al añadir padding, el espacio para la imagen interior se reduce. */
+    padding: 0.8rem; /* Puedes ajustar este valor */
+    
+    /* Nos aseguramos de que el padding no agrande el contenedor, sino que encoja el contenido */
+    box-sizing: border-box; 
+}
+/* 3. Estilos para la imagen dentro de su celda de la cuadrícula */
+.collage-vv-item img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 15px; /* Mantenemos las esquinas redondeadas */
+    
+    /* 4. Esta propiedad es ESENCIAL para que las imágenes llenen la celda sin deformarse */
+    object-fit: cover; 
 }

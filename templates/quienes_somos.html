@@ -94,25 +94,24 @@
         </section>
     {% endif %}
 
-    <!-- Collage Visión y Valores -->
     {% if imagenes_vision_valores %}
-        <section id="collage-vision-valores">
-            <div class="contenedor-collage">
-                <div class="grid-imagenes-vision-valores">
-                    {% for imagen in imagenes_vision_valores %}
-                        <div class="imagen-collage" data-orden="{{ imagen.orden }}">
-                            <img 
-                                src="{{ imagen.imagen.url }}" 
-                                alt="{{ imagen.alt_text }}"
-                                title="{{ imagen.titulo }}"
-                                loading="lazy"
-                            >
-                        </div>
-                    {% endfor %}
-                </div>
+    <section id="collage-vision-valores">
+        <div class="collage-vv-contenedor">
+            <div class="collage-vv-grid">
+                {% for imagen in imagenes_vision_valores %}
+                    <div class="collage-vv-item" data-orden="{{ imagen.orden }}">
+                        <img 
+                            src="{{ imagen.imagen.url }}" 
+                            alt="{{ imagen.alt_text }}"
+                            title="{{ imagen.titulo }}"
+                            loading="lazy"
+                        >
+                    </div>
+                {% endfor %}
             </div>
-        </section>
-    {% endif %}
+        </div>
+    </section>
+{% endif %}
 
     <!-- Sección de Equipo -->
     {% if miembros_equipo %}
