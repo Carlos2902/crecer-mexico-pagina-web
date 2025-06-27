@@ -1,0 +1,113 @@
+<!-- Sección Hero: Título principal, subtítulo, contenido introductorio -->
+{% if hero %}
+<section class="hero-section">
+    <div class="container">
+        <h1>{{ hero.titulo }}</h1>
+        <h2>{{ hero.subtitulo }}</h2>
+        <p>{{ hero.contenido|linebreaks }}</p>
+    </div>
+</section>
+{% endif %}
+
+<!-- Sección Programas Educativos: Tarjetas con contenido frontal y trasero{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proyectos</title>
+<!-- Aquí irían tus estilos CSS -->
+</head>
+<body>
+<!-- Sección 1: Título, subtítulo, contenido -->
+{% if seccion_1 %}
+<section class="seccion-1">
+    <div class="container">
+        <h1>{{ seccion_1.titulo }}</h1>
+        <h2>{{ seccion_1.subtitulo }}</h2>
+        <p>{{ seccion_1.contenido|linebreaks }}</p>
+    </div>
+</section>
+{% endif %}
+
+<!-- Sección 2: Tarjetas con contenido frontal y trasero -->
+{% if seccion_2 %}
+<section class="seccion-2">
+    <div class="container">
+        <h2>{{ seccion_2.titulo }}</h2>
+        <p>{{ seccion_2.descripcion|linebreaks }}</p>
+        
+        <div class="tarjetas-container">
+            {% for tarjeta in tarjetas %}
+            <div class="tarjeta" data-tarjeta-id="{{ tarjeta.id }}">
+                <!-- Contenido frontal -->
+                <div class="tarjeta-frontal">
+                    <img src="{{ tarjeta.imagen.url }}" alt="{{ tarjeta.titulo }}">
+                    <h4>{{ tarjeta.subtitulo }}</h4>
+                    <h3>{{ tarjeta.titulo }}</h3>
+                    <ul>
+                        {% for vineta in tarjeta.get_contenido_vinetas_list %}
+                        <li>{{ vineta }}</li>
+                        {% endfor %}
+                    </ul>
+                    <button class="btn-voltear" onclick="voltearTarjeta({{ tarjeta.id }})">
+                        {{ tarjeta.texto_boton }}
+                    </button>
+                </div>
+                
+                <!-- Contenido trasero (inicialmente oculto) -->
+                <div class="tarjeta-trasera" style="display: none;">
+                    <h3>{{ tarjeta.titulo_trasero }}</h3>
+                    <ul>
+                        {% for vineta in tarjeta.get_contenido_trasero_vinetas_list %}
+                        <li>{{ vineta }}</li>
+                        {% endfor %}
+                    </ul>
+                <button>
+                        Volver
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Sección 3: Imagen, título, subtítulo, texto, botón -->
+{% if seccion_3 %}
+<section class="seccion-3">
+    <div class="container">
+        <img src="{{ seccion_3.imagen.url }}" alt="{{ seccion_3.titulo }}">
+        <h2>{{ seccion_3.titulo }}</h2>
+        <h3>{{ seccion_3.subtitulo }}</h3>
+        <p>{{ seccion_3.texto|linebreaks }}</p>
+        <a href="{% url 'contacto:index' %}" class="btn btn-contacto">
+            {{ seccion_3.texto_boton }}
+        </a>
+    </div>
+</section>
+{% endif %}
+
+<!-- Sección 4: Documentos PDF -->
+{% if seccion_4 %}
+<section class="seccion-4">
+    <div class="container">
+        <h2>{{ seccion_4.titulo }}</h2>
+        <p>{{ seccion_4.descripcion|linebreaks }}</p>
+        <div class="documentos-container">
+            {% for documento in documentos %}
+            <div class="documento">
+                <a href="{{ documento.archivo.url }}" target="_blank">
+                    <img src="{% static 'images/pdf-icon.png' %}" alt="Documento PDF">
+                    <h4>{{ documento.titulo }}</h4>
+                </a>
+                <p>{{ documento.descripcion|linebreaks }}</p>                   
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}     
+</body>
+</html>

@@ -2,80 +2,88 @@
    ESTILOS PARA QUIÉNES SOMOS
    ============================ */
 
-/* Sección Principal */
-
-.seccion-mision{
+/* --- Sección Principal --- */
+.seccion-mision {
     padding: 2rem 1rem;
     background: transparent;
-}
-.contenedor-principal h1 {
-    font-size: 2.5rem;
-    font-weight: var(--font-weight-bold);
-    color: var(--color-primary-dark-blue);
-    margin-bottom: 0;
-    text-align: center;
-}
-
-.contenedor-principal h2 {
-    color: var(--color-primary-green);
-    text-align: center;
-    margin-bottom: 0;
-}
-
-.contenedor-principal h3 {
-    font-size: 2rem;
-    font-weight: var(--font-weight-bold);
-    color: var(--color-primary-dark-blue);
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.contenedor-mision {
+  }
+  
+  .contenedor-mision {
     max-width: var(--container-max-width);
     margin: 0 auto;
-}
-
-.contenido-mision h3 {
+  }
+  
+  .contenedor-principal h1 {
+    font-size: 2.2rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary-dark-blue);
+    text-align: center;
+  }
+  
+  .contenedor-principal h2 {
+    color: var(--color-primary-green);
+    font-size: 2.2rem;
+    text-align: center;
+  }
+  
+  .contenedor-principal h3 {
+    font-size: 2.2rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary-dark-blue);
+    text-align: center;
+  }
+  
+  .contenido-mision h3 {
     font-family: var(--font-family-sans);
     font-size: 2rem;
     font-weight: var(--font-weight-bold);
     color: var(--color-primary-green);
-    margin-bottom: calc(var(--spacing-unit) * 2);
     text-align: center;
-}
-
-.descripcion-mision {
-    font-family: var(--font-family-sans);
-    font-size: 1rem;
+    margin-bottom: calc(var(--spacing-unit) * 2);
+  }
+  
+  .descripcion-mision {
+    font-size: 1.1rem;
     font-weight: var(--font-weight-regular);
     color: var(--color-primary-black);
-    line-height: 1.6;
-}
-
-.descripcion-mision p {
-    margin-bottom: calc(var(--spacing-unit) * 2);
     text-align: center;
-}
+    line-height: 1.7;
+    max-width: 800px;
+    padding: 20px;
 
-/* Collage de Imágenes */
-.collage-mision {
+  }
+  
+  
+  /* --- Collage de Imágenes Misión --- */
+  .collage-mision {
     position: relative;
     max-width: 100%;
-    overflow: hidden;
     height: 180px;
+    overflow: hidden;
     margin-top: calc(var(--spacing-unit) * 2);
-}
-
-.grid-imagenes {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .collage-mision::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .grid-imagenes {
     display: flex;
-    animation: scroll 20s linear infinite;
     height: 100%;
+    animation: scroll 20s linear infinite;
     will-change: transform;
-}
-
-/* Efectos de gradiente en los bordes */
-.collage-mision::before,
-.collage-mision::after {
+  }
+  
+  .grid-imagenes:hover {
+    animation-play-state: paused;
+  }
+  
+  /* Efectos de gradiente en los bordes */
+  .collage-mision::before,
+  .collage-mision::after {
     content: '';
     position: absolute;
     top: 0;
@@ -83,426 +91,88 @@
     width: 30px;
     z-index: 10;
     pointer-events: none;
-}
-
-.collage-mision::before {
+  }
+  
+  .collage-mision::before {
     left: 0;
     background: linear-gradient(to right, #ffffff, transparent);
-}
-
-.collage-mision::after {
+  }
+  
+  .collage-mision::after {
     right: 0;
     background: linear-gradient(to left, #ffffff, transparent);
-}
-
-/* Pausar animación en hover para mejor UX */
-.grid-imagenes:hover {
-    animation-play-state: paused;
-}
-
-.imagen-collage {
+  }
+  
+  .imagen-collage {
     flex: 0 0 220px;
-    margin-right: 15px;
     height: 150px;
-    border-radius: 1.2rem;
+    margin-right: 15px;
     padding: 12px;
+    border-radius: 1.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Colores alternados para los contenedores */
-.imagen-collage:nth-child(odd) {
+  }
+  
+  .imagen-collage:nth-child(odd) {
     background: var(--color-primary-white);
     box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
-}
-
-.imagen-collage:nth-child(even) {
+  }
+  
+  .imagen-collage:nth-child(even) {
     background: var(--color-primary-green);
     box-shadow: 0 6px 24px rgba(105, 198, 36, 0.3);
-}
-
-.imagen-collage img {
+  }
+  
+  .imagen-collage img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 0.8rem;
     transition: transform 0.3s ease;
-}
-
-.imagen-collage:hover {
+  }
+  
+  .imagen-collage:hover {
     transform: translateY(-8px);
-}
-
-.imagen-collage:hover img {
+  }
+  
+  .imagen-collage:hover img {
     transform: scale(1.05);
-}
-
-/* Animación de scroll infinito */
-@keyframes scroll {
+  }
+  
+  /* Animación de scroll infinito */
+  @keyframes scroll {
     0% {
-        transform: translateX(0);
+      transform: translateX(0);
     }
     100% {
-        transform: translateX(-50%);
+      transform: translateX(-50%);
     }
-}
-
-/* Soporte para dispositivos táctiles */
-.collage-mision {
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.collage-mision::-webkit-scrollbar {
-    display: none;
-}
-
-/* Mensaje sin imágenes */
-.sin-imagenes {
-    text-align: center;
-    padding: calc(var(--spacing-unit) * 8);
-    color: var(--color-secondary-gray);
-    font-style: italic;
-}
-/* ============================
-   MEDIA QUERIES - OPTIMIZADOS CON MEJORAS
-   ============================ */
-
-/* Tablets y pantallas medianas (768px+) */
-@media (min-width: 768px) {
-    /* Contenedores alineados con hero */
-    
-    .contenedor-mision {
-        max-width: 900px;
-        padding: 0 2rem;
-    }
-    
-    /* Tipografía escalada consistentemente */
-    .contenedor-principal h1 {
-        font-size: 2.5rem;
-        font-weight: var(--font-weight-bold);
-        color: var(--color-primary-dark-blue);
-        line-height: 1.2;
-        margin-bottom: 1.5rem;
-        text-align: left;
-    }
-    
-    .contenedor-principal h2 {
-        color: var(--color-primary-green);
-    }
-    
-    .contenedor-principal h3 {
-        font-size: 2rem;
-        font-weight: var(--font-weight-bold);
-        color: var(--color-primary-dark-blue);
-        text-align: left;
-    }
-    
-    .contenido-mision h3 {
-        font-size: 2.5rem;
-    }
-    
-    .descripcion-mision {
-        font-size: 1.125rem;
-        line-height: 1.6;
-    }
-    
-    /* Collage ajustado */
-    .collage-mision {
-        height: 300px;
-        margin-top: calc(var(--spacing-unit) * 3);
-    }
-    
-    .imagen-collage {
-        flex: 0 0 280px;
-        height: 240px;
-        margin-right: 20px;
-        /* Transición de entrada desde abajo */
-        transform: translateY(50px);
-        opacity: 0;
-        transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    
-    /* Estado visible de las imágenes */
-    .imagen-collage.visible {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-/* Pantallas grandes (1024px+) */
-@media (min-width: 1024px) {
-    /* Contenedor de la rejilla principal */
-    .contenedor-mision {
-        max-width: 1400px;
-        padding: 0 3rem;
-        display: grid;
-        grid-template-columns: 1fr 450px; /* Columna de texto | Columna de imágenes */
-        gap: 5rem;
-        align-items: start;
-        margin: 2rem 0; /* Alineado con la página de inicio para tablet */
-    }
-
-    /* NUEVA REGLA: Contenedor para toda la columna izquierda */
-    .columna-contenido {
-        grid-column: 1; /* Posiciona este contenedor en la primera columna */
-        grid-row: 1;    /* y en la primera fila */
-        display: flex; /* Opcional: para control avanzado de alineación interna */
-        flex-direction: column; /* Apila los hijos verticalmente */
-    }
-
-    /* REGLA MODIFICADA: Eliminar espacio excesivo entre contenedores */
-    .contenedor-principal {
-        margin-bottom: 0; /* Eliminamos el espacio excesivo */
-        text-align: left;
-    }
-
-    /* REGLA MODIFICADA: Limpia el posicionamiento del grid y el margen superior */
-    .contenido-mision {
-        /* Eliminamos grid-column, grid-row y margin-top */
-        margin-bottom: 0;
-        padding-right: 0;
-    }
-
-    .collage-mision {
-        grid-column: 2;
-        grid-row: 1;
-        height: auto;
-        position: relative;
-        border-radius: 16px;
-        padding: 2rem;
-        margin-top: 0;
-    }
-    
-    /* Tipografía escalada */
-    .contenedor-principal h1 {
-        text-align: left;
-        font-size: 3.5rem;
-        margin-bottom: 2rem;
-        line-height: 1.2;
-    }
-    
-    .contenedor-principal h2 {
-        text-align: left;
-        font-size: 3rem;
-        margin-bottom: 2.5rem;
-    }
-    
-    .contenedor-principal p {
-        text-align: left;
-
-        font-size: 1.1rem;
-    }
-    
-    .contenido-mision h3 {
-        text-align: left;
-
-        font-size: 3rem;
-        margin-bottom: 2rem;
-    }
-    
-    .descripcion-mision {
-        font-size: 1.25rem;
-    }
-
-    /* Collage apilado para pantallas grandes */
-    .collage-mision::before,
-    .collage-mision::after {
-        display: none;
-    }
-    
-    .grid-imagenes {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        animation: none;
-    }
-    
-    .imagen-collage {
-        flex: none;
-        width: 100%;
-        height: 180px;
-        position: relative;
-        margin-right: 0;
-        /* Transición de entrada desde abajo */
-        transform: translateY(50px);
-        opacity: 0;
-        transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    
-    /* Estado visible de las imágenes */
-    .imagen-collage.visible {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    
-    /* NUEVA ALINEACIÓN: Posicionamiento alternado para efecto visual mejorado */
-    .imagen-collage:nth-child(1) {
-        margin-left: -1rem; /* Más a la izquierda */
-        margin-right: 3rem;
-        transition-delay: 0.1s; /* Aparece primero */
-    }
-    
-    .imagen-collage:nth-child(2) {
-        margin-left: 1rem; /* Centro-derecha */
-        margin-right: 1rem;
-        transition-delay: 0.2s; /* Aparece segundo */
-    }
-    
-    .imagen-collage:nth-child(3) {
-        margin-left: -0.5rem; /* Más a la izquierda que el centro */
-        margin-right: 2.5rem;
-        transition-delay: 0.3s; /* Aparece tercero */
-    }
-    
-    .imagen-collage:nth-child(4) {
-        margin-left: 2rem; /* Centro-derecha */
-        margin-right: 0;
-        transition-delay: 0.4s; /* Aparece cuarto */
-    }
-    
-    .imagen-collage:nth-child(5) {
-        margin-left: -1rem; /* Más a la izquierda (como la primera) */
-        margin-right: 3rem;
-        transition-delay: 0.5s; /* Aparece último */
-    }
-}
-
-/* Pantallas extra grandes (1440px+) */
-@media (min-width: 1440px) {
-    /* Contenedores alineados con hero */
-    #seccion-mision {
-        padding: calc(var(--spacing-unit) * 12) 4rem;
-    }
-    
-    .contenedor-mision {
-        max-width: 1600px;
-        padding: 0 4rem;
-        grid-template-columns: 1fr 500px;
-        gap: 6rem;
-    }
-    
-    /* Tipografía escalada máxima */
-    .contenedor-principal h1 {
-        font-size: 4rem;
-    }
-    
-    .contenedor-principal h2 {
-        font-size: 3.5rem;
-    }
-    
-    .contenedor-principal p {
-        font-size: 1.2rem;
-    }
-    
-    .contenido-mision h3 {
-        font-size: 3.5rem;
-    }
-    
-    .descripcion-mision {
-        font-size: 1.25rem;
-    }
-    
-    /* Collage optimizado */
-    .collage-mision {
-        padding: 2.5rem;
-    }
-    
-    .grid-imagenes {
-        gap: 2rem;
-    }
-    
-    .imagen-collage {
-        height: 200px;
-    }
-    
-    /* Alineación mejorada para pantallas extra grandes */
-    .imagen-collage:nth-child(1) {
-        margin-left: -1.5rem; /* Más espacio a la izquierda */
-        margin-right: 4rem;
-    }
-    
-    .imagen-collage:nth-child(3) {
-        margin-left: -1rem;
-        margin-right: 3rem;
-    }
-    
-    .imagen-collage:nth-child(5) {
-        margin-left: -1.5rem; /* Consistente con la primera */
-        margin-right: 4rem;
-    }
-}
-
-/* Mejoras para accesibilidad */
-@media (prefers-reduced-motion: reduce) {
-    .grid-imagenes {
-        animation: none;
-    }
-    
-    .imagen-collage {
-        transition: none;
-        transform: none !important;
-        opacity: 1 !important;
-    }
-    
-    .imagen-collage img {
-        transition: none;
-    }
-}
-
-/* Soporte para pantallas de alta densidad */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
-    .imagen-collage {
-        box-shadow: 0 4px 12px rgba(51, 51, 51, 0.15);
-    }
-}
-
-/* NUEVO: Clases auxiliares para la animación */
-.fade-in-up {
-    animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* === ESTILOS GENERALES === */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* === SECCIÓN VISIÓN === */
-#seccion-vision {
+  }
+  
+  /* ============================
+     SECCIÓN VISIÓN
+     ============================ */
+  #seccion-vision {
     padding: calc(var(--spacing-unit) * 6) calc(var(--spacing-unit) * 2);
-}
-
-.contenedor-vision {
+  }
+  
+  .contenedor-vision {
     max-width: var(--container-max-width);
     margin: 0 auto;
-}
-
-.contenido-vision h3 {
+  }
+  
+  .contenido-vision h3 {
     font-size: 2.5rem;
     font-weight: var(--font-weight-bold);
     color: var(--color-primary-green);
     margin-bottom: calc(var(--spacing-unit) * 3);
     text-align: center;
-}
-
-.descripcion-vision {
+  }
+  
+  .descripcion-vision {
     font-size: 1.1rem;
     font-weight: var(--font-weight-regular);
     color: var(--color-primary-black);
@@ -510,178 +180,1239 @@
     line-height: 1.7;
     max-width: 800px;
     margin: 0 auto;
-}
-
-/* === SECCIÓN VALORES === *//* === SECCIÓN VALORES === */
-#seccion-valores {
+  }
+  
+/* ============================
+     SECCIÓN VALORES
+   ============================ */
+   #seccion-valores {
     padding: calc(var(--spacing-unit) * 6) calc(var(--spacing-unit) * 2);
-
-}
-
-.contenedor-valores {
+  }
+  
+  .contenedor-valores {
     max-width: var(--container-max-width);
     margin: 0 auto;
-}
-
-.contenedor-valores h3 {
+  }
+  
+  .contenedor-valores h3 {
     font-size: 2.5rem;
     font-weight: var(--font-weight-bold);
     color: var(--color-primary-green);
-    margin-bottom: calc(var(--spacing-unit) * 6);
     text-align: center;
-}
-
-.grid-valores {
+    margin-bottom: calc(var(--spacing-unit) * 6);
+  }
+  
+  /* --- MODIFICACIONES PRINCIPALES AQUÍ --- */
+  .grid-valores {
     display: flex;
-    flex-direction: column;
-    /* Centramos las píldoras para un mejor look en móvil */
-    align-items: center; 
-    gap: calc(var(--spacing-unit) * 3);
-}
-
-/* ESTILOS DE LA PÍLDORA DE VALOR */
-.tarjeta-valor {
-    /* Eliminamos ancho y alto fijos para que se adapte al contenido */
-    /* width: 200px; */
-    /* height: 200px; */
-    
-    /* Creamos la forma de píldora con un border-radius alto */
-    border-radius: 50px; 
-    
-    /* Usamos padding para dar espacio interno. Más ancho que alto. */
-    padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3);
-    
-    /* Ya no usamos borde, sino un color de fondo */
-    background-color: #f0f0f0; /* Color por defecto */
-    
+    flex-wrap: wrap; /* Permite que los elementos pasen a la siguiente línea */
+    justify-content: center; /* Centra los valores horizontalmente como grupo */
+    align-items: center; /* Alinea verticalmente los valores en la misma fila */
+    gap: calc(var(--spacing-unit) * 2); /* Ajustado para un mejor espaciado */
+  }
+  
+  .tarjeta-valor {
+    border-radius: 50px;
+    /* Reducido el padding vertical para hacer las tarjetas menos altas */
+    padding: calc(var(--spacing-unit) * 1.2) calc(var(--spacing-unit) * 3);
+    background-color: #f0f0f0;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: transform 0.3s ease;
-    
-    /* La animación de pulso se mantiene */
     animation: pulso-infinito 3s ease-in-out infinite;
-}
-
-.tarjeta-valor h4 {
+    height: 30px;
+  }
+  
+  .tarjeta-valor h4 {
     font-size: 1.1rem;
     font-weight: var(--font-weight-semibold);
     line-height: 1.3;
-    /* Asegura que el texto no se parta en varias líneas */
-    white-space: nowrap; 
-}
-
-/* === ASIGNACIÓN DE COLORES SEGÚN EL MOCKUP === */
-/* NOTA: Asegúrate de que tu HTML tiene los 'data-orden' correctos. */
-
-/* Valores con fondo azul claro y texto azul oscuro */
-.tarjeta-valor[data-orden="1"], /* Respeto a la persona y su dignidad */
-.tarjeta-valor[data-orden="4"], /* Vocación por la calidad */
-.tarjeta-valor[data-orden="5"]  /* Trabajo colaborativo */
-{
-    background-color: #eef2ff; /* Un azul muy claro */
-}
-
-.tarjeta-valor[data-orden="1"] h4,
-.tarjeta-valor[data-orden="4"] h4,
-.tarjeta-valor[data-orden="5"] h4 {
-    color: var(--color-secondary-light-blue); /* Tu variable para azul */
-}
-
-/* Valores con fondo verde claro y texto verde oscuro */
-.tarjeta-valor[data-orden="2"], /* Compromiso social */
-.tarjeta-valor[data-orden="6"]  /* Integridad y responsabilidad */
-{
-    background-color: #e6f7ee; /* Un verde muy claro */
-}
-
-.tarjeta-valor[data-orden="2"] h4,
-.tarjeta-valor[data-orden="6"] h4 {
-    color: var(--color-primary-green); /* Tu variable para verde */
-}
-
-/* Valor "Empatía" con fondo gris claro y texto gris oscuro */
-.tarjeta-valor[data-orden="3"] /* Empatía */
-{
-    background-color: #f0f2f5; /* Un gris muy claro */
-}
-
-.tarjeta-valor[data-orden="3"] h4 {
-    color: var(--color-secondary-gray); /* Tu variable para gris */
-}
-
-
-/* === ANIMACIÓN INFINITA DE PULSACIÓN (sin cambios) === */
-@keyframes pulso-infinito {
-    0% {
-        transform: scale(1);
+    white-space: nowrap;
+    text-align: center; /* Asegura que el texto esté centrado en la tarjeta */
+  }
+  
+  /* Colores de fondo por valor */
+  .tarjeta-valor[data-orden="1"],
+  .tarjeta-valor[data-orden="5"] {
+    background-color: #eef2ff; /* Azul claro */
+  }
+  
+  .tarjeta-valor[data-orden="2"],
+  .tarjeta-valor[data-orden="6"],
+  .tarjeta-valor[data-orden="4"]{
+    background-color: #e6f7ee; /* Verde claro */
+  }
+  
+  .tarjeta-valor[data-orden="3"] {
+    background-color: #f0f2f5; /* Gris claro */
+  }
+  
+  /* Colores de texto por valor */
+  .tarjeta-valor[data-orden="1"] h4{
+    color: var(--color-secondary-light-blue);
+  }
+  
+  .tarjeta-valor[data-orden="2"] h4,
+  .tarjeta-valor[data-orden="6"] h4,
+  .tarjeta-valor[data-orden="4"] h4 {
+    color: var(--color-primary-green);
+  }
+  
+  .tarjeta-valor[data-orden="3"] h4 {
+    color: var(--color-secondary-gray);
+  }
+  
+  /* Animación de pulso con delay */
+  @keyframes pulso-infinito {
+    0%, 100% {
+      transform: scale(1);
     }
     50% {
-        transform: scale(1.05);
+      transform: scale(1.05);
     }
-    100% {
-        transform: scale(1);
-    }
-}
-
-/* Delay diferente para cada valor (ajustado para 6 valores principales) */
-.tarjeta-valor[data-orden="1"] { animation-delay: 0s; }
-.tarjeta-valor[data-orden="2"] { animation-delay: 0.5s; }
-.tarjeta-valor[data-orden="3"] { animation-delay: 1s; }
-.tarjeta-valor[data-orden="4"] { animation-delay: 1.5s; }
-.tarjeta-valor[data-orden="5"] { animation-delay: 2s; }
-.tarjeta-valor[data-orden="6"] { animation-delay: 2.5s; }
-
-
-/* === EFECTOS DE HOVER (sin cambios) === */
-@media (hover: hover) {
+  }
+  
+  .tarjeta-valor[data-orden="1"] { animation-delay: 0s; }
+  .tarjeta-valor[data-orden="2"] { animation-delay: 0.5s; }
+  .tarjeta-valor[data-orden="3"] { animation-delay: 1s; }
+  .tarjeta-valor[data-orden="4"] { animation-delay: 1.5s; }
+  .tarjeta-valor[data-orden="5"] { animation-delay: 2s; }
+  .tarjeta-valor[data-orden="6"] { animation-delay: 2.5s; }
+  
+  @media (hover: hover) {
     .tarjeta-valor:hover {
-        transform: scale(1.1); /* Aumenté un poco el efecto para que se note más */
-        animation-play-state: paused;
+      transform: scale(1.1);
+      animation-play-state: paused;
     }
-}
-
-/* === SECCIÓN COLLAGE VISIÓN Y VALORES (Mobile First) === */
-
-#collage-vision-valores {
+  }
+  
+  /* ============================
+     SECCIÓN COLLAGE VISIÓN Y VALORES
+     ============================ */
+  #collage-vision-valores {
     padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 2);
-}
-
-.collage-vv-contenedor {
+  }
+  
+  .collage-vv-contenedor {
     max-width: var(--container-max-width);
     margin: 0 auto;
-    /* No hay borde, según la corrección */
-}
-
-/* --- ESTRATEGIA DE GRID PARA MÓVIL --- */
-.collage-vv-grid {
+    border-radius: 35px;
+  }
+  
+  .collage-vv-grid {
     display: grid;
-    /* 1. Creamos una cuadrícula de 2 columnas de igual ancho */
-    grid-template-columns: repeat(2, 1fr);
-    
-    /* 2. Damos un espacio consistente entre todos los elementos */
+    grid-template-columns: repeat(2, 1.5fr);
     gap: calc(var(--spacing-unit) * 1.5);
-}
-
-
-/* === INICIO DE LA MODIFICACIÓN === */
-/* Ajuste para reducir el tamaño de las imágenes 1 y 4 */
-
-.collage-vv-item[data-orden="1"],
-.collage-vv-item[data-orden="2"] {
-    /* Al añadir padding, el espacio para la imagen interior se reduce. */
-    padding: 0.8rem; /* Puedes ajustar este valor */
-    
-    /* Nos aseguramos de que el padding no agrande el contenedor, sino que encoja el contenido */
-    box-sizing: border-box; 
-}
-/* 3. Estilos para la imagen dentro de su celda de la cuadrícula */
-.collage-vv-item img {
+  }
+  
+  .collage-vv-item {
+    border-radius: 5px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+  }
+  
+  .collage-vv-item[data-orden="0"],
+  .collage-vv-item[data-orden="3"] {
+    background: var(--color-primary-white);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+  }
+  
+  .collage-vv-item[data-orden="1"],
+  .collage-vv-item[data-orden="2"] {
+    background: var(--color-secondary-light-blue);
+    box-shadow: 0 6px 24px rgba(105, 198, 36, 0.3);
+    padding: 0.5rem;
+  }
+  
+  .collage-vv-item img {
     width: 100%;
     height: 100%;
     display: block;
-    border-radius: 15px; /* Mantenemos las esquinas redondeadas */
+    border-radius: 25px;
+    object-fit: cover;
+    animation: pulso-infinito 3s ease-in-out;
+  }
+  
+  /* ============================
+     CLASES AUXILIARES Y ANIMACIONES
+     ============================ */
+  .fade-in-up {
+    animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* ============================
+     MEDIA QUERIES
+     ============================ */
+  
+  /* --- Tablets y pantallas medianas (768px+) --- */
+  @media (min-width: 768px) {
+
+  
+    .contenedor-principal h1,
+    .contenedor-principal h3{
+      text-align: center;
+    }
     
-    /* 4. Esta propiedad es ESENCIAL para que las imágenes llenen la celda sin deformarse */
-    object-fit: cover; 
+
+    .contenedor-principal h1 {
+      font-size: 2.5rem;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+  
+    .contenedor-principal h3 {
+      font-size: 2rem;
+    }
+  
+    .contenido-mision h3 {
+      font-size: 2.5rem;
+    }
+  
+    .descripcion-mision  {
+        font-size: 1rem;
+        line-height: 1.4;
+        text-align: left;
+        margin-bottom: 0;
+        padding: 0;
+    }
+
+
+  
+    .collage-mision {
+      height: 300px;
+      margin-top: calc(var(--spacing-unit) * 3);
+    }
+  
+    .imagen-collage {
+      flex: 0 0 280px;
+      height: 240px;
+      margin-right: 20px;
+      transform: translateY(50px);
+      opacity: 0;
+      transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+  
+    .imagen-collage.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  
+    /* Visión y Valores Layout */
+    .vision-valores-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: "collage contenido";
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+  
+    #collage-vision-valores {
+      grid-area: collage;
+      margin: 0;
+    }
+  
+    .contenido-derecha {
+      grid-area: contenido;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  
+    #seccion-vision,
+    #seccion-valores {
+      margin: 0;
+      padding: 0; /* Reseteo de padding para control interno */
+    }
+    
+    .contenedor-vision,
+    .contenedor-valores {
+      padding-top: 0;
+      margin-top: 0;
+    }
+  
+    .contenido-vision {
+      text-align: left;
+      padding-top: 0;
+      margin-top: 0;
+    }
+    
+    .contenido-vision h3,
+    .contenedor-valores h3 {
+      color: #7CB342;
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: left;
+      margin: 0 0 2rem 0;
+      padding-top: 2.5rem;
+    }
+  
+    .descripcion-vision {
+      font-size: 1rem;
+      line-height: 1.4;
+      text-align: left;
+      margin-bottom: 0;
+    }
+    
+    .collage-vv-contenedor,
+    .collage-vv-grid {
+        height: 100%;
+    }
+  
+    .collage-vv-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+  
+    .collage-vv-item {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  
+    .collage-vv-item img {
+        transition: transform 0.3s ease;
+    }
+  
+    .collage-vv-item:hover img {
+        transform: scale(1.05);
+    }
+  
+    /* Grid de Valores */
+    .grid-valores {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(3, auto);
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+    
+    .tarjeta-valor[data-orden="1"] { grid-area: 1 / 2 / 2 / 3; text-align: center; }
+    .tarjeta-valor[data-orden="2"] { grid-area: 2 / 1 / 3 / 2; text-align: left; }
+    .tarjeta-valor[data-orden="3"] { grid-area: 2 / 2 / 3 / 3; text-align: right; }
+    .tarjeta-valor[data-orden="4"] { grid-area: 3 / 2 / 4 / 3; text-align: center; }
+    .tarjeta-valor[data-orden="5"] { grid-area: 3 / 1 / 4 / 2; text-align: left; }
+    .tarjeta-valor[data-orden="6"] { grid-area: 4 / 2 / 5 / 3; text-align: right; }
+  
+    .tarjeta-valor h4 {
+        font-size: 0.95rem;
+        font-weight: 500;
+        padding: 0.3rem 0;
+        margin: 0;
+        line-height: 1.2;
+    }
+  }
+  
+  /* --- Pantallas grandes (1024px+) --- */
+  @media (min-width: 1024px) {
+    .contenedor-principal h1,
+    .contenedor-principal h3 {
+      text-align: left;
+    }
+    /* Misión */
+    .contenedor-mision {
+      max-width: 1400px;
+      display: grid;
+      grid-template-columns: 1fr 450px;
+      gap: 5rem;
+      align-items: start;
+      margin: 2rem auto;
+    }
+    .descripcion-mision {
+        font-size: 1rem;
+        line-height: 1.4;
+        text-align: left;
+        margin-bottom: 0;
+    }
+    .columna-contenido {
+      grid-column: 1;
+      grid-row: 1;
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .contenedor-principal {
+      margin-bottom: 0;
+      text-align: left;
+    }
+  
+    .contenido-mision {
+      margin-bottom: 0;
+      padding-right: 0;
+    }
+  
+    .collage-mision {
+      grid-column: 2;
+      grid-row: 1;
+      height: auto;
+      position: relative;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-top: 0;
+    }
+  
+    .contenedor-principal h1 { font-size: 3.5rem; margin-bottom: 2rem; line-height: 1.2; }
+    .contenedor-principal h2 { font-size: 3rem; margin-bottom: 2.5rem; text-align: left; }
+    .contenedor-principal p { font-size: 1.1rem; text-align: left; }
+    .contenido-mision h3 { font-size: 3rem; margin-bottom: 2rem; text-align: left; }
+    .descripcion-mision { font-size: 1.25rem; }
+  
+    .collage-mision::before,
+    .collage-mision::after {
+      display: none;
+    }
+  
+    .grid-imagenes {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      animation: none;
+    }
+  
+    .imagen-collage {
+      flex: none;
+      width: 100%;
+      height: 180px;
+      margin-right: 0;
+    }
+    
+    .imagen-collage.visible {
+        transform: translateY(0);
+        opacity: 1;
+    }
+  
+    /* Alineación alternada para collage en desktop */
+    .imagen-collage:nth-child(1) { margin-left: -1rem; margin-right: 3rem; transition-delay: 0.1s; }
+    .imagen-collage:nth-child(2) { margin-left: 1rem; margin-right: 1rem; transition-delay: 0.2s; }
+    .imagen-collage:nth-child(3) { margin-left: -0.5rem; margin-right: 2.5rem; transition-delay: 0.3s; }
+    .imagen-collage:nth-child(4) { margin-left: 2rem; margin-right: 0; transition-delay: 0.4s; }
+    .imagen-collage:nth-child(5) { margin-left: -1rem; margin-right: 3rem; transition-delay: 0.5s; }
+  
+    /* Visión y Valores */
+    .vision-valores-layout {
+      gap: 4rem;
+      padding: 3rem;
+    }
+    
+    .contenido-vision h3 { font-size: 3rem; }
+    .descripcion-vision { font-size: 1.2rem; }
+    .contenedor-valores h3 { font-size: 2.2rem; }
+    .tarjeta-valor h4 { font-size: 1.2rem; }
+    .collage-vv-grid { gap: 1.5rem; }
+  }
+  
+  /* --- Pantallas extra grandes (1200px+) --- */
+  @media (min-width: 1200px) {
+      .vision-valores-layout {
+          max-width: 1400px;
+          gap: 4rem;
+      }
+  
+      .contenido-vision h3,
+      .contenedor-valores h3 {
+          font-size: 3.2rem;
+      }
+  
+      .descripcion-vision {
+          font-size: 1.25rem;
+          line-height: 1.7;
+      }
+  
+      .tarjeta-valor h4 {
+          font-size: 1.1rem;
+      }
+  }
+  
+  /* --- Pantallas extra grandes (1440px+) --- */
+  @media (min-width: 1440px) {
+    #seccion-mision {
+      padding: calc(var(--spacing-unit) * 12) 4rem;
+    }
+  
+    .contenedor-mision {
+      max-width: 1600px;
+      grid-template-columns: 1fr 500px;
+      gap: 6rem;
+    }
+  
+    .contenedor-principal h1 { font-size: 4rem; }
+    .contenedor-principal h2 { font-size: 3.5rem; }
+    .contenedor-principal p { font-size: 1.2rem; }
+    .contenido-mision h3 { font-size: 3.5rem; }
+    .descripcion-mision { font-size: 1.25rem; }
+  
+    .collage-mision { padding: 2.5rem; }
+    .grid-imagenes { gap: 2rem; }
+    .imagen-collage { height: 200px; }
+  
+    .imagen-collage:nth-child(1),
+    .imagen-collage:nth-child(5) { margin-left: -1.5rem; margin-right: 4rem; }
+    .imagen-collage:nth-child(3) { margin-left: -1rem; margin-right: 3rem; }
+  }
+  
+  /* ============================
+     MEJORAS DE ACCESIBILIDAD Y SOPORTE
+     ============================ */
+  
+  /* Reducir movimiento */
+  @media (prefers-reduced-motion: reduce) {
+    .grid-imagenes {
+      animation: none;
+    }
+  
+    .imagen-collage,
+    .imagen-collage img {
+      transition: none;
+    }
+  
+    .imagen-collage {
+      transform: none !important;
+      opacity: 1 !important;
+    }
+  }
+  
+  /* Pantallas de alta densidad */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+    .imagen-collage {
+      box-shadow: 0 4px 12px rgba(51, 51, 51, 0.15);
+    }
+  }
+
+
+  
+  
+  /* --- Estilos para la Sección de Equipo (Móvil) --- */
+
+/* Contenedor principal de la sección */
+#seccion-equipo {
+  padding: 4rem 0; /* Espaciado superior e inferior */
+  background-color: #ffffff; /* O el color de fondo que necesites */
+}
+
+/* Título principal "Nuestro Equipo" */
+#seccion-equipo h3 {
+  font-size: 2.2rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary-dark-blue);
+  text-align: center;
+  margin-bottom: 2rem; /* Espacio antes de las tarjetas */
+}
+
+/* Contenedor del carrusel (grid-equipo)
+- Usamos Flexbox para crear una fila horizontal.
+- overflow-x: auto permite el deslizamiento horizontal.
+- scroll-snap-type hace que el scroll se "enganche" a cada tarjeta.
+*/
+.grid-equipo {
+  display: flex;
+  overflow-x: auto;
+  gap: 1.5rem; /* Espacio entre las tarjetas */
+  padding: 1rem 1.5rem 2rem 1.5rem; /* Espaciado interno para que las tarjetas no se peguen a los bordes */
+  scroll-snap-type: x mandatory;
+  /* Ocultar la barra de scroll para un diseño más limpio */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+.grid-equipo::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
+
+/* Tarjeta individual de cada miembro
+- flex: 0 0 85% define que cada tarjeta ocupará el 85% del ancho del contenedor.
+- scroll-snap-align centra la tarjeta cuando el usuario desliza.
+*/
+.tarjeta-miembro {
+  flex: 0 0 85%; /* No crecer, no encoger, base del 85% del ancho */
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #f9fafb; /* Un gris muy claro como en el mock-up */
+  padding: 2.5rem 1.5rem;
+  border-radius: 16px; /* Bordes redondeados */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra sutil */
+}
+
+/* Contenedor de la imagen para asegurar la forma */
+.imagen-miembro {
+  margin-bottom: 1.5rem;
+}
+
+/* Imagen del miembro del equipo */
+.imagen-miembro img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%; /* Hace la imagen perfectamente redonda */
+  object-fit: cover; /* Asegura que la imagen cubra el espacio sin deformarse */
+}
+
+/* Nombre del miembro */
+.info-miembro h4 {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  color: #333333; /* Un color oscuro para el nombre */
+  margin: 0 0 0.25rem 0; /* Ajuste de margen inferior */
+}
+
+/* Puesto del miembro (Ej. "Profesora") */
+.info-miembro .puesto {
+  color: var(--color-primary-green);
+  font-size: 1.1rem;
+  font-weight: 600; /* Un poco más de grosor */
+  margin-bottom: 1rem;
+}
+
+/* Frase destacada del miembro */
+.info-miembro .frase {
+  font-size: 1rem;
+  color: #555555; /* Un gris intermedio para la frase */
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* NOTA: 
+El mock-up muestra flechas de navegación y puntos de paginación. 
+Estos elementos no están en el HTML proporcionado. Cuando los agregues, 
+el contenedor `.grid-equipo` ya está preparado para funcionar como un 
+carrusel deslizable en pantallas táctiles.
+*/
+
+
+
+/* --- Estilos Adicionales para Controles del Carrusel --- */
+
+/* El contenedor del equipo ahora necesita ser 'relative'
+   para que los botones 'absolute' se posicionen respecto a él. */
+   .contenedor-equipo {
+    position: relative;
+}
+
+/* Estilos para los botones de navegación (flechas) */
+.carousel-nav {
+    position: absolute;
+    /* Centrado verticalmente respecto al contenedor */
+    top: 55%; /* Ajustado para alinear mejor con las tarjetas */
+    transform: translateY(-50%);
+    
+    /* Apariencia y tamaño mejorados para toque */
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 1px solid #eee;
+    width: 40px;  /* Más grande para ser un mejor objetivo táctil */
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    
+    /* Flex para centrar el SVG dentro del botón */
+    display: flex; /* Cambiado de 'none' a 'flex' para que sea visible */
+    align-items: center;
+    justify-content: center;
+    
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Efecto hover/focus para los botones */
+.carousel-nav:hover, .carousel-nav:focus {
+    background-color: var(--color-primary-green);
+    color: white; /* El SVG heredará este color */
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 4px 16px rgba(105, 198, 36, 0.4);
+    outline: none; /* Quita el contorno por defecto al hacer foco */
+}
+
+/* Posicionamiento específico para cada botón */
+.carousel-nav.prev {
+    left: 0px; /* Posicionado ligeramente fuera para no tapar el contenido */
+}
+
+.carousel-nav.next {
+    right: 0px;
+}
+
+/* Estilo del icono SVG dentro del botón */
+.carousel-nav svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor; /* El color del SVG será el del texto del botón */
+}
+
+/* En pantallas muy pequeñas, podemos ocultar las flechas
+   si preferimos que la interacción sea solo por swipe. */
+@media (max-width: 500px) {
+    .carousel-nav {
+        display: none;
+    }
+}
+
+
+/* Tablets (768px+) - 2 tarjetas por vista */
+@media (min-width: 768px) {
+  #seccion-equipo {
+      padding: 6rem 0;
+  }
+
+  #seccion-equipo h3 {
+      font-size: 2.8rem;
+      margin-bottom: 3rem;
+  }
+
+  .contenedor-equipo {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+  }
+
+  .grid-equipo {
+      gap: 2rem;
+      padding: 0;
+  }
+
+  .tarjeta-miembro {
+      flex: 0 0 calc(50% - 1rem); /* 2 tarjetas por vista */
+      padding: 3rem 2rem;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .tarjeta-miembro:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  .imagen-miembro img {
+      width: 140px;
+      height: 140px;
+  }
+
+  .info-miembro h4 {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+  }
+
+  .info-miembro .puesto {
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+  }
+
+  .info-miembro .frase {
+      font-size: 1.1rem;
+      line-height: 1.6;
+  }
+
+  /* Mostrar controles de carrusel en tablets y desktop */
+  .carousel-nav {
+      display: flex;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(255, 255, 255, 0.95);
+      border: 1px solid #eee;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+  }
+
+  .carousel-nav:hover, .carousel-nav:focus {
+      background-color: var(--color-primary-green);
+      color: white;
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 4px 16px rgba(105, 198, 36, 0.4);
+      outline: none;
+  }
+
+  .carousel-nav.prev {
+      left: -25px;
+  }
+
+  .carousel-nav.next {
+      right: -25px;
+  }
+
+  .carousel-nav svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+  }
+}
+
+/* Desktop (1024px+) - 4 tarjetas por vista */
+@media (min-width: 1024px) {
+  #seccion-equipo {
+      padding: 8rem 0;
+  }
+
+  #seccion-equipo h3 {
+      font-size: 3.2rem;
+      margin-bottom: 4rem;
+  }
+
+  .contenedor-equipo {
+      max-width: 1400px;
+      padding: 0 3rem;
+  }
+
+  .grid-equipo {
+      gap: 2.5rem;
+  }
+
+  .tarjeta-miembro {
+      flex: 0 0 calc(25% - 1.875rem); /* 4 tarjetas por vista */
+      padding: 3.5rem 2.5rem;
+      border-radius: 24px;
+  }
+
+  .tarjeta-miembro:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .imagen-miembro {
+      margin-bottom: 2rem;
+  }
+
+  .imagen-miembro img {
+      width: 160px;
+      height: 160px;
+  }
+
+  .info-miembro h4 {
+      font-size: 1.8rem;
+      margin-bottom: 0.75rem;
+  }
+
+  .info-miembro .puesto {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+  }
+
+  .info-miembro .frase {
+      font-size: 1.1rem;
+      line-height: 1.7;
+  }
+
+  .carousel-nav {
+      width: 55px;
+      height: 55px;
+  }
+
+  .carousel-nav svg {
+      width: 28px;
+      height: 28px;
+  }
+}
+
+/* Pantallas extra grandes (1200px+) */
+@media (min-width: 1200px) {
+  .contenedor-equipo {
+      max-width: 1600px;
+      padding: 0 4rem;
+  }
+
+  .grid-equipo {
+      gap: 3rem;
+  }
+
+  .tarjeta-miembro {
+      flex: 0 0 calc(25% - 2.25rem); /* Ajuste para el gap más grande */
+      padding: 4rem 3rem;
+  }
+}
+/* Indicadores de paginación - barras horizontales */
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.carousel-indicator {
+  width: 32px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #d1d5db;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  border: none;
+  padding: 0;
+}
+
+.carousel-indicator.active {
+  background-color: var(--color-primary-green);
+}
+
+.carousel-indicator:hover {
+  background-color: var(--color-primary-green);
+  opacity: 0.7;
+}
+
+
+
+
+/* ==============================================
+   ESTILOS MOBILE - SECCIÓN ODS
+   ============================================== */
+
+/* Sección principal ODS */
+#seccion-ods {
+  padding: 2rem 1rem;
+  background-color: #f8f9fa;
+}
+
+.contenedor-ods {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Título de la sección */
+.titulo-ods {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+#titulo-ods-configurable {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #2c3e50;
+  margin: 0;
+  padding: 0 1rem;
+}
+
+#titulo-ods-configurable .destacado {
+  color: #7cb342;
+}
+
+/* Grid de tarjetas ODS */
+.grid-ods {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Tarjetas ODS */
+.tarjeta-ods {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tarjeta-ods:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Número ODS */
+.numero-ods {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #7cb342;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+/* Contenido de la tarjeta */
+.contenido-ods h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 0.75rem 0;
+  line-height: 1.3;
+}
+
+.contenido-ods p {
+  font-size: 0.9rem;
+  color: #6c757d;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Estilos específicos para números de ODS destacados */
+.tarjeta-ods[data-numero="4"] {
+  background: linear-gradient(135deg, #e8f5e8 0%, #ffffff 100%);
+  border-left: 4px solid #7cb342;
+}
+
+.tarjeta-ods[data-numero="5"] {
+  background: #ffffff;
+}
+
+.tarjeta-ods[data-numero="17"] {
+  background: linear-gradient(135deg, #e8f5e8 0%, #ffffff 100%);
+  border-left: 4px solid #7cb342;
+}
+
+/* Animación de entrada */
+.tarjeta-ods {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.tarjeta-ods:nth-child(1) { animation-delay: 0.1s; }
+.tarjeta-ods:nth-child(2) { animation-delay: 0.2s; }
+.tarjeta-ods:nth-child(3) { animation-delay: 0.3s; }
+.tarjeta-ods:nth-child(4) { animation-delay: 0.4s; }
+.tarjeta-ods:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes fadeInUp {
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Efecto hover para dispositivos que lo soporten */
+@media (hover: hover) {
+  .tarjeta-ods:hover .numero-ods {
+      color: #689f38;
+      transform: scale(1.05);
+  }
+  
+  .tarjeta-ods:hover .contenido-ods h4 {
+      color: #1a252f;
+  }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 360px) {
+  #seccion-ods {
+      padding: 1.5rem 0.75rem;
+  }
+  
+  #titulo-ods-configurable {
+      font-size: 1.25rem;
+      padding: 0 0.5rem;
+  }
+  
+  .tarjeta-ods {
+      padding: 1.25rem;
+  }
+  
+  .numero-ods {
+      font-size: 2rem;
+  }
+  
+  .contenido-ods h4 {
+      font-size: 1.1rem;
+  }
+  
+  .contenido-ods p {
+      font-size: 0.85rem;
+  }
+}
+
+/* ==============================================
+ MEDIA QUERIES - PANTALLAS MEDIANAS Y GRANDES
+ ============================================== */
+
+/* Tablets - Pantallas medianas (768px+) */
+@media (min-width: 768px) {
+  #seccion-ods {
+      padding: 3rem 2rem;
+  }
+  
+  .contenedor-ods {
+      max-width: 1200px;
+  }
+  
+  /* Título ajustado para tablets */
+  #titulo-ods-configurable {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      padding: 0 2rem;
+  }
+  
+  .titulo-ods {
+      margin-bottom: 3rem;
+  }
+  
+  /* Grid de 2 columnas para tablets */
+  .grid-ods {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+  }
+  
+  /* Tarjetas más amplias */
+  .tarjeta-ods {
+      padding: 2rem;
+  }
+  
+  .numero-ods {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+  }
+  
+  .contenido-ods h4 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+  }
+  
+  .contenido-ods p {
+      font-size: 1rem;
+      line-height: 1.6;
+  }
+}
+
+/* Desktop - Pantallas grandes (1024px+) */
+@media (min-width: 1024px) {
+  #seccion-ods {
+      padding: 4rem 2rem;
+  }
+  
+  /* Título más grande para desktop */
+  #titulo-ods-configurable {
+      font-size: 2.5rem;
+      line-height: 1.3;
+      padding: 0 3rem;
+  }
+  
+  .titulo-ods {
+      margin-bottom: 4rem;
+  }
+  
+  /* Grid de 3 columnas para desktop */
+  .grid-ods {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+  }
+  
+  /* Tarjetas más espaciosas */
+  .tarjeta-ods {
+      padding: 2.5rem;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+  }
+  
+  .numero-ods {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+  }
+  
+  .contenido-ods {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+  }
+  
+  .contenido-ods h4 {
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+      line-height: 1.25;
+  }
+  
+  .contenido-ods p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      flex-grow: 1;
+  }
+  
+  /* Efectos hover mejorados para desktop */
+  .tarjeta-ods:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+  
+  .tarjeta-ods:hover .numero-ods {
+      transform: scale(1.1);
+  }
+}
+
+/* Desktop grande - Pantallas extra grandes (1200px+) */
+@media (min-width: 1200px) {
+  .contenedor-ods {
+      max-width: 1400px;
+  }
+  
+  #titulo-ods-configurable {
+      font-size: 3rem;
+      padding: 0 4rem;
+  }
+  
+  .grid-ods {
+      gap: 3rem;
+      max-width: 1300px;
+  }
+  
+  .tarjeta-ods {
+      padding: 3rem;
+      min-height: 320px;
+  }
+  
+  .numero-ods {
+      font-size: 4rem;
+      margin-bottom: 2rem;
+  }
+  
+  .contenido-ods h4 {
+      font-size: 1.75rem;
+      margin-bottom: 1.5rem;
+  }
+  
+  .contenido-ods p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+  }
+}
+
+/* Ajustes para pantallas ultra anchas (1440px+) */
+@media (min-width: 1440px) {
+  #seccion-ods {
+      padding: 5rem 3rem;
+  }
+  
+  .contenedor-ods {
+      max-width: 1600px;
+  }
+  
+  #titulo-ods-configurable {
+      font-size: 3.5rem;
+      padding: 0 5rem;
+  }
+  
+  .titulo-ods {
+      margin-bottom: 5rem;
+  }
+  
+  .grid-ods {
+      gap: 3.5rem;
+      max-width: 1500px;
+  }
 }

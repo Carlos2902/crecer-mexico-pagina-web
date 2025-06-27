@@ -64,83 +64,99 @@
         </div>
     </section>
 
-    <!-- Sección de Visión -->
-    {% if vision %}
-        <section id="seccion-vision">
+    <div class="vision-valores-layout">
+        <div class="contenido-derecha">
+          <!-- Sección de Visión -->
+          {% if vision %}
+          <section id="seccion-vision">
             <div class="contenedor-vision">
-                <div class="contenido-vision">
-                    <h3>{{ vision.titulo }}</h3>
-                    <div class="descripcion-vision">
-                        {{ vision.descripcion|safe }}
-                    </div>
+              <div class="contenido-vision">
+                <h3>{{ vision.titulo }}</h3>
+                <div class="descripcion-vision">
+                  {{ vision.descripcion|safe }}
                 </div>
+              </div>
             </div>
-        </section>
-    {% endif %}
-
-    <!-- Sección de Valores -->
-    {% if valores %}
-        <section id="seccion-valores">
+          </section>
+          {% endif %}
+      
+          <!-- Sección de Valores -->
+          {% if valores %}
+          <section id="seccion-valores">
             <div class="contenedor-valores">
-                <h3>Valores</h3>
-                <div class="grid-valores">
-                    {% for valor in valores %}
-                        <div class="tarjeta-valor" data-orden="{{ valor.orden }}">
-                            <h4>{{ valor.nombre }}</h4>
-                        </div>
-                    {% endfor %}
+              <h3>Valores</h3>
+              <div class="grid-valores">
+                {% for valor in valores %}
+                <div class="tarjeta-valor" data-orden="{{ valor.orden }}">
+                  <h4>{{ valor.nombre }}</h4>
                 </div>
-            </div>
-        </section>
-    {% endif %}
-
-    {% if imagenes_vision_valores %}
-    <section id="collage-vision-valores">
-        <div class="collage-vv-contenedor">
-            <div class="collage-vv-grid">
-                {% for imagen in imagenes_vision_valores %}
-                    <div class="collage-vv-item" data-orden="{{ imagen.orden }}">
-                        <img 
-                            src="{{ imagen.imagen.url }}" 
-                            alt="{{ imagen.alt_text }}"
-                            title="{{ imagen.titulo }}"
-                            loading="lazy"
-                        >
-                    </div>
                 {% endfor %}
+              </div>
             </div>
+          </section>
+          {% endif %}
         </div>
-    </section>
-{% endif %}
-
-    <!-- Sección de Equipo -->
-    {% if miembros_equipo %}
-        <section id="seccion-equipo">
-            <div class="contenedor-equipo">
-                <h3>Nuestro Equipo</h3>
-                <div class="grid-equipo">
-                    {% for miembro in miembros_equipo %}
-                        <div class="tarjeta-miembro" data-orden="{{ miembro.orden }}">
-                            {% if miembro.imagen %}
-                                <div class="imagen-miembro">
-                                    <img src="{{ miembro.imagen.url }}" alt="Foto de {{ miembro.nombre }}">
-                                </div>
-                            {% endif %}
-                            <div class="info-miembro">
-                                <h4>{{ miembro.nombre }}</h4>
-                                <p class="puesto">{{ miembro.puesto }}</p>
-                                {% if miembro.frase_destacada %}
-                                    <div class="frase">
-                                        {{ miembro.frase_destacada|safe }}
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
+      
+        {% if imagenes_vision_valores %}
+        <section id="collage-vision-valores">
+          <div class="collage-vv-contenedor">
+            <div class="collage-vv-grid">
+              {% for imagen in imagenes_vision_valores %}
+              <div class="collage-vv-item" data-orden="{{ imagen.orden }}">
+                <img
+                  src="{{ imagen.imagen.url }}"
+                  alt="{{ imagen.alt_text }}"
+                  title="{{ imagen.titulo }}"
+                  loading="lazy"
+                >
+              </div>
+              {% endfor %}
             </div>
+          </div>
         </section>
-    {% endif %}
+        {% endif %}
+      </div>
+
+      {% if miembros_equipo %}
+      <section id="seccion-equipo">
+          <div class="contenedor-equipo">
+              <h3>Nuestro Equipo</h3>
+  
+              <div class="grid-equipo">
+                  {% for miembro in miembros_equipo %}
+                      <div class="tarjeta-miembro" data-orden="{{ miembro.orden }}">
+                          {% if miembro.imagen %}
+                              <div class="imagen-miembro">
+                                  <img src="{{ miembro.imagen.url }}" alt="Foto de {{ miembro.nombre }}">
+                              </div>
+                          {% endif %}
+                          <div class="info-miembro">
+                              <h4>{{ miembro.nombre }}</h4>
+                              <p class="puesto">{{ miembro.puesto }}</p>
+                              {% if miembro.frase_destacada %}
+                                  <div class="frase">
+                                      {{ miembro.frase_destacada|safe }}
+                                  </div>
+                              {% endif %}
+                          </div>
+                      </div>
+                  {% endfor %}
+              </div>
+  
+              <button class="carousel-nav prev" aria-label="Anterior">
+                  <svg viewBox="0 0 24 24">
+                      <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                  </svg>
+              </button>
+              <button class="carousel-nav next" aria-label="Siguiente">
+                  <svg viewBox="0 0 24 24">
+                      <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                  </svg>
+              </button>
+  
+          </div>
+      </section>
+  {% endif %}
 
     <!-- Sección de ODS -->
     {% if config_ods and objetivos_ods %}
