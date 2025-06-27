@@ -2,7 +2,6 @@
 {% load static %}
 {% block title %}Inicio | Crecer México{% endblock %}
 {% block content %}
-{% load static %}
 {% for section in sections %}
     {% if section.section == 'hero' and hero %}
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
@@ -77,9 +76,9 @@
                     {% endif %}
                     
                     <div class="hero-buttons-left">
-                        <a href="{{ hero.primary_button_url }}" class="btn btn-primary">
-                            {{ hero.primary_button_text }}
-                        </a>
+                    <a href="{% url 'donations:donations' %}" class="btn btn-primary">
+                           {{ hero.primary_button_text }}
+                    </a>
                         <a href="{{ hero.secondary_button_url }}" class="btn btn-outline">
                             {{ hero.secondary_button_text }}
                         </a>

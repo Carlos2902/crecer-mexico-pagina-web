@@ -248,6 +248,6 @@ class SeccionProgramasODSAdmin(admin.ModelAdmin):
         return False
 
 # Personalización del admin site
-admin.site.site_header = "Panel de Administración - Quiénes Somos"
+#admin.site.site_header = "Panel de Administración - Quiénes Somos"
 admin.site.site_title = "Admin Quiénes Somos"
 admin.site.index_title = "Gestión de Contenido - Quiénes Somos"

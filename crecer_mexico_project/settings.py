@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,10 +26,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!&#8zo5#tr2bf9))j3*ko+1nbx*b8*sy*h6fzx2x0n$ow)u^t%'
+SECRET_KEY = 'django-insecure-!&#8zo5#tr2bf9))j3*ko+1nbx*b8*sy*h6fzx2x0n$ow)u^t%' #se debe de pasar a otro archivo 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True  #se debe de pasar a otro archivo 
 
 ALLOWED_HOSTS = ['*']
 
@@ -44,8 +49,11 @@ INSTALLED_APPS = [
     'apps.contact',
     'apps.donations',
     'apps.impact',
-    'apps.projects',
-]
+    'widget_tweaks',
+]   
+
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 
 
 MIDDLEWARE = [
@@ -114,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Mexico_City'
 
 USE_I18N = True
 
