@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'apps.about',
     'apps.contact',
     'apps.donations',
+    'apps.projects',
     'apps.impact',
     'widget_tweaks',
 ]   
