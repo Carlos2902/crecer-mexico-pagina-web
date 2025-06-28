@@ -24,8 +24,9 @@
     <!-- Header -->
     <div class="header">
       <div class="icon">
-        <img src="{{ donations_config.logo.url }}" alt="Logo Crecer México" style="width: 40%; height: 60%;">
-        <i data-lucide="heart" style="width: 32px; height: 32px; color: white;"></i>
+        {% if donations_config.logo and donations_config.logo.url %}
+        <img src="{{ donations_config.logo.url }}" alt="Logo Crecer México">
+      {% endif %}        <i data-lucide="heart" style="width: 32px; height: 32px; color: white;"></i>
       </div>
       <h1 class="main-title">{{donations_config.main_title}}</h1>
       <p class="subtitle">{{donations_config.main_subtitle}}</p>
