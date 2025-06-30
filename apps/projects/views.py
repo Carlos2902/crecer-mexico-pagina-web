@@ -9,7 +9,7 @@ from .models import (
 
 class ProyectosView(TemplateView):
     """Vista principal para la página de proyectos"""
-    template_name = 'proyectos/proyectos.html'
+    template_name = 'projects.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

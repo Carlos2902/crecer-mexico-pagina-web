@@ -1,0 +1,267 @@
+<!-- Sección 1: Hero -->
+{% if hero %}
+<section class="hero">
+    <div class="container">
+        <h1>{{ hero.titulo }}</h1>
+        <h2>{{ hero.subtitulo }}</h2>
+        <p>{{ hero.contenido|linebreaks }}</p>
+    </div>
+</section>
+{% endif %}
+
+<!-- Sección 2: Programas Educativos - Tarjetas con contenido frontal y trasero -->
+{% if programas_educativos %}
+<section class="programas_educativos">
+    <div class="container">
+        <h2>{{ programas_educativos.titulo }}</h2>
+        <p>{{ programas_educativos.descripcion|linebreaks }}</p>
+        
+        {% if tarjetas_programas %}
+        <div class="tarjetas-grid">
+            {% for tarjeta in tarjetas_programas %}
+            <div class="tarjeta-programa" data-orden="{{ tarjeta.orden }}">
+                <!-- Lado frontal de la tarjeta -->
+                <div class="tarjeta-front">
+                    <div class="tarjeta-imagen">
+                        <img src="{{ tarjeta.imagen.url }}" alt="{{ tarjeta.titulo }}">
+                    </div>
+                    <div class="tarjeta-contenido">
+                        <h3 class="tarjeta-subtitulo">{{ tarjeta.subtitulo }}</h3>
+                        <h4 class="tarjeta-titulo">{{ tarjeta.titulo }}</h4>
+                        <ul class="tarjeta-vinetas">
+                            {% for vineta in tarjeta.get_contenido_vinetas_list %}
+                            <li>{{ vineta }}</li>
+                            {% endfor %}
+                        </ul>
+                        <button class="btn-tarjeta" onclick="voltearTarjeta(this)">
+                            {{ tarjeta.texto_boton }}
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Lado trasero de la tarjeta -->
+                <div class="tarjeta-back">
+                    <div class="tarjeta-contenido-trasero">
+                        <h4 class="tarjeta-titulo-trasero">{{ tarjeta.titulo_trasero }}</h4>
+                        <ul class="tarjeta-vinetas-trasero">
+                            {% for vineta in tarjeta.get_contenido_trasero_vinetas_list %}
+                            <li>{{ vineta }}</li>
+                            {% endfor %}
+                        </ul>
+                        <button class="btn-volver" onclick="voltearTarjeta(this)">
+                            Volver
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endif %}
+
+<!-- Sección 3: Becas Escolares -->
+{% if becas_escolares %}
+<section class="becas_escolares">
+    <div class="container">
+        <div class="becas-content">
+            <div class="becas-imagen">
+                <img src="{{ becas_escolares.imagen.url }}" alt="{{ becas_escolares.titulo }}">
+            </div>
+            <div class="becas-info">
+                <h2>{{ becas_escolares.titulo }}</h2>
+                <h3>{{ becas_escolares.subtitulo }}</h3>
+                <p>{{ becas_escolares.texto|linebreaks }}</p>
+                <button class="btn-becas">{{ becas_escolares.texto_boton }}</button>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Sección 4: Convocatorias y Documentos -->
+{% if convocatorias %}
+<section class="convocatorias_documentos">
+    <div class="container">
+        <h2>{{ convocatorias.titulo }}</h2>
+        <p>{{ convocatorias.texto|linebreaks }}</p>
+        
+        {% if documentos_convocatorias %}
+        <div class="documentos-grid">
+            {% for documento in documentos_convocatorias %}
+            <div class="documento-card" data-orden="{{ documento.orden }}">
+                <div class="documento-imagen">
+                    <img src="{{ documento.imagen.url }}" alt="{{ documento.titulo }}">
+                </div>
+                <div class="documento-info">
+                    <h3>{{ documento.titulo }}</h3>
+                    {% if documento.descripcion %}
+                    <p>{{ documento.descripcion|linebreaks }}</p>
+                    {% endif %}
+                    <a href="{% url 'ver_documento_convocatoria' documento.id %}" 
+                    class="btn-documento" 
+                    target="_blank">
+                     {{ convocatorias.texto_boton }}
+                 </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endif %}
+
+<!-- Sección 5: Apoyo Institucional -->
+{% if apoyo_institucional %}
+<section class="apoyo_institucional">
+    <div class="container">
+        <div class="apoyo-content">
+            <div class="apoyo-info">
+                <h2>{{ apoyo_institucional.titulo }}</h2>
+                <p>{{ apoyo_institucional.texto|linebreaks }}</p>
+                <button class="btn-apoyo">{{ apoyo_institucional.texto_boton }}</button>
+            </div>
+            <div class="apoyo-imagen">
+                <img src="{{ apoyo_institucional.imagen.url }}" alt="{{ apoyo_institucional.titulo }}">
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- JavaScript para funcionalidad de tarjetas -->
+<script>
+function voltearTarjeta(button) {
+    const tarjeta = button.closest('.tarjeta-programa');
+    tarjeta.classList.toggle('volteada');
+}
+</script>
+
+<!-- CSS básico para las tarjetas volteables -->
+<style>
+.tarjetas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.tarjeta-programa {
+    position: relative;
+    height: 400px;
+    perspective: 1000px;
+}
+
+.tarjeta-front,
+.tarjeta-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transition: transform 0.6s;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background: white;
+    padding: 1rem;
+}
+
+.tarjeta-back {
+    transform: rotateY(180deg);
+}
+
+.tarjeta-programa.volteada .tarjeta-front {
+    transform: rotateY(180deg);
+}
+
+.tarjeta-programa.volteada .tarjeta-back {
+    transform: rotateY(0deg);
+}
+
+.tarjeta-imagen img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.tarjeta-vinetas,
+.tarjeta-vinetas-trasero {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+}
+
+.btn-tarjeta,
+.btn-volver,
+.btn-becas,
+.btn-documento,
+.btn-apoyo {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+.btn-tarjeta:hover,
+.btn-volver:hover,
+.btn-becas:hover,
+.btn-documento:hover,
+.btn-apoyo:hover {
+    background: #0056b3;
+}
+
+.becas-content,
+.apoyo-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.becas-imagen img,
+.apoyo-imagen img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.documentos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.documento-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 1rem;
+    text-align: center;
+}
+
+.documento-imagen img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .becas-content,
+    .apoyo-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .tarjetas-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
