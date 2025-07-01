@@ -1,15 +1,229 @@
 {% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8" />
-    <title>Contacto | Crecer México</title>
-</head>
-<body>
-<h1 class="text-2xl font-bold text-red-600">Pagina de Contacto.</h1>
+{% block title %}Contacto | Crecer México{% endblock %}
 
-<a href="{% url 'core:home' %}">Volver a Inicio</a>
-</body>
-</html>
+{% block extra_head %}
+<link href="{% static 'css/contact.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+<section class="contact-section">
+    <div class="container">
+        <!--    <a href="{% url 'core:home' %}" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                Volver a Inicio
+            </a> -->
+        
+        <div class="contact-header">
+            <h1>Contáctanos</h1>
+            <p>Estamos aquí para ayudarte. Envíanos un mensaje y nos pondremos en contacto contigo lo antes posible.</p>
+        </div>
+        
+        <!-- NUEVO: Wrapper decorativo que contiene los elementos decorativos -->
+        <div class="contact-decorative-wrapper">
+            <!-- Elementos decorativos posicionados relativos al wrapper -->
+            <div class="decor-box decor-box-1"></div>
+            <div class="decor-box decor-box-2"></div>
+            
+            <!-- Contenedor unificado para formulario y mapa -->
+            <div class="contact-unified-container">
+                <!-- Formulario de Contacto -->
+                <div class="contact-form-container">
+                    <h2>Envíanos un Mensaje</h2>
+                    <form id="contactForm" method="POST" action="">
+                        {% csrf_token %}
+                        
+                        <div class="form-group required">
+                            <label for="nombre">Nombre Completo</label>
+                            <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo">
+                        </div>
+                        
+                        <div class="form-group required">
+                            <label for="correo">Correo Electrónico</label>
+                            <input type="email" id="correo" name="correo" required placeholder="tu@email.com">
+                        </div>
+                        
+                        <div class="form-group required">
+                            <label for="telefono">Teléfono</label>
+                            <input type="tel" id="telefono" name="telefono" required placeholder="+52 123 456 7890">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="asunto">Asunto</label>
+                            <input type="text" id="asunto" name="asunto" placeholder="¿En qué podemos ayudarte?">
+                        </div>
+                        
+                        <div class="form-group required">
+                            <label for="mensaje">Mensaje</label>
+                            <textarea id="mensaje" name="mensaje" required placeholder="Escribe tu mensaje aquí..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <span id="submitText">Enviar Mensaje</span>
+                            <span id="submitLoader" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i> Enviando...
+                            </span>
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Mapa y Información de Contacto -->
+                <div class="map-container">
+                    <div class="map-header">
+                        <h2>Nuestra Ubicación</h2>
+                        <p>Visítanos en nuestra oficina principal</p>
+                    </div>
+                    
+                    <div class="map-wrapper">
+                        <!-- Google Maps Embed - Ubicación en Ciudad de México -->
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3764.131699869895!2d-99.1826777!3d19.3634493!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff8c5eb77755%3A0xe6c846c7ea3e746b!2sCRECER%20M%C3%89XICO!5e0!3m2!1ses!2smx!4v1749783441103!5m2!1ses!2smx"
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Ubicación de Crecer México">
+                        </iframe>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <div class="contact-info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Av. Juárez #123, Centro Histórico<br>Ciudad de México, CDMX 06000</span><br>
+                            <i class="fas fa-phone"></i>
+                            <span>+52 55 1234 5678</span><br>
+                            <i class="fas fa-envelope"></i>
+                            <span>contacto@crecermexico.org</span><br>
+                            <i class="fas fa-clock"></i>
+                                <span>Lunes a Viernes: 9:00 AM - 6:00 PM<br>Sábados: 9:00 AM - 2:00 PM</span>
+                        </div>
+                    
+                        <div class="contact-info-item">
+                            <ul class="contact-info-list">
+                                <li><strong>Información para ingresar a clases:</strong></li>
+                                <li>Promotora: Nadia Pacheco - 5591659457</li>
+                                <li>Promotor: Hugo Garrido - 5539688886</li>
+                                <li><strong>Informes área educativa:</strong></li>
+                                <li>Gerente Educativa: Paola Quintero Villalvazo</li>
+                                <li>📧 pquintero@crecermexico.org</li>
+                                <li><strong>Becas y apoyo institucional:</strong></li>
+                                <li>Gerente de Operaciones: Myriam Saldivar Aguilar</li>
+                                <li>📧 msaldivar@crecermexico.org</li>
+                                <li><strong>Servicio social y bolsa de trabajo:</strong></li>
+                                <li>📧 amartinez@crecermexico.org</li>
+                                <li><strong>Alianzas estratégicas:</strong></li>
+                                <li>📧 mgallastegui@crecermexico.org</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const submitText = document.getElementById('submitText');
+    const submitLoader = document.getElementById('submitLoader');
+    
+    // Form validation
+    const inputs = form.querySelectorAll('input[required], textarea[required]');
+    
+    function validateForm() {
+        let isValid = true;
+        inputs.forEach(input => {
+            if (!input.value.trim()) {
+                isValid = false;
+                input.style.borderColor = '#e53e3e';
+            } else {
+                input.style.borderColor = '#69c624';
+            }
+        });
+        
+        // Email validation
+        const emailInput = document.getElementById('correo');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailInput.value)) {
+            isValid = false;
+            emailInput.style.borderColor = '#e53e3e';
+        }
+        
+        // Phone validation (basic)
+        const phoneInput = document.getElementById('telefono');
+        const phoneRegex = /^[\+]?[\d\s\-\(\)]{10,}$/;
+        if (!phoneRegex.test(phoneInput.value)) {
+            isValid = false;
+            phoneInput.style.borderColor = '#e53e3e';
+        }
+        
+        return isValid;
+    }
+    
+    // Real-time validation
+    inputs.forEach(input => {
+        input.addEventListener('blur', validateForm);
+        input.addEventListener('input', function() {
+            if (this.value.trim()) {
+                this.style.borderColor = '#69c624';
+            }
+        });
+    });
+    
+    // Form submission
+    form.addEventListener('submit', function(e) {
+        
+        if (!validateForm()) {
+            alert('Por favor, completa todos los campos requeridos correctamente.');
+            return;
+        }
+        
+        // Show loading state
+        submitBtn.disabled = true;
+        submitText.style.display = 'none';
+        submitLoader.style.display = 'inline';
+        
+        // Simulate form submission (replace with actual form handling)
+        //  setTimeout(() => {
+      //   alert('¡Mensaje enviado exitosamente! Nos pondremos en contacto contigo pronto.');
+      //       messageBox.remove();
+            
+            // Reset button state
+            submitBtn.disabled = false;
+            submitText.style.display = 'inline';
+            submitLoader.style.display = 'none';
+            
+            // Reset input borders
+            inputs.forEach(input => {
+                input.style.borderColor = '#e2e8f0';
+            });
+        }, 2000);
+    });
+    
+    // Phone number formatting
+    const phoneInput = document.getElementById('telefono');
+    phoneInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length >= 10) {
+            value = value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})/, '+$1 $2 $3 $4');
+        } else if (value.length >= 7) {
+            value = value.replace(/(\d{3})(\d{3})(\d{1,4})/, '$1 $2 $3');
+        } else if (value.length >= 4) {
+            value = value.replace(/(\d{3})(\d{1,3})/, '$1 $2');
+        }
+        e.target.value = value;
+    });
+});
+</script>
+{% endblock %}

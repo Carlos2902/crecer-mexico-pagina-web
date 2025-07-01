@@ -33,7 +33,7 @@
       padding: 20px;        
       box-sizing: border-box;
       transform: scale(0.85);  /* reduce tamaño al 80% */
-      transform-origin: top left; /* para que escale desde arriba a la izquierda */
+      transform-origin: top center; /* para que escale desde arriba a la izquierda */
     }
 
     .container {
@@ -225,12 +225,14 @@
     .security-title {
       font-weight: 600;
       margin-bottom: 0.5rem;
+      margin-left: -17px;
     }
 
     .security-text {
       font-size: 0.9rem;
       opacity: 0.9;
       line-height: 1.5;
+      margin-left: -17px;
     }
 
     .back-link {
