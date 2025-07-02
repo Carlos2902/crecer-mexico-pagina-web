@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-app_name = 'proyectos'
+app_name = 'projects'
 
 urlpatterns = [
     # Página principal de proyectos
@@ -11,5 +11,5 @@ urlpatterns = [
     # path('', views.proyectos_view, name='index'),
     
     # Vista para mostrar PDFs de convocatorias
-path('convocatoria/<int:documento_id>/', views.ver_documento_convocatoria, name='ver_documento_convocatoria'),
+    path('convocatoria/<int:documento_id>/', views.ver_documento_convocatoria, name='ver_documento_convocatoria'),
 ]

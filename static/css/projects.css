@@ -1,0 +1,624 @@
+/* ============================================= */
+/* ========== Sección 1: Hero (Móvil) ========== */
+/* ============================================= */
+
+.hero {
+  padding: 2rem 1rem; /* Consistente con seccion-mision */
+  background: transparent;
+}
+
+.hero .container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/*
+ * Estilos para los textos dentro del Hero
+*/
+.hero h1 {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-bold);
+  font-size: 2.2rem; /* Consistente con contenedor-principal h1 */
+  color: var(--color-primary-dark-blue);
+  margin-bottom: calc(var(--spacing-unit) * 2);
+  text-align: center;
+}
+
+.hero h2 {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-bold);
+  font-size: 2rem; /* Consistente con contenido-mision h3 */
+  color: var(--color-primary-green);
+  margin-bottom: calc(var(--spacing-unit) * 2);
+  text-align: center;
+}
+
+.hero p {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-regular);
+  font-size: 1.1rem; /* Consistente con descripcion-mision */
+  color: var(--color-primary-black);
+  line-height: 1.7;
+  text-align: center;
+  max-width: 800px;
+
+}
+
+/* ============================================= */
+/* ======== Media Queries - Tablet (MD) ======= */
+/* ============================================= */
+
+@media (min-width: 768px) {
+  .hero {
+    padding: calc(var(--spacing-unit) * 8) 0; /* 64px de padding vertical */
+  }
+  
+  .hero .container {
+    padding: 0 calc(var(--spacing-unit) * 4); /* 32px de padding horizontal */
+  }
+  
+  .hero h1 {
+    font-size: 3rem; /* 48px */
+    margin-bottom: calc(var(--spacing-unit) * 3); /* 24px */
+  }
+  
+  .hero h2 {
+    font-size: 3rem; /* 24px */
+    margin-bottom: calc(var(--spacing-unit) * 3); /* 24px */
+  }
+  
+  .hero p {
+    font-size: 1.125rem; /* 18px */
+    max-width: 70ch;
+  }
+}
+
+/* ============================================= */
+/* ======= Media Queries - Desktop (LG) ======= */
+/* ============================================= */
+
+@media (min-width: 1024px) {
+  .hero {
+    padding: calc(var(--spacing-unit) * 10) 0; /* 80px de padding vertical */
+  }
+  
+  .hero .container {
+    padding: 0 calc(var(--spacing-unit) * 6); /* 48px de padding horizontal */
+  }
+  
+  .hero h1 {
+    font-size: 3.75rem; /* 60px */
+    margin-bottom: calc(var(--spacing-unit) * 4); /* 32px */
+  }
+  
+  .hero h2 {
+    font-size: 3.75rem; /* 28px */
+    margin-bottom: calc(var(--spacing-unit) * 4); /* 32px */
+  }
+  
+  .hero p {
+    font-size: 1.25rem; /* 20px */
+    max-width: 75ch;
+  }
+}
+
+/* ============================================= */
+/* ====== Media Queries - Desktop XL (XL) ===== */
+/* ============================================= */
+
+@media (min-width: 1280px) {
+  .hero {
+    padding: calc(var(--spacing-unit) * 12) 0; /* 96px de padding vertical */
+  }
+  
+  .hero .container {
+    padding: 0 calc(var(--spacing-unit) * 8); /* 64px de padding horizontal */
+    max-width: 1200px; /* Contenedor máximo */
+    margin: 0 auto; /* Centrado horizontal */
+  }
+  
+  .hero h1 {
+    font-size: 4.5rem; /* 72px */
+    margin-bottom: calc(var(--spacing-unit) * 5); /* 40px */
+  }
+  
+  .hero h2 {
+    font-size: 3rem; /* 32px */
+  }
+  
+  .hero p {
+    font-size: 2rem; /* 22px */
+  }
+}
+
+/* ============================================= */
+/* =   Sección 2: Programas Educativos         = */
+/* ============================================= */
+
+.programas_educativos {
+  padding: 0 calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 6);
+  text-align: center;
+}
+
+.programas_educativos h2 {
+  color: var(--color-primary-green);
+  font-size: 2.5rem;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: calc(var(--spacing-unit) * 2); /* 16px */
+}
+
+.programas_educativos p {
+  max-width: 700px;
+  margin: 0 auto calc(var(--spacing-unit) * 5); /* 40px */
+  color: var(--color-primary-dark-blue);
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+/* --- Contenedor de las tarjetas --- */
+.tarjetas-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: calc(var(--spacing-unit) * 10); /* 64px */
+  max-width: 500px; /* Ancho máximo en mobile para una sola columna */
+  margin: 0 auto;
+}
+
+/* --- Estilo y Animación de cada Tarjeta --- */
+.tarjeta-programa {
+  position: relative;
+  width: 100%;
+  min-height: 700px; 
+  perspective: 1000px; 
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Clase que activa la animación de volteo */
+.tarjeta-programa.volteada {
+  transform: rotateY(180deg);
+}
+
+/* --- Lados Frontal y Trasero de la Tarjeta --- */
+.tarjeta-front,
+.tarjeta-back {
+  position: absolute;
+  width: 105%;
+  height: 105%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-primary-white);
+  border-radius: 15px;
+  /* CAMBIO: Sombra más pronunciada para mejor definición */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra sutil */
+  overflow: hidden; 
+}
+
+.tarjeta-back {
+  transform: rotateY(180deg); 
+}
+
+/* --- Cuadrados decorativos de las esquinas --- */
+.tarjeta-front::before,
+.tarjeta-front::after {
+  content: '';
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  z-index: -1;
+}
+
+.tarjeta-front::before {
+  background-color: var(--color-primary-dark-blue);
+  top: -30px;
+  left: -30px;
+  transform: rotate(-15deg);
+}
+
+.tarjeta-front::after {
+  background-color: var(--color-primary-green);
+  bottom: -30px;
+  right: -30px;
+  transform: rotate(15deg);
+}
+
+
+/* --- Contenido de la Tarjeta (Frontal) --- */
+.tarjeta-imagen img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.tarjeta-contenido {
+  padding: calc(var(--spacing-unit) * 3); /* 24px */
+  text-align: left;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tarjeta-subtitulo {
+  color: var(--color-primary-green);
+  font-size: 0.9rem;
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--spacing-unit); /* 8px */
+}
+
+.tarjeta-titulo {
+  color: var(--color-primary-dark-blue);
+  font-size: 1rem; /* Mantenemos el ajuste que hiciste */
+  font-weight: var(--font-weight-bold);
+  margin-bottom: calc(var(--spacing-unit) * 2); /* 16px */
+}
+
+.tarjeta-vinetas {
+  list-style-position: inside;
+  padding-left: 0;
+  color: var(--color-secondary-gray);
+  flex-grow: 1; 
+}
+
+.tarjeta-vinetas li {
+  /* CAMBIO: Tamaño de fuente reducido para mejorar el layout en móvil */
+  font-size: 1rem; 
+  margin-bottom: var(--spacing-unit); /* 8px */
+  line-height: 1.35;
+}
+
+/* --- Contenido de la Tarjeta (Trasero) --- */
+.tarjeta-contenido-trasero {
+  padding: calc(var(--spacing-unit) * 4); /* 32px */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+}
+
+.tarjeta-titulo-trasero {
+  color: var(--color-primary-dark-blue);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: calc(var(--spacing-unit) * 3); /* 24px */
+}
+
+.tarjeta-vinetas-trasero {
+  list-style-position: inside;
+  padding: 0;
+  margin-bottom: calc(var(--spacing-unit) * 4); /* 32px */
+  color: var(--color-secondary-gray);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  text-align: left;
+}
+
+.tarjeta-vinetas-trasero li {
+  margin-bottom: calc(var(--spacing-unit) * 2); /* 16px */
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+
+/* --- Botones --- */
+.btn-tarjeta,
+.btn-volver {
+  background-color: var(--color-primary-green);
+  color: var(--color-primary-white);
+  border: none;
+  padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 3); /* 12px 24px */
+  border-radius: 25px;
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  align-self: center;
+  width: 80%;
+  max-width: 250px;
+}
+
+.btn-tarjeta:hover,
+.btn-volver:hover {
+  background-color: #5ab41f; 
+  transform: translateY(-2px);
+}
+
+/* ============================================= */
+/* =   Media Query para Tablets y Escritorio   = */
+/* ============================================= */
+@media (min-width: 768px) {
+  .tarjetas-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: calc(var(--spacing-unit) * 12); /* 48px */
+      max-width: var(--container-max-width);
+  }
+  
+  .tarjeta-programa {
+      min-height: 650px; 
+  }
+
+  .tarjeta-subtitulo, .tarjeta-titulo{
+    font-size: 1.3rem;
+    line-height: 0;
+  }
+
+  .btn-tarjeta, .btn-volver{
+    font-size: 1.1rem;
+  }
+
+  /* Opcional: Aumentar un poco el texto de las viñetas en desktop */
+  .tarjeta-vinetas li {
+    font-size: 1.15rem;
+  }
+
+  .programas_educativos p {
+    max-width: 700px;
+    margin: 0 auto calc(var(--spacing-unit) * 5); /* 40px */
+    color: var(--color-primary-dark-blue);
+    font-weight: bold;
+    font-size: 2rem;
+    line-height: 1.6;
+  }
+}
+/* Sección Becas Escolares - Mobile First */
+
+.becas_escolares {
+  padding: calc(var(--spacing-unit) * 6) 0;
+  background-color: var(--color-primary-white);
+}
+
+.becas_escolares .container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 calc(var(--spacing-unit) * 2);
+}
+
+.becas-content {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-unit) * 4);
+  align-items: center;
+}
+
+.becas-imagen {
+  width: 100%;
+  max-width: 300px;
+  border-radius: calc(var(--spacing-unit) * 2);
+  overflow: hidden;
+  box-shadow: 0 calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 4) rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 2;
+}
+
+.becas-imagen::before {
+  content: '';
+  position: absolute;
+  top: calc(var(--spacing-unit) * -3);
+  left: calc(var(--spacing-unit) * -3);
+  width: 100%;
+  height: 100%;
+  background-color: #421414;
+  border-radius: calc(var(--spacing-unit) * 2);
+  z-index: -1;
+}
+
+.becas-imagen img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.becas-info {
+  text-align: center;
+  width: 100%;
+}
+
+.becas-info h2 {
+  color: var(--color-primary-green);
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-bold);
+  font-size: 1.5rem;
+  line-height: 1.3;
+  margin-bottom: calc(var(--spacing-unit) * 2);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.becas-info h3 {
+  color: var(--color-primary-black);
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-bold);
+  font-size: 1.75rem;
+  line-height: 1.2;
+  margin-bottom: calc(var(--spacing-unit) * 3);
+}
+
+.becas-info p {
+  color: var(--color-secondary-gray);
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-regular);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: calc(var(--spacing-unit) * 4);
+}
+
+.becas-info ul {
+  text-align: left;
+  margin: calc(var(--spacing-unit) * 3) 0;
+  padding-left: calc(var(--spacing-unit) * 3);
+}
+
+.becas-info li {
+  color: var(--color-secondary-gray);
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-regular);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: calc(var(--spacing-unit) * 1);
+}
+
+.btn-becas {
+  background-color: var(--color-primary-green);
+  color: var(--color-primary-white);
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-semibold);
+  font-size: 1rem;
+  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 4);
+  border: none;
+  border-radius: calc(var(--spacing-unit) * 6);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-becas:hover {
+  background-color: var(--color-primary-dark-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 3) rgba(0, 0, 0, 0.2);
+}
+
+.btn-becas:active {
+  transform: translateY(0);
+  box-shadow: 0 calc(var(--spacing-unit) * 0.5) calc(var(--spacing-unit) * 1.5) rgba(0, 0, 0, 0.2);
+}
+
+/* Tablets - Pantallas medianas */
+@media (min-width: 768px) {
+  .becas_escolares {
+    padding: calc(var(--spacing-unit) * 8) 0;
+  }
+
+  .becas_escolares .container {
+    padding: 0 calc(var(--spacing-unit) * 4);
+  }
+
+  .becas-content {
+    flex-direction: row;
+    gap: calc(var(--spacing-unit) * 6);
+    align-items: flex-start;
+  }
+
+  .becas-imagen {
+    flex: 0 0 45%;
+    max-width: none;
+  }
+
+  .becas-imagen::before {
+    top: calc(var(--spacing-unit) * -4);
+    left: calc(var(--spacing-unit) * -4);
+  }
+
+  .becas-info {
+    flex: 1;
+    text-align: left;
+  }
+
+  .becas-info h2 {
+    font-size: 1.25rem;
+    margin-bottom: calc(var(--spacing-unit) * 1.5);
+  }
+
+  .becas-info h3 {
+    font-size: 2rem;
+    margin-bottom: calc(var(--spacing-unit) * 3);
+  }
+
+  .becas-info p {
+    font-size: 1.1rem;
+    margin-bottom: calc(var(--spacing-unit) * 4);
+  }
+
+  .btn-becas {
+    font-size: 1.1rem;
+    padding: calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 5);
+  }
+}
+
+/* Desktop - Pantallas grandes */
+@media (min-width: 1024px) {
+  .becas_escolares {
+    padding: calc(var(--spacing-unit) * 10) 0;
+  }
+
+  .becas-content {
+    gap: calc(var(--spacing-unit) * 8);
+  }
+
+  .becas-imagen {
+    flex: 0 0 40%;
+    border-radius: calc(var(--spacing-unit) * 3);
+  }
+
+  .becas-imagen::before {
+    top: calc(var(--spacing-unit) * -5);
+    left: calc(var(--spacing-unit) * -5);
+    border-radius: calc(var(--spacing-unit) * 3);
+  }
+
+  .becas-info {
+    flex: 1;
+    padding-left: calc(var(--spacing-unit) * 2);
+  }
+
+  .becas-info h2 {
+    font-size: 1.125rem;
+  }
+
+  .becas-info h3 {
+    font-size: 2.5rem;
+    line-height: 1.1;
+    margin-bottom: calc(var(--spacing-unit) * 4);
+  }
+
+  .becas-info p {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    margin-bottom: calc(var(--spacing-unit) * 5);
+  }
+
+  .becas-info ul {
+    margin: calc(var(--spacing-unit) * 4) 0;
+  }
+
+  .becas-info li {
+    font-size: 1.125rem;
+    margin-bottom: calc(var(--spacing-unit) * 1.5);
+  }
+
+  .btn-becas {
+    font-size: 1.125rem;
+    padding: calc(var(--spacing-unit) * 3) calc(var(--spacing-unit) * 6);
+    border-radius: calc(var(--spacing-unit) * 8);
+  }
+}
+
+/* Pantallas extra grandes */
+@media (min-width: 1200px) {
+  .becas_escolares {
+    padding: calc(var(--spacing-unit) * 12) 0;
+  }
+
+  .becas-content {
+    gap: calc(var(--spacing-unit) * 10);
+  }
+
+  .becas-info h3 {
+    font-size: 2.75rem;
+  }
+
+  .becas-info p {
+    font-size: 1.2rem;
+  }
+}
