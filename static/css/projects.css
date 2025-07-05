@@ -392,22 +392,21 @@
 .becas-imagen {
   width: 100%;
   max-width: 300px;
-  border-radius: calc(var(--spacing-unit) * 2);
-  overflow: hidden;
-  box-shadow: 0 calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 4) rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 2;
+  margin-top: calc(var(--spacing-unit) * 6); /* Empuja la imagen hacia abajo */
 }
 
+/* Contenedor gris claro con esquinas redondeadas */
 .becas-imagen::before {
   content: '';
   position: absolute;
-  top: calc(var(--spacing-unit) * -3);
-  left: calc(var(--spacing-unit) * -3);
-  width: 100%;
-  height: 100%;
-  background-color: #421414;
-  border-radius: calc(var(--spacing-unit) * 2);
+  top: calc(var(--spacing-unit) * -6); /* Extendemos hacia arriba */
+  left: calc(var(--spacing-unit) * -2);
+  right: calc(var(--spacing-unit) * -2);
+  bottom: calc(var(--spacing-unit) * -4); /* Mantenemos espacio abajo */
+  background-color: #f5f5f5; /* Gris claro */
+  border-radius: calc(var(--spacing-unit) * 3);
   z-index: -1;
 }
 
@@ -415,6 +414,11 @@
   width: 100%;
   height: auto;
   display: block;
+  border-radius: calc(var(--spacing-unit) * 2);
+  box-shadow: 0 calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 3) rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+  transform: translateY(calc(var(--spacing-unit) * 4)); /* Mueve la imagen hacia abajo */
 }
 
 .becas-info {
@@ -434,7 +438,7 @@
 }
 
 .becas-info h3 {
-  color: var(--color-primary-black);
+  color: var(--color-primary-dark-blue);
   font-family: var(--font-family-sans);
   font-weight: var(--font-weight-bold);
   font-size: 1.75rem;
@@ -443,7 +447,7 @@
 }
 
 .becas-info p {
-  color: var(--color-secondary-gray);
+  color: var(--color-primary-black);
   font-family: var(--font-family-sans);
   font-weight: var(--font-weight-regular);
   font-size: 1rem;
@@ -497,7 +501,7 @@
 /* Tablets - Pantallas medianas */
 @media (min-width: 768px) {
   .becas_escolares {
-    padding: calc(var(--spacing-unit) * 8) 0;
+    padding: calc(var(--spacing-unit) * 9) 0;
   }
 
   .becas_escolares .container {
@@ -513,11 +517,14 @@
   .becas-imagen {
     flex: 0 0 45%;
     max-width: none;
+    margin-top: calc(var(--spacing-unit) * 8); /* Más margen en tablets */
   }
 
   .becas-imagen::before {
-    top: calc(var(--spacing-unit) * -4);
-    left: calc(var(--spacing-unit) * -4);
+    top: calc(var(--spacing-unit) * -8); /* Más espacio arriba en tablets */
+    left: calc(var(--spacing-unit) * -3);
+    right: calc(var(--spacing-unit) * -3);
+    bottom: calc(var(--spacing-unit) * -5);
   }
 
   .becas-info {
@@ -526,12 +533,12 @@
   }
 
   .becas-info h2 {
-    font-size: 1.25rem;
+    font-size: 2rem;
     margin-bottom: calc(var(--spacing-unit) * 1.5);
   }
 
   .becas-info h3 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-bottom: calc(var(--spacing-unit) * 3);
   }
 
@@ -558,13 +565,20 @@
 
   .becas-imagen {
     flex: 0 0 40%;
-    border-radius: calc(var(--spacing-unit) * 3);
+    margin-top: calc(var(--spacing-unit) * 10); /* Más margen en desktop */
   }
 
   .becas-imagen::before {
-    top: calc(var(--spacing-unit) * -5);
-    left: calc(var(--spacing-unit) * -5);
+    top: calc(var(--spacing-unit) * -10); /* Más espacio arriba en desktop */
+    left: calc(var(--spacing-unit) * -4);
+    right: calc(var(--spacing-unit) * -4);
+    bottom: calc(var(--spacing-unit) * -6);
+    border-radius: calc(var(--spacing-unit) * 4);
+  }
+
+  .becas-imagen img {
     border-radius: calc(var(--spacing-unit) * 3);
+    transform: translateY(calc(var(--spacing-unit) * 5)); /* Más desplazamiento en tablets */
   }
 
   .becas-info {
@@ -573,11 +587,11 @@
   }
 
   .becas-info h2 {
-    font-size: 1.125rem;
+    font-size: 2.5rem;
   }
 
   .becas-info h3 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     line-height: 1.1;
     margin-bottom: calc(var(--spacing-unit) * 4);
   }
@@ -602,12 +616,34 @@
     padding: calc(var(--spacing-unit) * 3) calc(var(--spacing-unit) * 6);
     border-radius: calc(var(--spacing-unit) * 8);
   }
-}
+}/* SOLUCIÓN PARA MOVER LA IMAGEN HACIA ABAJO (CENTRADA CON EL TEXTO) */
 
-/* Pantallas extra grandes */
+/* Cambios en pantallas grandes (1200px+) */
 @media (min-width: 1200px) {
+  
+  /* Permitir que la imagen salga del contenedor */
+  .becas-imagen {
+    overflow: visible; /* Permite que la imagen sobresalga del contenedor gris */
+    position: relative;
+  }
+
+  /* Mover la imagen hacia ABAJO con translateY positivo */
+  .becas-imagen img {
+    transform: translateY(calc(var(--spacing-unit) * 16)) translateX(calc(var(--spacing-unit) * 5)); /* Más hacia la derecha */
+    position: relative;
+    z-index: 10; /* Por encima del contenedor gris */
+  }
+
+  /* Ajustar el contenedor gris - más espacio arriba, menos abajo */
+  .becas-imagen::before {
+    top: calc(var(--spacing-unit) * -2); /* Más espacio arriba del contenedor gris */
+    left: calc(var(--spacing-unit) * -2);
+    right: calc(var(--spacing-unit) * -2);
+    bottom: calc(var(--spacing-unit) * -2); /* Menos espacio abajo */
+  }
+
   .becas_escolares {
-    padding: calc(var(--spacing-unit) * 12) 0;
+    padding: calc(var(--spacing-unit) * 12) 0; /* Padding normal */
   }
 
   .becas-content {
