@@ -658,3 +658,183 @@
     font-size: 1.2rem;
   }
 }
+.becas-texto {
+  list-style: none; /* Quita los bullets por defecto */
+  padding-left: 0;
+  margin: 20px 0;
+}
+
+.becas-texto li {
+  position: relative;
+  padding-left: 40px; /* Espacio para el bullet personalizado */
+  margin: 10px 0;
+  line-height: 1.6;
+  color: var(--color-primary-black);
+}
+
+.becas-texto li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background-image: url('/media/logos/bullet_point.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Opcional: Ajustar el primer y último elemento */
+.becas-texto li:first-child {
+  margin-top: 0;
+}
+
+.becas-texto li:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================= */
+/* SECCIÓN 4: CONVOCATORIAS Y DOCUMENTOS         */
+/* ============================================= */
+
+/* --- Estilos Base (Mobile First) --- */
+
+.convocatorias_documentos {
+  padding: calc(var(--spacing-unit) * 5) 0; /* 40px */
+  font-family: var(--font-family-sans);
+}
+
+.convocatorias_documentos .container h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary-dark-blue);
+  margin-bottom: calc(var(--spacing-unit) * 2); /* 16px */
+}
+
+.convocatorias_documentos .container > p {
+  text-align: center;
+  color: var(--color-secondary-gray);
+  max-width: 800px;
+  margin: 0 auto calc(var(--spacing-unit) * 5); /* 40px */
+}
+
+.documentos-grid {
+  display: grid;
+  gap: calc(var(--spacing-unit) * 4); /* 32px */
+}
+
+/*
+  CARD: En móvil, la imagen y la info se apilan verticalmente.
+*/
+.documento-card {
+  background-color: var(--color-primary-green);
+  color: var(--color-primary-white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px -5px var(--shadow-color-20);
+  display: flex;
+  flex-direction: column; /* Apila imagen sobre texto */
+}
+
+.documento-imagen img {
+  display: block;
+  width: 100%;
+  height: 250px; /* Altura fija para la imagen en móvil */
+  object-fit: cover;
+}
+
+.documento-info {
+  padding: calc(var(--spacing-unit) * 4); /* 32px */
+}
+
+.documento-info h3 {
+  font-size: 1.75rem;
+  font-weight: var(--font-weight-bold);
+  margin: 0 0 calc(var(--spacing-unit) * 1.5); /* 12px */
+}
+
+.documento-info p {
+  font-size: 1rem;
+  font-weight: var(--font-weight-regular);
+  line-height: 1.6;
+  margin: 0 0 calc(var(--spacing-unit) * 4); /* 32px */
+}
+
+.btn-documento {
+  display: inline-block;
+  background-color: var(--color-primary-white);
+  color: var(--color-primary-black);
+  padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 4); /* 12px 32px */
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: var(--font-weight-semibold);
+  transition: transform 0.2s ease-out;
+}
+
+
+.btn-documento:hover {
+  color: white;
+  transform: scale(1.05);
+  background-color: var(--color-primary-dark-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 3) rgba(0, 0, 0, 0.2);
+}
+/* ============================================= */
+/* --- Media Query para Pantallas Medianas (Tablets) --- */
+/* ============================================= */
+@media (min-width: 768px) {
+  /*
+    CARD: Cambiamos a un layout horizontal (flex-direction: row)
+    imitando el mock-up. La imagen ocupa un 40% y el texto el 60% restante.
+  */
+  .documento-card {
+    flex-direction: row; /* Pone los elementos en fila */
+    align-items: center; /* Centra verticalmente el contenido */
+  }
+
+  .documento-imagen {
+    flex: 0 0 40%; /* No crece, no se encoge, base del 40% */
+  }
+
+  .documento-imagen img {
+    height: 100%; /* La altura se adapta al contenido del texto */
+    min-height: 300px; /* Altura mínima para la tarjeta */
+  }
+
+  .documento-info {
+    flex: 1; /* Ocupa el espacio restante */
+    padding: calc(var(--spacing-unit) * 5); /* 40px */
+  }
+}
+
+/* ============================================= */
+/* --- Media Query para Pantallas Grandes (Desktop) --- */
+/* ============================================= */
+@media (min-width: 1024px) {
+  .convocatorias_documentos {
+    padding: calc(var(--spacing-unit) * 8) 0; /* 64px */
+  }
+
+  /*
+    CARD: En pantallas grandes, hacemos la imagen un poco más ancha
+    y aumentamos el espaciado para un look más equilibrado.
+  */
+  .documento-imagen {
+    flex-basis: 45%; /* La imagen ocupa un poco más de espacio */
+  }
+
+  .documento-info {
+    padding: calc(var(--spacing-unit) * 6); /* 48px */
+  }
+
+  .documento-info h3 {
+    font-size: 2rem; /* Título más grande */
+  }
+
+  .documento-info p {
+    font-size: 1.1rem; /* Texto de párrafo ligeramente más grande */
+  }
+}

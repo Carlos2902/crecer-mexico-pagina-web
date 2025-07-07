@@ -83,7 +83,19 @@
             <div class="becas-info">
                 <h2>{{ becas_escolares.titulo }}</h2>
                 <h3>{{ becas_escolares.subtitulo }}</h3>
-                <p>{{ becas_escolares.texto|linebreaks }}</p>
+                <p> 
+                    {{ becas_escolares.texto|linebreaks }}
+                </p>
+                
+                <!-- Lista de viñetas corregida -->
+                {% if becas_escolares.get_contenido_vinetas_list %}
+                <ul class="becas-texto">
+                    {% for vineta in becas_escolares.get_contenido_vinetas_list %}
+                    <li>{{ vineta }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                
                 <button class="btn-becas">{{ becas_escolares.texto_boton }}</button>
             </div>
         </div>
@@ -95,8 +107,6 @@
 {% if convocatorias %}
 <section class="convocatorias_documentos">
     <div class="container">
-        <h2>{{ convocatorias.titulo }}</h2>
-        <p>{{ convocatorias.texto|linebreaks }}</p>
         
         {% if documentos_convocatorias %}
         <div class="documentos-grid">
@@ -107,6 +117,7 @@
                 </div>
                 <div class="documento-info">
                     <h3>{{ documento.titulo }}</h3>
+                    <p>{{ convocatorias.texto|linebreaks }}</p>
                     {% if documento.descripcion %}
                     <p>{{ documento.descripcion|linebreaks }}</p>
                     {% endif %}

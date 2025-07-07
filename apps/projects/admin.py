@@ -105,6 +105,10 @@ class BecasEscolaresAdmin(admin.ModelAdmin):
         ('Contenido Principal', {
             'fields': ('imagen', 'titulo', 'subtitulo', 'texto')
         }),
+        ('Contenido de Viñetas',{
+            'fields': ('contenido_vinetas',),
+            'description': 'Escribe cada viñeta en una línea nueva.'
+            }),
         ('Botón de Acción', {
             'fields': ('texto_boton',)
         }),

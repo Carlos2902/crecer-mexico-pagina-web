@@ -153,6 +153,12 @@ class BecasEscolares(models.Model):
         verbose_name="Texto",
         help_text="Contenido de texto de la sección"
     )
+    
+    contenido_vinetas = models.TextField(
+        verbose_name="Contenido (viñetas)",
+        help_text="Contenido de los requisitos de beca. Escribe cada viñeta en una línea nueva."
+    )
+    
     texto_boton = models.CharField(
         max_length=50,
         default="Contactar",
@@ -168,6 +174,10 @@ class BecasEscolares(models.Model):
     class Meta:
         verbose_name = "Proyectos - Becas Escolares"
         verbose_name_plural = "Proyectos - Becas Escolares"
+        
+    def get_contenido_vinetas_list(self):
+        """Retorna el contenido trasero de viñetas como lista"""
+        return [linea.strip() for linea in self.contenido_vinetas.split('\n') if linea.strip()]
     
     def __str__(self):
         return f"Becas: {self.titulo}"
