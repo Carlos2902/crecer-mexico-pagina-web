@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ estadisticas_impacto.titulo }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/testimonio_impacto.css' %}">
+<!-- Chart.js para las gráficas de anillos -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="testimonio-impacto-page">
+    
+    <!-- Sección: Estadísticas de Impacto -->
+    <section class="estadisticas-impacto" id="estadisticas-impacto">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">{{ estadisticas_impacto.titulo }}</h2>
+                <p class="section-subtitle">{{ estadisticas_impacto.subtitulo }}</p>
+            </div>
+            
+            <div class="estadisticas-content">
+                <!-- Mapa interactivo -->
+                <div class="mapa-container">
+                    <div id="mapa-mexico" class="mapa-mexico">
+                        <!-- Aquí se insertará el mapa SVG de México -->
+                    </div>
+                </div>
+                
+                <!-- Fichas de ratio -->
+                <div class="ratio-cards">
+                    <div class="ratio-card hombres">
+                        <div class="ratio-icon">👨</div>
+                        <div class="ratio-value" id="ratio-hombres">0%</div>
+                        <div class="ratio-label">Hombres</div>
+                    </div>
+                    <div class="ratio-card mujeres">
+                        <div class="ratio-icon">👩</div>
+                        <div class="ratio-value" id="ratio-mujeres">0%</div>
+                        <div class="ratio-label">Mujeres</div>
+                    </div>
+                </div>
+                
+                <!-- Información del estado seleccionado -->
+                <div class="estado-info" id="estado-info">
+                    <h3 id="estado-nombre">Selecciona un estado</h3>
+                    <div class="estado-estadisticas">
+                        <div class="estadistica-item">
+                            <span class="estadistica-label">Total de egresados:</span>
+                            <span class="estadistica-value" id="total-egresados">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección: Métricas de Impacto (Gráficas de anillos) -->
+    <section class="metricas-impacto" id="metricas-impacto">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Resultados de Nuestros Egresados</h2>
+                <p class="section-subtitle">Conoce el impacto real en la vida de quienes completaron nuestro programa</p>
+            </div>
+            
+            <div class="metricas-grid">
+                <!-- Gráfica 1: Incremento de ingresos -->
+                <div class="metrica-card">
+                    <canvas id="chart-ingresos" width="150" height="150"></canvas>
+                    <h4>{{ metricas_impacto.incremento_ingresos }}%</h4>
+                    <p>Incrementó sus ingresos</p>
+                </div>
+                
+                <!-- Gráfica 2: Ascenso laboral -->
+                <div class="metrica-card">
+                    <canvas id="chart-ascenso" width="150" height="150"></canvas>
+                    <h4>{{ metricas_impacto.recibio_ascenso }}%</h4>
+                    <p>Recibió un ascenso</p>
+                </div>
+                
+                <!-- Gráfica 3: Emprendimiento -->
+                <div class="metrica-card">
+                    <canvas id="chart-emprendimiento" width="150" height="150"></canvas>
+                    <h4>{{ metricas_impacto.emprendi_negocio }}%</h4>
+                    <p>Emprendió un negocio</p>
+                </div>
+                
+                <!-- Gráfica 4: Estudios superiores -->
+                <div class="metrica-card">
+                    <canvas id="chart-estudios" width="150" height="150"></canvas>
+                    <h4>{{ metricas_impacto.continuo_estudios }}%</h4>
+                    <p>Continuó estudios superiores</p>
+                </div>
+                
+                <!-- Gráfica 5: Formación continua -->
+                <div class="metrica-card">
+                    <canvas id="chart-formacion" width="150" height="150"></canvas>
+                    <h4>{{ metricas_impacto.formacion_continua }}%</h4>
+                    <p>Formación continua</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección: Testimonio de Egresado -->
+    {% if testimonio_egresado %}
+    <section class="testimonio-egresado" id="testimonio-egresado">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">{{ testimonio_egresado.titulo }}</h2>
+            </div>
+            
+            <div class="testimonio-content">
+                <div class="video-container">
+                    <iframe 
+                        src="{{ testimonio_egresado.video_url }}" 
+                        frameborder="0" 
+                        allowfullscreen
+                        class="testimonio-video">
+                    </iframe>
+                </div>
+                
+                <div class="testimonio-info">
+                    <div class="testimonio-card">
+                        <blockquote class="testimonio-texto">
+                            "{{ testimonio_egresado.texto_testimonial }}"
+                        </blockquote>
+                        <div class="testimonio-autor">
+                            <strong>{{ testimonio_egresado.nombre_egresado }}</strong>
+                            <span>{{ testimonio_egresado.programa_completado }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+{% endblock%}
