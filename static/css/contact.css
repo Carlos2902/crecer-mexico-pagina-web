@@ -257,27 +257,6 @@
     font-size: 1.2rem;
 }
 
-/* Back to Home Link */
-.back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--color-primary-green);
-    text-decoration: none;
-    font-weight: var(--font-weight-semibold);
-    margin-bottom: 2rem;
-    transition: all 0.3s ease;
-}
-
-.back-link:hover {
-    color: var(--color-primary-dark-blue);
-    transform: translateX(-3px);
-}
-
-.back-link i {
-    font-size: 1rem;
-}
-
 h1, h3, h4, h5, h6 {
     color: var(--color-primary-dark-blue);
 }
