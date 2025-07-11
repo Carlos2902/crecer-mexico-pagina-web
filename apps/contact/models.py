@@ -42,7 +42,7 @@ class ContactInfo(models.Model):
 
     ubicacion_titulo = models.CharField ("Titulo Ubicación", max_length=100, default="Nuestra Ubicación")
     ubicacion_subtitulo = models.CharField ("Subtitulo Ubicación", max_length=150, default="Visítanos en nuestra oficina principal")
-    link_ubicacion = models.URLField("Link de ubicación", default="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3764.131699869895!2d-99.1826777!3d19.3634493!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff8c5eb77755%3A0xe6c846c7ea3e746b!2sCRECER%20M%C3%89XICO!5e0!3m2!1ses!2smx!4v1749783441103!5m2!1ses!2smx")
+    link_ubicacion = models.URLField("Link de ubicación", max_length=5000, default="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3764.131699869895!2d-99.1826777!3d19.3634493!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff8c5eb77755%3A0xe6c846c7ea3e746b!2sCRECER%20M%C3%89XICO!5e0!3m2!1ses!2smx!4v1749783441103!5m2!1ses!2smx")
     def __str__(self):
         return "Información de contacto"
 
