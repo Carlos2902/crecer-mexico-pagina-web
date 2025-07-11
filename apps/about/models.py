@@ -232,12 +232,6 @@ class ObjetivoDesarrolloSostenible(models.Model):
     descripcion = models.TextField(
         help_text="Descripción de cómo el programa se alinea con este objetivo"
     )
-    icono = models.ImageField(
-        upload_to='quienes_somos/ods_iconos/',
-        blank=True,
-        null=True,
-        help_text="Icono representativo del ODS (opcional)"
-    )
     activo = models.BooleanField(default=True)
     orden = models.PositiveIntegerField(
         default=1,

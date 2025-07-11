@@ -11,34 +11,7 @@ from .models import (
     FeaturedVideo,
     HomepageSection
 )
-
-
-def get_common_context():
-    """
-    Obtiene el contexto común para todas las páginas
-    """
-    try:
-        config = SiteConfiguration.objects.first()
-    except SiteConfiguration.DoesNotExist:
-        config = None
-    
-    context = {
-        'site_config': config,
-        'social_networks': SocialNetwork.objects.filter(is_active=True).order_by('order'),
-        'header_menu': MenuItem.objects.filter(
-            is_active=True, 
-            parent__isnull=True, 
-            location__in=['header', 'both']
-        ).order_by('order'),
-        'footer_menu': MenuItem.objects.filter(
-            is_active=True, 
-            parent__isnull=True, 
-            location__in=['footer', 'both']
-        ).order_by('order'),
-    }
-    
-    return context
-
+from .models import SiteConfiguration, SocialNetwork, MenuItem
 
 class HomeView(TemplateView):
     template_name = 'core-inicio.html'
@@ -46,10 +19,6 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        # Añadir contexto común
-        context.update(get_common_context())
-        
-        # Obtener las secciones activas y su orden
         sections = HomepageSection.objects.filter(is_active=True).order_by('order')
         context['sections'] = sections
         

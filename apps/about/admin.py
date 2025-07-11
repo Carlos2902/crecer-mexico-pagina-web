@@ -152,7 +152,7 @@ class MiembroEquipoAdmin(admin.ModelAdmin):
 
 @admin.register(ObjetivoDesarrolloSostenible)
 class ObjetivoDesarrolloSostenibleAdmin(admin.ModelAdmin):
-    list_display = ['numero_formateado', 'titulo', 'icono_preview', 'activo', 'orden', 'fecha_actualizacion']
+    list_display = ['numero_formateado', 'titulo', 'activo', 'orden', 'fecha_actualizacion']
     list_filter = ['activo', 'fecha_creacion']
     search_fields = ['titulo', 'descripcion']
     list_editable = ['orden', 'activo']
@@ -164,9 +164,6 @@ class ObjetivoDesarrolloSostenibleAdmin(admin.ModelAdmin):
         }),
         ('Contenido', {
             'fields': ['descripcion']
-        }),
-        ('Apariencia', {
-            'fields': ['icono']
         }),
         ('Configuración', {
             'fields': ['activo', 'orden']

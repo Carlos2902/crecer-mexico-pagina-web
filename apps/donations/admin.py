@@ -11,6 +11,9 @@ class DonationAdmin(admin.ModelAdmin):
 @admin.register(SiteConfiguration)
 class SiteConfigurationAdmin(admin.ModelAdmin):
     fieldsets = (
+        ("Logo del sitio", {
+            "fields": ("logo",),
+        }),
         ("Título de Donaciones", {
             "fields": ("main_title", "main_subtitle"),
         }),
@@ -21,6 +24,7 @@ class SiteConfigurationAdmin(admin.ModelAdmin):
             "fields": ("security_title", "security_text"),
         }),
     )
+
 
 
 @admin.register(DonationSuccessPage)

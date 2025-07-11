@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Quiénes Somos{% endblock %}
+{% block content %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/quienes_somos.css' %}">
+
+
+    <section id="seccion-mision">
+        <div class="contenedor-mision">
+            
+            <div class="columna-contenido">
+                
+                <div class="contenedor-principal">
+                    {% if config %}
+                        <h1>{{ config.titulo_principal }}</h1>
+                        <h2>{{ config.subtitulo_principal }}</h2>
+                        <h3>{{ config.descripcion_principal }}</h3>
+                    {% else %}
+                        <h1>Nuestro Propósito</h1>
+                        <h2>Transformar Realidades</h2>
+                        <h3>A Través De La Educación.</h3>
+                    {% endif %}
+                </div>
+    
+                <div class="contenido-mision">
+                    {% if mision %}
+                        <h3>{{ mision.titulo }}</h3>
+                        <div class="descripcion-mision">
+                            {{ mision.descripcion|safe }}
+                        </div>
+                    {% else %}
+                        <h3>Misión</h3>
+                        <div class="descripcion-mision">
+                            <p>Información de misión no disponible.</p>
+                        </div>
+                    {% endif %}
+                </div>
+    
+            </div>
+            
+            <!-- Collage de Imágenes de Misión -->
+            <div class="collage-mision">
+                <div class="grid-imagenes">
+                    {% if imagenes_mision %}
+                        {% for imagen in imagenes_mision %}
+                            <div class="imagen-collage" data-orden="{{ imagen.orden }}">
+                                <img 
+                                    src="{{ imagen.imagen.url }}" 
+                                    alt="{{ imagen.alt_text }}"
+                                    title="{{ imagen.titulo }}"
+                                    loading="lazy"
+                                >
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="sin-imagenes">
+                            <p>No hay imágenes disponibles para esta sección.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="vision-valores-layout">
+        <div class="contenido-derecha">
+          <!-- Sección de Visión -->
+          {% if vision %}
+          <section id="seccion-vision">
+            <div class="contenedor-vision">
+              <div class="contenido-vision">
+                <h3>{{ vision.titulo }}</h3>
+                <div class="descripcion-vision">
+                  {{ vision.descripcion|safe }}
+                </div>
+              </div>
+            </div>
+          </section>
+          {% endif %}
+      
+          <!-- Sección de Valores -->
+          {% if valores %}
+          <section id="seccion-valores">
+            <div class="contenedor-valores">
+              <h3>Valores</h3>
+              <div class="grid-valores">
+                {% for valor in valores %}
+                <div class="tarjeta-valor" data-orden="{{ valor.orden }}">
+                  <h4>{{ valor.nombre }}</h4>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </section>
+          {% endif %}
+        </div>
+      
+        {% if imagenes_vision_valores %}
+        <section id="collage-vision-valores">
+          <div class="collage-vv-contenedor">
+            <div class="collage-vv-grid">
+              {% for imagen in imagenes_vision_valores %}
+              <div class="collage-vv-item" data-orden="{{ imagen.orden }}">
+                <img
+                  src="{{ imagen.imagen.url }}"
+                  alt="{{ imagen.alt_text }}"
+                  title="{{ imagen.titulo }}"
+                  loading="lazy"
+                >
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </section>
+        {% endif %}
+      </div>
+
+      {% if miembros_equipo %}
+      <section id="seccion-equipo">
+          <div class="contenedor-equipo">
+              <h3>Nuestro Equipo</h3>
+  
+              <div class="grid-equipo">
+                  {% for miembro in miembros_equipo %}
+                      <div class="tarjeta-miembro" data-orden="{{ miembro.orden }}">
+                          {% if miembro.imagen %}
+                              <div class="imagen-miembro">
+                                  <img src="{{ miembro.imagen.url }}" alt="Foto de {{ miembro.nombre }}">
+                              </div>
+                          {% endif %}
+                          <div class="info-miembro">
+                              <h4>{{ miembro.nombre }}</h4>
+                              <p class="puesto">{{ miembro.puesto }}</p>
+                              {% if miembro.frase_destacada %}
+                                  <div class="frase">
+                                      {{ miembro.frase_destacada|safe }}
+                                  </div>
+                              {% endif %}
+                          </div>
+                      </div>
+                  {% endfor %}
+              </div>
+  
+              <button class="carousel-nav prev" aria-label="Anterior">
+                  <svg viewBox="0 0 24 24">
+                      <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                  </svg>
+              </button>
+              <button class="carousel-nav next" aria-label="Siguiente">
+                  <svg viewBox="0 0 24 24">
+                      <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                  </svg>
+              </button>
+  
+          </div>
+      </section>
+  {% endif %}
+
+    <!-- Sección de ODS -->
+    {% if config_ods and objetivos_ods %}
+        <section id="seccion-ods">
+            <div class="contenedor-ods">
+                <div class="titulo-ods">
+                    <h3 id="titulo-ods-configurable">
+                        {{ config_ods.titulo_completo_configurable }}
+                    </h3>
+                </div>
+                
+                <div class="grid-ods">
+                    {% for objetivo in objetivos_ods %}
+                        <div class="tarjeta-ods" data-numero="{{ objetivo.numero }}" data-orden="{{ objetivo.orden }}">
+                            <div class="numero-ods">
+                                ODS {{ objetivo.numero|stringformat:"02d" }}
+                            </div>
+                            <div class="contenido-ods">
+                                <h4>{{ objetivo.titulo }}</h4>
+                                <p>{{ objetivo.descripcion }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+    
+    <script src="{% static 'js/quienes_somos.js' %}"></script>
+{% endblock %}

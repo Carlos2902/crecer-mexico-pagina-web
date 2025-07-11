@@ -11,7 +11,7 @@ class QuienesSomosView(TemplateView):
     """
     Vista principal para la página Quiénes Somos
     """
-    template_name = 'quienes_somos/index.html'
+    template_name = 'quienes_somos.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
