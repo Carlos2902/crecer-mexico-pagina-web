@@ -1,15 +1,129 @@
 {% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8" />
-    <title>Contacto | Crecer México</title>
-</head>
-<body>
-<h1 class="text-2xl font-bold text-red-600">Pagina de Contacto.</h1>
+{% block title %}Contacto | Crecer México{% endblock %}
 
-<a href="{% url 'core:home' %}">Volver a Inicio</a>
-</body>
-</html>
+{% block extra_head %}
+<link href="{% static 'css/contact.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+<section class="contact-section">
+    <div class="container">
+
+        <div class="contact-header">
+            <h1>{{ contact_info.Titulo }}</h1>
+            <p>{{ contact_info.Subtitulo }}</p>
+        </div>
+
+        <div class="contact-decorative-wrapper">
+            <div class="decor-box decor-box-1"></div>
+            <div class="decor-box decor-box-2"></div>
+
+            <div class="contact-unified-container">
+                <!-- Formulario de Contacto -->
+                <div class="contact-form-container">
+                    <h2>Envíanos un Mensaje</h2>
+                        <form id="contactForm" method="POST" action="">
+                            {% csrf_token %}
+
+                            <div class="form-group required">
+                                <label for="nombre">Nombre Completo</label>
+                                {{ form.name }}
+                            </div>
+
+                            <div class="form-group required">
+                                <label for="correo">Correo Electrónico</label>
+                                {{ form.email }}
+                            </div>
+
+                            <div class="form-group required">
+                                <label for="telefono">Teléfono</label>
+                                {{ form.phone }}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="asunto">Asunto</label>
+                                {{ form.subject }}
+                            </div>
+
+                            <div class="form-group required">
+                                <label for="mensaje">Mensaje</label>
+                                {{ form.message }}
+                            </div>
+
+                            <button type="submit" class="submit-btn" id="submitBtn">
+                                <span id="submitText">Enviar Mensaje</span>
+                                <span id="submitLoader" style="display: none;">
+                                    <i class="fas fa-spinner fa-spin"></i> Enviando...
+                                </span>
+                            </button>
+                        </form>
+                </div>
+                <!-- Mapa y Información de Contacto -->
+                <div class="map-container">
+                    <div class="map-header">
+                        <h2>{{ contact_info.ubicacion_titulo }}</h2>
+                        <p>{{ contact_info.ubicacion_subtitulo }}</p>
+                    </div>
+
+                    <div class="map-wrapper">
+                        <iframe 
+                            src="{{ contact_info.link_ubicacion }}"
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Ubicación de Crecer México">
+                        </iframe>
+                    </div>
+
+                    <div class="contact-info">
+                        <div class="contact-info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>{{ contact_info.direccion|linebreaksbr }}</span><br>
+                            <i class="fas fa-phone"></i>
+                            <span>{{ contact_info.telefono }}</span><br>
+                            <i class="fas fa-envelope"></i>
+                            <span>{{ contact_info.correo }}</span><br>
+                            <i class="fas fa-clock"></i>
+                            <span>{{ contact_info.horario|linebreaksbr }}</span>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <ul class="contact-info-list">
+                                <li><strong>Información para ingresar a clases:</strong></li>
+                                <li>Promotora: {{ contact_info.promotora }} - {{ contact_info.tel_promotora }}</li>
+                                <li>Promotor: {{ contact_info.promotor }} - {{ contact_info.tel_promotor }}</li>
+
+                                <li><strong>Informes área educativa:</strong></li>
+                                <li>Gerente Educativa: {{ contact_info.gerente_educativa }}</li>
+                                <li>📧 {{ contact_info.correo_gerente_educativa }}</li>
+
+                                <li><strong>Becas y apoyo institucional:</strong></li>
+                                <li>Gerente de Operaciones: {{ contact_info.gerente_operaciones }}</li>
+                                <li>📧 {{ contact_info.correo_gerente_operaciones }}</li>
+
+                                <li><strong>Servicio social y bolsa de trabajo:</strong></li>
+                                <li>📧 {{ contact_info.correo_servicio_social }}</li>
+
+                                <li><strong>Alianzas estratégicas:</strong></li>
+                                <li>📧 {{ contact_info.correo_alianzas }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+ <script src="{% static 'js/contact.js' %}"></script>
+{% endblock %}

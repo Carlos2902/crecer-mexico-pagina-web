@@ -69,6 +69,17 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'crecer_mexico_project.urls'
 
+# Configuración de email para el formulario de contacto
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # O tu proveedor de email
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'alejandro.crecermexico@gmail.com'
+EMAIL_HOST_PASSWORD = 'gbowxwfjttjnclff'
+DEFAULT_FROM_EMAIL = 'alejandro.crecermexico@gmail.com'
+CONTACT_EMAIL = 'alejandro.dagnino@parrotsoftware.io'  # Email donde recibirás los mensajes
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

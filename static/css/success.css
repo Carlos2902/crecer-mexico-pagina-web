@@ -40,7 +40,7 @@ body {
   padding: 20px;        
   box-sizing: border-box;
   transform: scale(0.85);
-  transform-origin: top left;
+  transform-origin: top center;
 }
 
 .container {
