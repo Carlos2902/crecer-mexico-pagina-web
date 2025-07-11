@@ -1,6 +1,7 @@
+import os
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-
+from django.utils.translation import gettext_lazy as _
 
 class EstadisticasImpacto(models.Model):
     """Modelo para la sección de cifras con mapa interactivo"""
@@ -153,6 +154,44 @@ class TestimonioEgresado(models.Model):
         return f"https://www.youtube.com/embed/{self.video_youtube_id}"
 
 
+
+class CarouselImage(models.Model):
+    title = models.CharField(
+        max_length=200,
+        verbose_name=_("Título"),
+        help_text=_("Se genera automáticamente desde el nombre del archivo"),
+        blank=True  # Permitir que esté vacío inicialmente
+    )
+    image = models.ImageField(
+        upload_to="impact/carousel/",
+        verbose_name=_("Imagen")
+    )
+    order = models.PositiveSmallIntegerField(
+        default=0,
+        verbose_name=_("Orden"),
+        help_text=_("0 = primera, 1 = segunda, …")
+    )
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name=_("Activo")
+    )
+
+    class Meta:
+        verbose_name = _("Imagen del Carrusel")
+        verbose_name_plural = _("Imágenes del Carrusel")
+        ordering = ["order"]
+
+    def save(self, *args, **kwargs):
+        # Auto-generar título desde el nombre del archivo
+        if self.image and not self.title:
+            filename = os.path.basename(self.image.name)
+            # Remover extensión y reemplazar guiones/guiones bajos con espacios
+            self.title = os.path.splitext(filename)[0].replace('_', ' ').replace('-', ' ').title()
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.title} – Orden {self.order}"
+
 class InformeAnual(models.Model):
     """Modelo para el informe anual"""
     titulo = models.CharField(max_length=200, default="Informe Anual")
@@ -215,3 +254,4 @@ class ConfiguracionAliados(models.Model):
     
     def __str__(self):
         return self.titulo
+

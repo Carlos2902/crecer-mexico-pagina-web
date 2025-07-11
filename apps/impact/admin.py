@@ -1,7 +1,10 @@
 from django.contrib import admin
+from django.utils.html import format_html
+from django.utils.safestring import mark_safe
+
 from .models import (
     EstadisticasImpacto, EstadisticaPorEstado, MetricasImpacto,
-    TestimonioEgresado, InformeAnual, Aliado, ConfiguracionAliados
+    TestimonioEgresado, InformeAnual, Aliado, ConfiguracionAliados, CarouselImage
 )
 
 
@@ -95,6 +98,56 @@ class TestimonioEgresadoAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         # Solo permitir una instancia activa
         return not TestimonioEgresado.objects.filter(activo=True).exists()
+
+
+
+
+
+@admin.register(CarouselImage)
+class CarouselImageAdmin(admin.ModelAdmin):
+    list_display = ('get_title_with_preview', 'order', 'is_active')
+    list_display_links = ('get_title_with_preview',)  # Hacer clickeable
+    list_filter = ('is_active',)
+    list_editable = ('order', 'is_active')
+    ordering = ('order',)
+    
+    fields = ('image', 'get_large_preview', 'title', 'order', 'is_active')
+    readonly_fields = ('get_large_preview',)
+    
+    def get_title_with_preview(self, obj):
+        """Muestra título con preview pequeño al lado"""
+        if obj.image:
+            try:
+                preview = f'<img src="{obj.image.url}" width="40" height="30" style="object-fit: cover; border-radius: 4px; margin-right: 10px; vertical-align: middle;" />'
+                title = f'<span style="vertical-align: middle; font-weight: 500;">{obj.title}</span>'
+                return mark_safe(f'{preview}{title}')
+            except:
+                return f"📷 {obj.title}"
+        return f"❌ {obj.title}"
+    
+    get_title_with_preview.short_description = "Imagen del Carrusel"
+    get_title_with_preview.admin_order_field = 'title'
+    
+    def get_large_preview(self, obj):
+        """Preview más grande para el formulario de edición"""
+        if obj.image:
+            try:
+                return format_html(
+                    '<img src="{}" width="200" height="auto" style="border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" />',
+                    obj.image.url
+                )
+            except:
+                return "Error al cargar la imagen"
+        return "Sin imagen"
+    
+    get_large_preview.short_description = "Previsualización"
+    
+    # Personalizar el formulario
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        # Hacer el campo title editable pero con ayuda
+        form.base_fields['title'].help_text = "Se genera automáticamente. Puedes editarlo si deseas."
+        return form
 
 
 @admin.register(InformeAnual)
