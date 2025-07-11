@@ -1,13 +1,14 @@
 from django.shortcuts import render, get_object_or_404
+from django.db.models import Sum
 from django.http import JsonResponse
 from .models import (
     EstadisticasImpacto, EstadisticaPorEstado, MetricasImpacto,
-    TestimonioEgresado, InformeAnual, Aliado, ConfiguracionAliados
+    TestimonioEgresado, InformeAnual, Aliado, ConfiguracionAliados,
+    CarouselImage
 )
 
 def testimonio_impacto(request):
     """Vista principal para la página de testimonio e impacto"""
-    
     # Obtener o crear instancias singleton
     estadisticas_impacto, created = EstadisticasImpacto.objects.get_or_create(
         pk=1,
@@ -36,6 +37,9 @@ def testimonio_impacto(request):
         # Sección de testimonio
         'testimonio_egresado': TestimonioEgresado.objects.filter(activo=True).first(),
         
+        # Sección de carrusel de imágenes
+        'carousel_images': CarouselImage.objects.filter(is_active=True).order_by('order'),
+        
         # Sección de informe anual
         'informe_anual': InformeAnual.objects.filter(activo=True).first(),
         
@@ -45,12 +49,11 @@ def testimonio_impacto(request):
         
         # Datos adicionales para el frontend
         'total_egresados_nacional': EstadisticaPorEstado.objects.aggregate(
-            total=models.Sum('total_egresados')
+            total=Sum('total_egresados')
         )['total'] or 0,
     }
     
-    return render(request, 'testimonio_impacto.html', context)
-
+    return render(request, 'impact.html', context)
 
 def api_estadisticas_mapa(request):
     """API endpoint para obtener datos del mapa en formato JSON"""
@@ -73,7 +76,6 @@ def api_estadisticas_mapa(request):
         })
     
     return JsonResponse(data)
-
 
 def api_metricas_impacto(request):
     """API endpoint para obtener métricas de impacto en formato JSON"""
@@ -106,6 +108,28 @@ def api_metricas_impacto(request):
                     'label': 'Formación continua',
                     'porcentaje': metricas.formacion_continua,
                 }
+            ]
+        }
+        
+        return JsonResponse(data)
+        
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+
+def api_carousel_images(request):
+    """API endpoint para obtener imágenes del carrusel en formato JSON"""
+    
+    try:
+        images = CarouselImage.objects.filter(is_active=True).order_by('order')
+        
+        data = {
+            'images': [
+                {
+                    'title': image.title,
+                    'image_url': image.image.url,
+                    'order': image.order,
+                }
+                for image in images
             ]
         }
         

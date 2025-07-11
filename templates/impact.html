@@ -25,6 +25,7 @@
                 <div class="mapa-container">
                     <div id="mapa-mexico" class="mapa-mexico">
                         <!-- Aquí se insertará el mapa SVG de México -->
+                        <p class="mapa-placeholder">Mapa interactivo próximamente</p>
                     </div>
                 </div>
                 
@@ -48,7 +49,7 @@
                     <div class="estado-estadisticas">
                         <div class="estadistica-item">
                             <span class="estadistica-label">Total de egresados:</span>
-                            <span class="estadistica-value" id="total-egresados">-</span>
+                            <span class="estadistica-value" id="total-egresados">{{ total_egresados_nacional }}</span>
                         </div>
                     </div>
                 </div>
@@ -103,6 +104,25 @@
         </div>
     </section>
 
+    <!-- Sección: Carrusel de Imágenes -->
+    {% if carousel_images %}
+    <section class="carousel-impacto" id="carousel-impacto">
+        <div class="container">
+            <div class="carousel-container">
+                <div class="carousel-wrapper">
+                    <div class="carousel-track" id="carousel-track">
+                        {% for image in carousel_images %}
+                        <div class="carousel-slide">
+                            <img src="{{ image.image.url }}" alt="{{ image.title }}" class="carousel-image">
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
     <!-- Sección: Testimonio de Egresado -->
     {% if testimonio_egresado %}
     <section class="testimonio-egresado" id="testimonio-egresado">
@@ -136,4 +156,58 @@
         </div>
     </section>
     {% endif %}
-{% endblock%}
+
+    <!-- Sección: Informe Anual -->
+    {% if informe_anual %}
+    <section class="informe-anual" id="informe-anual">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">{{ informe_anual.titulo }}</h2>
+                <p class="section-subtitle">{{ informe_anual.subtitulo }}</p>
+            </div>
+            
+            <div class="informe-content">
+                <div class="informe-card">
+                    <div class="informe-image">
+                        <img src="{{ informe_anual.imagen_portada.url }}" alt="Portada {{ informe_anual.titulo }} {{ informe_anual.año }}">
+                    </div>
+                    <div class="informe-info">
+                        <h3>{{ informe_anual.titulo }} {{ informe_anual.año }}</h3>
+                        <p>Publicado el {{ informe_anual.fecha_publicacion|date:"d/m/Y" }}</p>
+                        <a href="{{ informe_anual.archivo_pdf.url }}" 
+                           target="_blank" 
+                           class="btn btn-primary informe-btn">
+                            {{ informe_anual.texto_boton }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Sección: Aliados -->
+    {% if aliados %}
+    <section class="aliados" id="aliados">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">{{ configuracion_aliados.titulo }}</h2>
+                {% if configuracion_aliados.subtitulo %}
+                <p class="section-subtitle">{{ configuracion_aliados.subtitulo }}</p>
+                {% endif %}
+            </div>
+            
+            <div class="aliados-grid">
+                {% for aliado in aliados %}
+                <div class="aliado-card">
+                    <img src="{{ aliado.logo.url }}" alt="{{ aliado.nombre }}" class="aliado-logo">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+</div>
+
+{% endblock %}
